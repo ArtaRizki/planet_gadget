@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'library/sharedpref.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+Prefs prefs = Prefs();
 void main() {
   runApp(const MyApp());
 }
@@ -13,6 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'Spartan',
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );

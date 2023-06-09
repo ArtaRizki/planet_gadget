@@ -8,8 +8,12 @@ inter12() => const TextStyle(
 inter12Gray() => const TextStyle(fontSize: 12, color: Colors.grey);
 inter12GrayMedium() => const TextStyle(
     fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500);
-inter12BlackBold() => const TextStyle(
-    fontSize: 12, color: Colors.black, fontWeight: FontWeight.w700);
+inter12BlackMedium() =>
+    TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w500);
+inter12Black2Medium() =>
+    TextStyle(fontSize: 12, color: black2, fontWeight: FontWeight.w500);
+inter12BlackBold() =>
+    TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w700);
 
 inter10MediumGray() => TextStyle(fontSize: 10, color: gray);
 inter10Normal() => const TextStyle(fontSize: 10);
@@ -27,23 +31,25 @@ inter12Black87() => const TextStyle(fontSize: 12, color: Colors.black87);
 
 inter14NormalGray() => const TextStyle(fontSize: 14, color: Colors.grey);
 
-inter14MediumPGreen() =>
-    TextStyle(fontSize: 14, color: primaryGreen, fontWeight: FontWeight.w500);
+inter14MediumPYellow() =>
+    TextStyle(fontSize: 14, color: primaryYellow, fontWeight: FontWeight.w500);
 
-inter14Medium() => const TextStyle(
-    fontSize: 14, color: Colors.black, fontWeight: FontWeight.w500);
+inter14Medium() =>
+    TextStyle(fontSize: 14, color: black, fontWeight: FontWeight.w500);
 
+inter14MediumBlack() =>
+    TextStyle(fontSize: 14, color: black, fontWeight: FontWeight.w500);
 inter14MediumWhite() => const TextStyle(
     fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500);
 
-inter14MediumGreen() =>
-    TextStyle(fontSize: 14, color: tertiaryGreen, fontWeight: FontWeight.w500);
+inter14MediumYellow() =>
+    TextStyle(fontSize: 14, color: tertiaryYellow, fontWeight: FontWeight.w500);
 
 inter14BoldWhite() => const TextStyle(
     fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold);
 
-inter14MediumGray() => const TextStyle(
-    fontSize: 14, color: Colors.grey, fontWeight: FontWeight.w500);
+inter14MediumGray() =>
+    TextStyle(fontSize: 14, color: gray, fontWeight: FontWeight.w500);
 
 inter14MediumGray2() =>
     TextStyle(fontSize: 14, color: gray2, fontWeight: FontWeight.w500);
@@ -60,8 +66,8 @@ inter14MediumTidakAktif() => TextStyle(
 inter14MediumDibatalkan() => TextStyle(
     fontSize: 14, color: dibatalkanTextC, fontWeight: FontWeight.w500);
 
-inter14Bold() => const TextStyle(
-    fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold);
+inter14Bold() =>
+    TextStyle(fontSize: 14, color: black, fontWeight: FontWeight.bold);
 
 inter14BoldGray() => const TextStyle(
     fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold);
@@ -91,28 +97,28 @@ inter14HyperlinkBold() => TextStyle(
     fontWeight: FontWeight.bold,
     decoration: TextDecoration.underline);
 
-inter16Medium() => const TextStyle(
-    fontSize: 16, color: Colors.black, fontWeight: FontWeight.w500);
+inter16Medium() =>
+    TextStyle(fontSize: 16, color: black, fontWeight: FontWeight.w500);
 
 inter16BoldRed() =>
     TextStyle(fontSize: 16, color: red, fontWeight: FontWeight.w700);
 
-inter16Bold() => const TextStyle(
-    fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold);
+inter16Bold() =>
+    TextStyle(fontSize: 16, color: black, fontWeight: FontWeight.bold);
 
-inter18Medium() => const TextStyle(
-    fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500);
+inter18Medium() =>
+    TextStyle(fontSize: 18, color: black, fontWeight: FontWeight.w500);
 
-inter20Bold() => const TextStyle(
-    fontSize: 20, color: Colors.black, fontWeight: FontWeight.w700);
+inter20Bold() =>
+    TextStyle(fontSize: 20, color: black, fontWeight: FontWeight.w700);
 
-inter22Bold() => const TextStyle(
-    fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700);
+inter22Bold() =>
+    TextStyle(fontSize: 22, color: black, fontWeight: FontWeight.w700);
 
 inter28Bold() => const TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
 
-inter22BoldGreen() =>
-    TextStyle(fontSize: 22, color: green5, fontWeight: FontWeight.bold);
+inter22BoldYellow() =>
+    TextStyle(fontSize: 22, color: yellow5, fontWeight: FontWeight.bold);
 
 redValidateErrorRequired() => const TextStyle(fontSize: 13, color: Colors.red);
 

@@ -36,6 +36,7 @@ import 'package:dio/dio.dart'; // dio: ^3.0.9
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // intl: ^0.15.0
 import 'package:shared_preferences/shared_preferences.dart';
+import 'color.dart';
 import 'versioning.dart'; // shared_preferences: ^0.5.7+3
 // import 'package:mailer/mailer.dart'; // mailer: ^3.3.0
 // import 'package:mailer/smtp_server.dart'; // mailer: ^3.3.0
@@ -453,10 +454,10 @@ class MGLog {
                   minWidth: (MediaQuery.of(context).size.width / 2),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(color: Colors.green)),
+                      side: BorderSide(color: primaryYellow)),
                   color: Colors.white,
-                  child: const Text("SHOW",
-                      style: TextStyle(color: Colors.green, fontSize: 16)),
+                  child: Text("SHOW",
+                      style: TextStyle(color: primaryYellow, fontSize: 16)),
                   onPressed: () {
                     Navigator.of(context).pop(true);
                     showLogContentDialog(context: context).then((value) {});
@@ -467,8 +468,8 @@ class MGLog {
                   minWidth: (MediaQuery.of(context).size.width / 2),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(color: Colors.green)),
-                  color: Colors.green,
+                      side: BorderSide(color: primaryYellow)),
+                  color: primaryYellow,
                   child: const Text("SEND",
                       style: TextStyle(color: Colors.white, fontSize: 16)),
                   onPressed: () {

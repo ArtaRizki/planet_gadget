@@ -111,7 +111,7 @@ paketDecorationDatePicker(String hintTxt, bool isEmpty) {
 
 paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
   return InputDecoration(
-      suffixIcon: SizedBox(),
+      suffixIcon: const SizedBox(),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
@@ -215,7 +215,7 @@ registerDecorationWoIcon(String hintTxt, bool isEmpty) {
 registerDecorationWoIconDropdown(String hintTxt, bool isEmpty,
     {bool disabled = false}) {
   return InputDecoration(
-      suffixIcon: SizedBox(),
+      suffixIcon: const SizedBox(),
       filled: disabled,
       fillColor: disabled ? Colors.grey.withOpacity(0.25) : null,
       border: OutlineInputBorder(
@@ -247,31 +247,33 @@ registerDecorationWoIconDropdown(String hintTxt, bool isEmpty,
 searchDecoration(String hintTxt, {required Function onClear}) {
   return InputDecoration(
       prefixIcon: const Padding(
-        padding: EdgeInsets.only(left: 12, right: 5),
-        child: Icon(Icons.search, color: Colors.black54, size: 22),
+        padding: EdgeInsets.only(left: 15, right: 10, top: 0),
+        child: Icon(Icons.search, color: Colors.black, size: 24),
       ),
       suffixIcon: InkWell(
         onTap: () => onClear(),
-        child: SizedBox(),
+        child: const SizedBox(),
       ),
-      border: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: Colors.grey),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(color: gray),
       ),
-      focusedBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: Color.fromRGBO(24, 204, 113, 1)),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(color: primaryYellow),
       ),
-      enabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: Colors.grey),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(color: gray),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
-      contentPadding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
+      focusColor: primaryYellow,
+      filled: true,
+      fillColor: tertiaryYellow,
+      contentPadding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
       prefixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 30),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter14Gray());
+      hintStyle: inter14MediumGray());
 }
 
 searchDecorationGray(String hintTxt, {required Function onClear, clearIcon}) {

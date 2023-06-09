@@ -12,7 +12,7 @@ showToast(String txt, BuildContext context, {bool isError = false}) {
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12.0),
-      color: isError ? Colors.red : tertiaryGreen,
+      color: isError ? Colors.red : tertiaryYellow,
     ),
     child: Column(
       children: [

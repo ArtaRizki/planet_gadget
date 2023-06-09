@@ -83,12 +83,12 @@
 //                                 fieldWidth: 50,
 //                                 borderWidth: 1,
 //                                 activeFillColor: Colors.white,
-//                                 activeColor: primaryGreen,
+//                                 activeColor: primaryYellow,
 //                                 errorBorderColor: Colors.red,
-//                                 selectedColor: primaryGreen,
+//                                 selectedColor: primaryYellow,
 //                                 inactiveColor: gray,
 //                               ),
-//                               cursorColor: primaryGreen,
+//                               cursorColor: primaryYellow,
 //                             ),
 //                           ),
 //                           Padding(
@@ -114,8 +114,8 @@
 //                             padding: const EdgeInsets.only(bottom: 18),
 //                             child: ElevatedButton(
 //                                 style: ElevatedButton.styleFrom(
-//                                     onPrimary: tertiaryGreen,
-//                                     primary: !value.isRunning ? gray : green5,
+//                                     onPrimary: tertiaryYellow,
+//                                     primary: !value.isRunning ? gray : Yellow5,
 //                                     shape: RoundedRectangleBorder(
 //                                         borderRadius:
 //                                             BorderRadius.circular(6))),
@@ -181,7 +181,7 @@
 //                             width: 80, height: 80)),
 //                   ),
 //                   const SizedBox(height: 24),
-//                   Text("Verifikasi $txt Sukses", style: inter22BoldGreen()),
+//                   Text("Verifikasi $txt Sukses", style: inter22BoldYellow()),
 //                   const SizedBox(height: 16),
 //                   Center(
 //                     child: Align(
@@ -198,8 +198,8 @@
 //                     padding: const EdgeInsets.only(bottom: 18),
 //                     child: ElevatedButton(
 //                         style: ElevatedButton.styleFrom(
-//                             onPrimary: tertiaryGreen,
-//                             primary: green5,
+//                             onPrimary: tertiaryYellow,
+//                             primary: Yellow5,
 //                             shape: RoundedRectangleBorder(
 //                                 borderRadius: BorderRadius.circular(6))),
 //                         onPressed: () {
@@ -324,7 +324,7 @@
 //                                   Size(MediaQuery.of(context).size.width, 40),
 //                               primary: Colors.white,
 //                               shape: RoundedRectangleBorder(
-//                                   side: BorderSide(color: green5),
+//                                   side: BorderSide(color: Yellow5),
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () => Navigator.pop(context),
 //                           child: Text('Batal', style: inter16Medium())),
@@ -338,7 +338,7 @@
 //                               shadowColor: Colors.transparent,
 //                               fixedSize:
 //                                   Size(MediaQuery.of(context).size.width, 40),
-//                               primary: green5,
+//                               primary: Yellow5,
 //                               shape: RoundedRectangleBorder(
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () {
@@ -425,7 +425,7 @@
 //                                   Size(MediaQuery.of(context).size.width, 40),
 //                               primary: Colors.white,
 //                               shape: RoundedRectangleBorder(
-//                                   side: BorderSide(color: green5),
+//                                   side: BorderSide(color: Yellow5),
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () => Navigator.pop(context),
 //                           child: Text('Batal', style: inter16Medium())),
@@ -439,7 +439,7 @@
 //                               shadowColor: Colors.transparent,
 //                               fixedSize:
 //                                   Size(MediaQuery.of(context).size.width, 40),
-//                               primary: green5,
+//                               primary: Yellow5,
 //                               shape: RoundedRectangleBorder(
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () {
@@ -526,7 +526,7 @@
 //                                   Size(MediaQuery.of(context).size.width, 40),
 //                               primary: Colors.white,
 //                               shape: RoundedRectangleBorder(
-//                                   side: BorderSide(color: green5),
+//                                   side: BorderSide(color: Yellow5),
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () => Navigator.pop(context),
 //                           child: Text('Batal', style: inter16Medium())),
@@ -540,7 +540,7 @@
 //                               shadowColor: Colors.transparent,
 //                               fixedSize:
 //                                   Size(MediaQuery.of(context).size.width, 40),
-//                               primary: green5,
+//                               primary: Yellow5,
 //                               shape: RoundedRectangleBorder(
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () {
@@ -627,7 +627,7 @@
 //                                   Size(MediaQuery.of(context).size.width, 40),
 //                               primary: Colors.white,
 //                               shape: RoundedRectangleBorder(
-//                                   side: BorderSide(color: green5),
+//                                   side: BorderSide(color: Yellow5),
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () => Navigator.pop(context),
 //                           child: Text('Batal', style: inter16Medium())),
@@ -641,7 +641,7 @@
 //                               shadowColor: Colors.transparent,
 //                               fixedSize:
 //                                   Size(MediaQuery.of(context).size.width, 40),
-//                               primary: green5,
+//                               primary: Yellow5,
 //                               shape: RoundedRectangleBorder(
 //                                   borderRadius: BorderRadius.circular(6))),
 //                           onPressed: () => onTap!(),
@@ -697,7 +697,7 @@
 //                     child: Container(
 //                       decoration: BoxDecoration(
 //                           borderRadius: BorderRadius.circular(40),
-//                           color: primaryGreen),
+//                           color: primaryYellow),
 //                       child: Padding(
 //                         padding: const EdgeInsets.only(left: 13),
 //                         child: Text("${(number / total).round() * 100}%",

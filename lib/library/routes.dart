@@ -66,23 +66,23 @@
 //           transitionDuration: const Duration(seconds: 0),
 //           reverseTransitionDuration: Duration.zero));
 
-//   Future<void> homeView(BuildContext context, {String? loginType}) async {
+//   Future<void> DashboardPage(BuildContext context, {String? loginType}) async {
 //     await Navigator.push(
 //         context,
 //         PageRouteBuilder(
 //             pageBuilder: ((context, animation, secondaryAnimation) =>
-//                 HomeView(loginType: loginType)),
+//                 DashboardPage(loginType: loginType)),
 //             transitionDuration: const Duration(seconds: 0),
 //             reverseTransitionDuration: Duration.zero));
 //   }
 
-//   Future<void> homeViewRemoveUntil(BuildContext context,
+//   Future<void> DashboardPageRemoveUntil(BuildContext context,
 //       {String? loginType}) async {
 //     await Navigator.pushAndRemoveUntil(
 //         context,
 //         PageRouteBuilder(
 //             pageBuilder: ((context, animation, secondaryAnimation) =>
-//                 HomeView(loginType: loginType)),
+//                 DashboardPage(loginType: loginType)),
 //             transitionDuration: const Duration(seconds: 0),
 //             reverseTransitionDuration: Duration.zero),
 //         (Route<dynamic> route) => false);

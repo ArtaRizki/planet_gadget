@@ -9,6 +9,8 @@ import 'package:sizer/sizer.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../utils/constants/path.dart';
+import '../product/product_page.dart';
+import '../promo/promo_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -48,7 +50,7 @@ class _DashboardPageState extends State<DashboardPage> {
                         Expanded(
                           flex: 7,
                           child: TextFormField(
-                            autofocus: true,
+                            // autofocus: true,
                             controller: searchC,
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -160,9 +162,9 @@ class _DashboardPageState extends State<DashboardPage> {
                   Container(
                     margin: const EdgeInsets.only(top: 12),
                     padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      color: white,
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(12),
                         topRight: Radius.circular(12),
                       ),
@@ -176,10 +178,19 @@ class _DashboardPageState extends State<DashboardPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               colorBox(
-                                  bgColor: 0xffCEDBFD,
-                                  mainColor: 0xff385FE8,
-                                  imageName: "receipt-tax.svg",
-                                  name: "Promo"),
+                                bgColor: 0xffCEDBFD,
+                                mainColor: 0xff385FE8,
+                                imageName: "receipt-tax.svg",
+                                name: "Promo",
+                                onClick: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const PromoPage();
+                                    },
+                                  ),
+                                ),
+                              ),
                               colorBox(
                                   bgColor: 0xffCFFCDB,
                                   mainColor: 0xff35E565,
@@ -302,7 +313,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                   imageName:
                                       "iphone_12_mini_blue_1_1_5_2 1.png",
                                   price: convertToIdr(nominal: "12999000"),
-                                  productName: "Apple Iphone 12 128Gb");
+                                  productName: "Apple Iphone 12 128Gb",
+                                  onClick: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const ProductPage()));
+                                  });
                             },
                             separatorBuilder: (context, index) =>
                                 const SizedBox(width: 8),
@@ -312,7 +330,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ],
                     ),
                   ),
-                  Container(height: 12.h, color: Colors.white),
+                  Container(height: 12.h, color: white),
                 ],
               ),
             ),
@@ -339,30 +357,34 @@ class _DashboardPageState extends State<DashboardPage> {
       {required int bgColor,
       required int mainColor,
       required String imageName,
-      required String name}) {
-    return Container(
-      width: 60,
-      height: 60,
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 4),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Color(bgColor),
-      ),
-      child: Column(
-        children: <Widget>[
-          SvgPicture.asset("$iconsPath$imageName"),
-          const SizedBox(height: 4),
-          Flexible(
-            child: Text(
-              name,
-              style: TextStyle(
-                  color: Color(mainColor),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12,
-                  overflow: TextOverflow.fade),
+      required String name,
+      Function()? onClick}) {
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        width: 72,
+        height: 72,
+        padding: const EdgeInsets.fromLTRB(0, 16, 0, 4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Color(bgColor),
+        ),
+        child: Column(
+          children: <Widget>[
+            SvgPicture.asset("$iconsPath$imageName"),
+            const SizedBox(height: 4),
+            Flexible(
+              child: Text(
+                name,
+                style: TextStyle(
+                    color: Color(mainColor),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 12,
+                    overflow: TextOverflow.fade),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -389,43 +411,47 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget cardProduct(
       {required String imageName,
       required String price,
-      required String productName}) {
-    return Container(
-      width: 155,
-      margin: const EdgeInsets.only(top: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: Colors.white,
-        boxShadow: const <BoxShadow>[
-          BoxShadow(
-            blurRadius: 4,
-            color: Color.fromRGBO(0, 0, 0, 0.25),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            flex: 12,
-            child: SizedBox(
-              width: 131,
-              height: 145,
-              child: Image.asset(
-                '$productsPath$imageName',
-                fit: BoxFit.contain,
+      required String productName,
+      Function()? onClick}) {
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        width: 155,
+        margin: const EdgeInsets.only(top: 4),
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: white,
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+              blurRadius: 4,
+              color: Color.fromRGBO(0, 0, 0, 0.25),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 12,
+              child: SizedBox(
+                width: 131,
+                height: 145,
+                child: Image.asset(
+                  '$productsPath$imageName',
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 8),
-          Expanded(
-              flex: 3,
-              child: Text(productName + "aaaaaaaaaaaaaaaa",
-                  style: inter12BlackMedium())),
-          const SizedBox(height: 8),
-          Expanded(flex: 3, child: Text(price, style: inter14Bold())),
-        ],
+            const SizedBox(height: 8),
+            Expanded(
+                flex: 3,
+                child: Text(productName + "aaaaaaaaaaaaaaaa",
+                    style: inter12BlackMedium())),
+            const SizedBox(height: 8),
+            Expanded(flex: 3, child: Text(price, style: inter14Bold())),
+          ],
+        ),
       ),
     );
   }

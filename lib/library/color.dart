@@ -6,14 +6,17 @@ Color tertiaryYellow = const Color(0xffFFF4D1);
 Color quarteryYellow = const Color.fromRGBO(240, 252, 246, 1);
 Color yellow5 = const Color(0xff2ECC71);
 Color yellow6 = const Color(0xffF0FCF6);
-Color whiteYellow = const Color(0xffF0FCF6);
+Color white = const Color(0xffFCFCFC);
 
 Color black = const Color(0xff252525);
+Color blackDefault = Colors.black;
 Color black2 = const Color(0xff494949);
+Color black3 = const Color(0xff1f1f1f);
 
 Color gray = const Color(0xffAAAAAA);
 Color gray2 = const Color(0xff575757);
 Color gray3 = const Color(0xff393939);
+Color gray4 = const Color(0xffB6B6B6);
 Color grayBorder = const Color(0xffd5d5d5);
 
 Color red = const Color(0xffCB3A31);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-Color primaryYellow = const Color(0xffffd966);
-Color secondaryYellow = const Color(0xffFFE28C);
-Color tertiaryYellow = const Color(0xffFFF4D1);
+Color primaryBlue = const Color(0xff0B3C7F);
+Color primaryYellow = const Color(0xffFFE38C);
+Color secondaryBlue = const Color(0xffAEBED4);
 Color quarteryYellow = const Color.fromRGBO(240, 252, 246, 1);
-Color activeBgColor = const Color(0xffFFC619);
+Color activeBgColor = primaryBlue;
 Color yellow5 = const Color(0xff2ECC71);
 Color yellow6 = const Color(0xffF0FCF6);
 Color white = const Color(0xffFCFCFC);
@@ -17,6 +17,7 @@ Color disabledBgColor = const Color(0xff959595);
 Color disabledTextColor = const Color(0xff808080);
 
 Color black = const Color(0xff252525);
+Color black25 = black.withOpacity(0.25);
 Color blackDefault = Colors.black;
 Color black2 = const Color(0xff494949);
 Color black3 = const Color(0xff1f1f1f);
@@ -52,6 +53,6 @@ Color hyperlinkBlue20Opacity = const Color(0xffb1c5f6);
 Color hyperlinkBlueSecond20Opacity = const Color(0xffb1c5f6);
 
 Color enableDisableColor(bool value) {
-  if (value) return primaryYellow;
+  if (value) return primaryBlue;
   return gray;
 }

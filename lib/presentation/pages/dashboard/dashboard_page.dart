@@ -9,6 +9,7 @@ import 'package:sizer/sizer.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../utils/constants/path.dart';
+import '../brand/all_brand_page.dart';
 import '../product/product_page.dart';
 import '../promo/promo_page.dart';
 
@@ -28,7 +29,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return SafeArea(
       top: false,
       child: Scaffold(
-        backgroundColor: primaryYellow,
+        backgroundColor: primaryBlue,
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: RefreshIndicator(
@@ -56,7 +57,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 AutovalidateMode.onUserInteraction,
                             onChanged: (val) => onChangedSearch(val),
                             style: inter14Medium(),
-                            cursorColor: primaryYellow,
+                            cursorColor: primaryBlue,
                             decoration: searchDecoration(
                                 "Find the product you want", onClear: () {
                               searchC.clear();
@@ -116,7 +117,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      color: secondaryYellow,
+                      color: primaryYellow,
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,10 +193,19 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ),
                               ),
                               colorBox(
-                                  bgColor: 0xffCFFCDB,
-                                  mainColor: 0xff35E565,
-                                  imageName: "badge-check.svg",
-                                  name: "Brand"),
+                                bgColor: 0xffCFFCDB,
+                                mainColor: 0xff35E565,
+                                imageName: "badge-check.svg",
+                                name: "AllBrand",
+                                onClick: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) {
+                                      return const AllBrandPage();
+                                    },
+                                  ),
+                                ),
+                              ),
                               colorBox(
                                   bgColor: 0xffF8D3E4,
                                   mainColor: 0xffE7408F,

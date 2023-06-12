@@ -454,10 +454,10 @@ class MGLog {
                   minWidth: (MediaQuery.of(context).size.width / 2),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(color: primaryYellow)),
+                      side: BorderSide(color: primaryBlue)),
                   color: Colors.white,
                   child: Text("SHOW",
-                      style: TextStyle(color: primaryYellow, fontSize: 16)),
+                      style: TextStyle(color: primaryBlue, fontSize: 16)),
                   onPressed: () {
                     Navigator.of(context).pop(true);
                     showLogContentDialog(context: context).then((value) {});
@@ -468,8 +468,8 @@ class MGLog {
                   minWidth: (MediaQuery.of(context).size.width / 2),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(color: primaryYellow)),
-                  color: primaryYellow,
+                      side: BorderSide(color: primaryBlue)),
+                  color: primaryBlue,
                   child: const Text("SEND",
                       style: TextStyle(color: Colors.white, fontSize: 16)),
                   onPressed: () {

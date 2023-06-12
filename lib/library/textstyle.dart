@@ -33,11 +33,13 @@ inter12HyperlinkBold() => TextStyle(
 inter12Black54() => const TextStyle(fontSize: 12, color: Colors.black54);
 
 inter12Black87() => const TextStyle(fontSize: 12, color: Colors.black87);
-
+inter14() => const TextStyle(
+      fontSize: 14,
+    );
 inter14NormalGray() => const TextStyle(fontSize: 14, color: Colors.grey);
 
 inter14MediumPYellow() =>
-    TextStyle(fontSize: 14, color: primaryYellow, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 14, color: primaryBlue, fontWeight: FontWeight.w500);
 
 inter14Medium() =>
     TextStyle(fontSize: 14, color: black, fontWeight: FontWeight.w500);
@@ -50,7 +52,7 @@ inter14MediumWhite() => const TextStyle(
     fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500);
 
 inter14MediumYellow() =>
-    TextStyle(fontSize: 14, color: tertiaryYellow, fontWeight: FontWeight.w500);
+    TextStyle(fontSize: 14, color: secondaryBlue, fontWeight: FontWeight.w500);
 
 inter14BoldWhite() => const TextStyle(
     fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold);

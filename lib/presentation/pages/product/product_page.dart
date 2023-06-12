@@ -166,7 +166,7 @@ class _ProductPageState extends State<ProductPage> {
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: primaryYellow,
+        color: primaryBlue,
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Column(
@@ -195,7 +195,7 @@ class _ProductPageState extends State<ProductPage> {
           Container(
             decoration: BoxDecoration(
               color: bgColor == null ? Colors.white : null,
-              border: Border.all(color: primaryYellow),
+              border: Border.all(color: primaryBlue),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -242,13 +242,13 @@ class _ProductPageState extends State<ProductPage> {
                       builder: (context) => const StorePickupPage())),
               overlayColor: MaterialStateProperty.resolveWith((states) =>
                   states.contains(MaterialState.pressed)
-                      ? tertiaryYellow
+                      ? secondaryBlue
                       : null),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(
                   color: white,
-                  border: Border.all(color: primaryYellow, width: 2),
+                  border: Border.all(color: primaryBlue, width: 2),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -269,8 +269,8 @@ class _ProductPageState extends State<ProductPage> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
-                color: primaryYellow,
-                border: Border.all(color: primaryYellow, width: 2),
+                color: primaryBlue,
+                border: Border.all(color: primaryBlue, width: 2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -378,7 +378,7 @@ class _ProductPageState extends State<ProductPage> {
           Container(
             decoration: BoxDecoration(
               color: white,
-              border: Border.all(color: primaryYellow),
+              border: Border.all(color: primaryBlue),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -398,7 +398,7 @@ class _ProductPageState extends State<ProductPage> {
           Container(
             decoration: BoxDecoration(
               color: white,
-              border: Border.all(color: primaryYellow),
+              border: Border.all(color: primaryBlue),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -412,7 +412,7 @@ class _ProductPageState extends State<ProductPage> {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               itemBuilder: (context, index) {
-                return productSpecItem("Brand", "Iphone");
+                return productSpecItem("AllBrand", "Iphone");
               },
               separatorBuilder: (context, index) {
                 return Padding(
@@ -684,7 +684,7 @@ class _ProductPageState extends State<ProductPage> {
                 Size(MediaQuery.of(context).size.width, 52)),
             shape: MaterialStateProperty.all(
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-            backgroundColor: MaterialStateProperty.all(primaryYellow)),
+            backgroundColor: MaterialStateProperty.all(primaryBlue)),
         onPressed: () async => onClick ?? {},
         child: Text(
           name,

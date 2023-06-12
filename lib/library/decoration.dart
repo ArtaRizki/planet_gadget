@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
+import '../utils/constants/path.dart';
 import 'color.dart';
 import 'textstyle.dart';
 
@@ -25,7 +27,7 @@ paketDetailDecoration(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 paketDecoration(String hintTxt, bool isEmpty) {
@@ -50,7 +52,7 @@ paketDecoration(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 paketDetailHargaJualDisableDecoration(String hintTxt, bool isEmpty) {
@@ -77,7 +79,7 @@ paketDetailHargaJualDisableDecoration(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 paketDecorationDatePicker(String hintTxt, bool isEmpty) {
@@ -106,7 +108,7 @@ paketDecorationDatePicker(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
@@ -135,7 +137,7 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 generalDecoration(String hintTxt, bool isEmpty) {
@@ -164,7 +166,7 @@ generalDecoration(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 viewOnlyDecoration(String hintTxt, bool isEmpty) {
@@ -209,7 +211,32 @@ generalDecorationWoIcon(String hintTxt, bool isEmpty) {
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
+}
+
+generalDecorationWoIconWPrefix(String hintTxt, bool isEmpty, String prefixTxt) {
+  return InputDecoration(
+      prefixText: prefixTxt,
+      prefixStyle: inter14Medium(),
+      border: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+        borderSide: BorderSide(
+            color:
+                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(6)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
+      ),
+      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      contentPadding: const EdgeInsets.all(10),
+      alignLabelWithHint: true,
+      hintText: hintTxt,
+      hintStyle: inter14MediumBlack2());
 }
 
 generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
@@ -241,40 +268,51 @@ generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter12Gray());
+      hintStyle: inter14MediumBlack2());
 }
 
 searchDecoration(String hintTxt,
-    {required Function onClear, Color? borderColor}) {
+    {required Function onClear, Color? borderColor, bool clearIcon = false}) {
   return InputDecoration(
       prefixIcon: const Padding(
         padding: EdgeInsets.only(left: 15, right: 10, top: 0),
         child: Icon(Icons.search, color: Colors.black, size: 24),
       ),
-      suffixIcon: InkWell(
-        onTap: () => onClear(),
-        child: const SizedBox(),
-      ),
+      suffixIconConstraints:
+          !clearIcon ? null : const BoxConstraints(minHeight: 36, minWidth: 36),
+      suffixIcon: !clearIcon
+          ? null
+          : Padding(
+              padding: const EdgeInsets.only(right: 14),
+              child: InkWell(
+                onTap: () => onClear,
+                child: SvgPicture.asset(
+                  "${iconsPath}x-circle.svg",
+                  width: 13,
+                  height: 13,
+                ),
+              ),
+            ),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         borderSide: BorderSide(color: borderColor ?? gray),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        borderSide: BorderSide(color: primaryYellow),
+        borderSide: BorderSide(color: primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
         borderSide: BorderSide(color: borderColor ?? gray),
       ),
-      focusColor: primaryYellow,
+      focusColor: primaryBlue,
       filled: true,
-      fillColor: tertiaryYellow,
+      fillColor: secondaryBlue,
       contentPadding: const EdgeInsets.fromLTRB(0, 0, 10, 10),
       prefixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 30),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter14MediumGray());
+      hintStyle: inter14MediumBlack2());
 }
 
 searchDecorationGray(String hintTxt, {required Function onClear, clearIcon}) {
@@ -310,5 +348,5 @@ searchDecorationGray(String hintTxt, {required Function onClear, clearIcon}) {
       prefixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 30),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter14Gray());
+      hintStyle: inter14MediumBlack2());
 }

@@ -62,7 +62,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                                   AutovalidateMode.onUserInteraction,
                               onChanged: (val) => onChangedSearch(val),
                               style: inter14Medium(),
-                              cursorColor: primaryYellow,
+                              cursorColor: primaryBlue,
                               decoration: searchDecoration(
                                 "Masukkan lokasi Toko",
                                 onClear: () {
@@ -71,7 +71,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                                   searchResult.clear();
                                   setState(() {});
                                 },
-                                borderColor: tertiaryYellow,
+                                borderColor: secondaryBlue,
                               ),
                               scrollPadding: const EdgeInsets.only(bottom: 52),
                             ),
@@ -86,7 +86,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                                       const EdgeInsets.symmetric(vertical: 12),
                                   decoration: BoxDecoration(
                                     color: white,
-                                    border: Border.all(color: primaryYellow),
+                                    border: Border.all(color: primaryBlue),
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: const Icon(
@@ -168,7 +168,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                           setState(() {});
                         },
                         style: inter12(),
-                        cursorColor: primaryYellow,
+                        cursorColor: primaryBlue,
                         decoration: generalDecoration(
                             "Input your number KTP/SIM/KITAS", false),
                         scrollPadding: const EdgeInsets.only(bottom: 52),
@@ -259,7 +259,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                     decoration: BoxDecoration(
-                      color: tertiaryYellow,
+                      color: secondaryBlue,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(
@@ -679,7 +679,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                         }),
                     afterChangeButton(
                         name: "No, back to the store pickup list",
-                        outlineColor: primaryYellow,
+                        outlineColor: primaryBlue,
                         onClick: () async {
                           Navigator.pop(context);
                         }),
@@ -705,7 +705,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
           Container(
             decoration: BoxDecoration(
               color: bgColor == null ? Colors.white : null,
-              border: Border.all(color: primaryYellow),
+              border: Border.all(color: primaryBlue),
               borderRadius: BorderRadius.circular(8),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
@@ -751,9 +751,9 @@ class _StorePickupPageState extends State<StorePickupPage> {
                 Size(MediaQuery.of(context).size.width, 52)),
             shape: MaterialStateProperty.all(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: BorderSide(color: outlineColor ?? primaryYellow))),
+                side: BorderSide(color: outlineColor ?? primaryBlue))),
             backgroundColor: MaterialStateProperty.all(
-                outlineColor == null ? primaryYellow : white)),
+                outlineColor == null ? primaryBlue : white)),
         onPressed: onClick,
         child: Text(
           name,
@@ -773,12 +773,12 @@ class _StorePickupPageState extends State<StorePickupPage> {
           InkWell(
             onTap: () => termsSheet(),
             overlayColor: MaterialStateProperty.resolveWith((states) =>
-                states.contains(MaterialState.pressed) ? tertiaryYellow : null),
+                states.contains(MaterialState.pressed) ? secondaryBlue : null),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
                 color: white,
-                border: Border.all(color: primaryYellow, width: 2),
+                border: Border.all(color: primaryBlue, width: 2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -796,8 +796,8 @@ class _StorePickupPageState extends State<StorePickupPage> {
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
-                color: primaryYellow,
-                border: Border.all(color: primaryYellow, width: 2),
+                color: primaryBlue,
+                border: Border.all(color: primaryBlue, width: 2),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(

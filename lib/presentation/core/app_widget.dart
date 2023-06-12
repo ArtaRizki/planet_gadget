@@ -29,7 +29,7 @@ class AppWidget extends StatelessWidget {
               fontFamily: 'Inter',
               primarySwatch: Colors.yellow,
               textSelectionTheme:
-                  TextSelectionThemeData(selectionHandleColor: primaryYellow)),
+                  TextSelectionThemeData(selectionHandleColor: primaryBlue)),
           home: const BottomNavWidget(),
         ),
       ),

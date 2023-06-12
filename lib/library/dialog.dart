@@ -83,12 +83,12 @@
 //                                 fieldWidth: 50,
 //                                 borderWidth: 1,
 //                                 activeFillColor: Colors.white,
-//                                 activeColor: primaryYellow,
+//                                 activeColor: primaryBlue,
 //                                 errorBorderColor: Colors.red,
-//                                 selectedColor: primaryYellow,
+//                                 selectedColor: primaryBlue,
 //                                 inactiveColor: gray,
 //                               ),
-//                               cursorColor: primaryYellow,
+//                               cursorColor: primaryBlue,
 //                             ),
 //                           ),
 //                           Padding(
@@ -114,7 +114,7 @@
 //                             padding: const EdgeInsets.only(bottom: 18),
 //                             child: ElevatedButton(
 //                                 style: ElevatedButton.styleFrom(
-//                                     onPrimary: tertiaryYellow,
+//                                     onPrimary: secondaryBlue,
 //                                     primary: !value.isRunning ? gray : Yellow5,
 //                                     shape: RoundedRectangleBorder(
 //                                         borderRadius:
@@ -198,7 +198,7 @@
 //                     padding: const EdgeInsets.only(bottom: 18),
 //                     child: ElevatedButton(
 //                         style: ElevatedButton.styleFrom(
-//                             onPrimary: tertiaryYellow,
+//                             onPrimary: secondaryBlue,
 //                             primary: Yellow5,
 //                             shape: RoundedRectangleBorder(
 //                                 borderRadius: BorderRadius.circular(6))),
@@ -697,7 +697,7 @@
 //                     child: Container(
 //                       decoration: BoxDecoration(
 //                           borderRadius: BorderRadius.circular(40),
-//                           color: primaryYellow),
+//                           color: primaryBlue),
 //                       child: Padding(
 //                         padding: const EdgeInsets.only(left: 13),
 //                         child: Text("${(number / total).round() * 100}%",

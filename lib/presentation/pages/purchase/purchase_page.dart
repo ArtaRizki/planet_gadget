@@ -69,13 +69,14 @@ class _PurchasePageState extends State<PurchasePage> {
                       child: TabBarView(
                         controller: tabController,
                         children: <Widget>[
+                          const Text("ASU"),
                           Container(
                             margin: const EdgeInsets.all(20),
                             child: ListView.separated(
                                 physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemBuilder: (context, index) {
-                                  return productItem();
+                                  return productPackingItem();
                                 },
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 16),
@@ -83,8 +84,18 @@ class _PurchasePageState extends State<PurchasePage> {
                           ),
                           const Text("ASU"),
                           const Text("ASU"),
-                          const Text("ASU"),
-                          const Text("ASU"),
+                          Container(
+                            margin: const EdgeInsets.all(20),
+                            child: ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return productCompletedItem();
+                                },
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 16),
+                                itemCount: 2),
+                          ),
                           const Text("ASU"),
                         ],
                       ),
@@ -129,8 +140,9 @@ class _PurchasePageState extends State<PurchasePage> {
     );
   }
 
-  Widget productItem() {
+  Widget productPackingItem() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,106 +151,141 @@ class _PurchasePageState extends State<PurchasePage> {
             Text("230512GFG29TN5 ", style: inter14Bold()),
           ],
         ),
-        const SizedBox(height: 16),
+        // const SizedBox(height: 16),
         Row(
           children: <Widget>[
-            imageBox(
-                borderRadius: 0,
-                width: 80,
-                height: 80,
-                imagePath: "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png"),
+            Expanded(
+              flex: 2,
+              child: imageBox(
+                  borderRadius: 0,
+                  width: 80,
+                  height: 80,
+                  imagePath:
+                      "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png"),
+            ),
             const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text("Apple Iphone 12 128Gb", style: inter14MediumBlack2()),
-                const SizedBox(height: 8),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: tertiaryYellow,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        Text("Variant: Blue", style: inter12MediumBlack2()),
-                        // const SizedBox(width: 4),
-                        Icon(Icons.keyboard_arrow_down_rounded, color: black)
-                      ],
-                    ),
+            Expanded(
+              flex: 7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 24),
+                  Text("Apple Iphone 12 128Gb", style: inter14MediumBlack2()),
+                  const SizedBox(height: 8),
+                  Text("Variant: Blue", style: inter12MediumBlack2()),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(convertToIdr(nominal: "12999000"),
+                          style: inter14Bold()),
+                      Text(
+                        "(1 Item)",
+                        style: inter12MediumBlack2(),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 8),
-                Text(convertToIdr(nominal: "12999000"), style: inter14Bold()),
-              ],
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text("Order Total : ", style: inter12MediumBlack2()),
+                      Text(convertToIdr(nominal: "13019000"),
+                          style: inter12BoldBlack())
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 24),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Expanded(
-                flex: 10,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: InkWell(
-                    onTap: () {},
-                    child:
-                        SvgPicture.asset("${iconsPath}trash.svg", color: red),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 14),
-              Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: activeBgColor),
-                      borderRadius: BorderRadius.circular(8),
-                      color: white),
-                  child: Row(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text("Packing Time 01-06-2023", style: inter12MediumBlack2()),
+        )
+      ],
+    );
+  }
+
+  Widget productCompletedItem() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Text("Order ID", style: inter14Bold()),
+            Text("230512GFG29TN5 ", style: inter14Bold()),
+          ],
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: imageBox(
+                  borderRadius: 0,
+                  width: 80,
+                  height: 80,
+                  imagePath:
+                      "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png"),
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              flex: 7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 24),
+                  Text("Apple Iphone 12 128Gb", style: inter14MediumBlack2()),
+                  const SizedBox(height: 8),
+                  Text("Variant: Blue", style: inter12MediumBlack2()),
+                  const SizedBox(height: 8),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: disabledBgColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                            ),
-                          ),
-                          child: SvgPicture.asset("${iconsPath}minus.svg",
-                              color: disabledTextColor),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 4,
-                        child: Text(
-                          "1",
-                          style: inter14MediumBlack2(),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          color: activeBgColor,
-                          child: SvgPicture.asset("${iconsPath}plus.svg",
-                              color: black),
-                        ),
+                    children: [
+                      Text(convertToIdr(nominal: "12999000"),
+                          style: inter14Bold()),
+                      Text(
+                        "(1 Item)",
+                        style: inter12MediumBlack2(),
                       ),
                     ],
                   ),
-                ),
-              )
-            ],
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Text("Order Total : ", style: inter12MediumBlack2()),
+                      Text(convertToIdr(nominal: "13019000"),
+                          style: inter12BoldBlack())
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          child:
+              Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
+        ),
+        InkWell(
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const PurchasePage())),
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            decoration: BoxDecoration(
+              color: primaryBlue,
+              border: Border.all(color: primaryBlue, width: 2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("Rate", style: inter16Bold()),
+              ],
+            ),
           ),
         )
       ],

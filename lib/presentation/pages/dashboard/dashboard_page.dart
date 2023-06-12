@@ -105,7 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 style: inter14MediumBlack()),
                             const SizedBox(height: 5),
                             Text("7,52 KM | Planet Gadget Brigjen Katamso Waru",
-                                style: inter12Black2Medium())
+                                style: inter12MediumBlack2())
                           ],
                         )
                       ],
@@ -132,7 +132,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               const SizedBox(width: 10),
                               Text(
                                 "100 Coin",
-                                style: inter12BlackMedium(),
+                                style: inter12MediumBlack(),
                               )
                             ],
                           ),
@@ -151,7 +151,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               const SizedBox(width: 10),
                               Text(
                                 "Gold Member",
-                                style: inter12BlackMedium(),
+                                style: inter12MediumBlack(),
                               ),
                             ],
                           ),
@@ -232,7 +232,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               InkWell(
                                   onTap: () {},
                                   child: Text("See More",
-                                      style: inter12BlackMedium())),
+                                      style: inter12MediumBlack())),
                             ],
                           ),
                         ),
@@ -265,7 +265,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               InkWell(
                                   onTap: () {},
                                   child: Text("See More",
-                                      style: inter12BlackMedium())),
+                                      style: inter12MediumBlack())),
                             ],
                           ),
                         ),
@@ -297,7 +297,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               InkWell(
                                   onTap: () {},
                                   child: Text("See More",
-                                      style: inter12BlackMedium())),
+                                      style: inter12MediumBlack())),
                             ],
                           ),
                         ),
@@ -447,7 +447,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Expanded(
                 flex: 3,
                 child: Text(productName + "aaaaaaaaaaaaaaaa",
-                    style: inter12BlackMedium())),
+                    style: inter12MediumBlack())),
             const SizedBox(height: 8),
             Expanded(flex: 3, child: Text(price, style: inter14Bold())),
           ],

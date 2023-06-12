@@ -7,14 +7,18 @@ inter12() => const TextStyle(
 
 inter12Gray() => const TextStyle(fontSize: 12, color: Colors.grey);
 inter12Black2() => TextStyle(fontSize: 12, color: black2);
-inter12GrayMedium() => const TextStyle(
+inter12MediumGray() => const TextStyle(
     fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500);
-inter12BlackMedium() =>
+inter12MediumBlack() =>
     TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w500);
-inter12Black2Medium() =>
+inter12MediumBlack2() =>
     TextStyle(fontSize: 12, color: black2, fontWeight: FontWeight.w500);
-inter12BlackBold() =>
+inter12BoldBlack() =>
     TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w700);
+inter12BBoldSuccess() => TextStyle(
+    fontSize: 12, color: successTextColor, fontWeight: FontWeight.w700);
+inter12BBoldError() =>
+    TextStyle(fontSize: 12, color: errorTextColor, fontWeight: FontWeight.w700);
 
 inter10MediumGray() => TextStyle(fontSize: 10, color: gray);
 inter10Normal() => const TextStyle(fontSize: 10);

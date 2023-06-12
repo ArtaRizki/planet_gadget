@@ -5,6 +5,7 @@ import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/utils/constants/path.dart';
 
 import '../../../library/color.dart';
+import '../../core/appbar_widget.dart';
 
 class PromoPage extends StatefulWidget {
   const PromoPage({super.key});
@@ -19,6 +20,7 @@ class _PromoPageState extends State<PromoPage> {
     return SafeArea(
       top: false,
       child: Scaffold(
+        appBar: appBarWidget(title: "Promo", context: context),
         backgroundColor: white,
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -26,48 +28,21 @@ class _PromoPageState extends State<PromoPage> {
             onRefresh: () {
               return refresh();
             },
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 36, 20, 0),
-                    child: InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.navigate_before,
-                            color: black,
-                            size: 32,
-                          ),
-                          const SizedBox(width: 10),
-                          Text("Promo", style: inter20Bold()),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  ListView.separated(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 173,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image:
-                                      AssetImage("${bannerPath}promo2.jpg"))),
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 8),
-                      itemCount: 7),
-                ],
-              ),
-            ),
+            child: ListView.separated(
+                padding: const EdgeInsets.only(top: 16, bottom: 24),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Container(
+                    height: 173,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage("${bannerPath}promo2.jpg"))),
+                  );
+                },
+                separatorBuilder: (context, index) => const SizedBox(height: 8),
+                itemCount: 10),
           ),
         ),
       ),

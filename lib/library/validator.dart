@@ -115,6 +115,14 @@ loginEmailNoWa(String? val) {
   return null;
 }
 
+registerNumber(String? val) {
+  val = val.toString().trim();
+  if (val == "" || val.isEmpty || val == "null") {
+    return "Nama kategori belum diisi";
+  }
+  return null;
+}
+
 registerNamaKategori(String? val) {
   val = val.toString().trim();
   if (val == "" || val.isEmpty || val == "null") {

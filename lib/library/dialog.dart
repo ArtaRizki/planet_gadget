@@ -297,12 +297,12 @@
 //                   children: [
 //                     Text(
 //                       title,
-//                       style: inter12GrayMedium(),
+//                       style: inter12MediumGray(),
 //                       textAlign: TextAlign.center,
 //                     ),
 //                     Text(
 //                       " $itemName ?",
-//                       style: inter12BlackBold(),
+//                       style: inter12BoldBlack(),
 //                       maxLines: null,
 //                       softWrap: true,
 //                       textAlign: TextAlign.center,
@@ -398,12 +398,12 @@
 //                   children: [
 //                     Text(
 //                       title,
-//                       style: inter12GrayMedium(),
+//                       style: inter12MediumGray(),
 //                       textAlign: TextAlign.center,
 //                     ),
 //                     Text(
 //                       " $itemName ?",
-//                       style: inter12BlackBold(),
+//                       style: inter12BoldBlack(),
 //                       maxLines: null,
 //                       softWrap: true,
 //                       textAlign: TextAlign.center,
@@ -499,12 +499,12 @@
 //                   children: [
 //                     Text(
 //                       title,
-//                       style: inter12GrayMedium(),
+//                       style: inter12MediumGray(),
 //                       textAlign: TextAlign.center,
 //                     ),
 //                     Text(
 //                       " $itemName ?",
-//                       style: inter12BlackBold(),
+//                       style: inter12BoldBlack(),
 //                       maxLines: null,
 //                       softWrap: true,
 //                       textAlign: TextAlign.center,

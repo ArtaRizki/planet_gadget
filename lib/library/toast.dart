@@ -12,7 +12,7 @@ showToast(String txt, BuildContext context, {bool isError = false}) {
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(12.0),
-      color: isError ? Colors.red : tertiaryYellow,
+      color: isError ? Colors.red : successToastColor,
     ),
     child: Column(
       children: [
@@ -27,14 +27,14 @@ showToast(String txt, BuildContext context, {bool isError = false}) {
                     padding: const EdgeInsets.only(right: 14),
                     child: SvgPicture.asset(
                       isError
-                          ? "assets/icons/katalog/x-circle-white.svg"
-                          : "assets/icons/katalog/check-circle-white.svg",
+                          ? "assets/icons/x-circle-white.svg"
+                          : "assets/icons/check-circle.svg",
                     ),
                   ),
                   Flexible(
                     child: Text(
                       txt,
-                      style: inter14BoldWhite(),
+                      style: inter14Bold(),
                       maxLines: 2,
                       softWrap: true,
                     ),
@@ -44,9 +44,9 @@ showToast(String txt, BuildContext context, {bool isError = false}) {
             ),
             InkWell(
               onTap: () => FToast().removeCustomToast(),
-              child: const Icon(
+              child: Icon(
                 Icons.close,
-                color: Colors.white,
+                color: isError ? errorTextColor : successTextColor,
               ),
             )
           ],

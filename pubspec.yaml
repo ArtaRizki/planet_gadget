@@ -85,6 +85,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/icons/bottom_navbar/
+    - assets/icons/metode_pengiriman/
     - assets/images/
     - assets/images/merek/
     - assets/images/banner/

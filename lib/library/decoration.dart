@@ -138,7 +138,7 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
       hintStyle: inter12Gray());
 }
 
-registerDecoration(String hintTxt, bool isEmpty) {
+generalDecoration(String hintTxt, bool isEmpty) {
   return InputDecoration(
       suffixIcon:
           Icon(Icons.warning, color: isEmpty ? Colors.red : Colors.transparent),
@@ -189,7 +189,7 @@ viewOnlyDecoration(String hintTxt, bool isEmpty) {
       hintStyle: inter14Gray2());
 }
 
-registerDecorationWoIcon(String hintTxt, bool isEmpty) {
+generalDecorationWoIcon(String hintTxt, bool isEmpty) {
   return InputDecoration(
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
@@ -212,7 +212,7 @@ registerDecorationWoIcon(String hintTxt, bool isEmpty) {
       hintStyle: inter12Gray());
 }
 
-registerDecorationWoIconDropdown(String hintTxt, bool isEmpty,
+generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
     {bool disabled = false}) {
   return InputDecoration(
       suffixIcon: const SizedBox(),
@@ -244,7 +244,8 @@ registerDecorationWoIconDropdown(String hintTxt, bool isEmpty,
       hintStyle: inter12Gray());
 }
 
-searchDecoration(String hintTxt, {required Function onClear}) {
+searchDecoration(String hintTxt,
+    {required Function onClear, Color? borderColor}) {
   return InputDecoration(
       prefixIcon: const Padding(
         padding: EdgeInsets.only(left: 15, right: 10, top: 0),
@@ -256,7 +257,7 @@ searchDecoration(String hintTxt, {required Function onClear}) {
       ),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        borderSide: BorderSide(color: gray),
+        borderSide: BorderSide(color: borderColor ?? gray),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
@@ -264,7 +265,7 @@ searchDecoration(String hintTxt, {required Function onClear}) {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(12)),
-        borderSide: BorderSide(color: gray),
+        borderSide: BorderSide(color: borderColor ?? gray),
       ),
       focusColor: primaryYellow,
       filled: true,

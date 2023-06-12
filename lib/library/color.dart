@@ -4,14 +4,23 @@ Color primaryYellow = const Color(0xffffd966);
 Color secondaryYellow = const Color(0xffFFE28C);
 Color tertiaryYellow = const Color(0xffFFF4D1);
 Color quarteryYellow = const Color.fromRGBO(240, 252, 246, 1);
+Color activeBgColor = const Color(0xffFFC619);
 Color yellow5 = const Color(0xff2ECC71);
 Color yellow6 = const Color(0xffF0FCF6);
 Color white = const Color(0xffFCFCFC);
+Color successBgColor = const Color(0xffCFE5D9);
+Color successToastColor = const Color(0xffAFD3C0);
+Color successTextColor = const Color(0xff107C41);
+Color errorBgColor = const Color(0xffF5D8D6);
+Color errorTextColor = red;
+Color disabledBgColor = const Color(0xff959595);
+Color disabledTextColor = const Color(0xff808080);
 
 Color black = const Color(0xff252525);
 Color blackDefault = Colors.black;
 Color black2 = const Color(0xff494949);
 Color black3 = const Color(0xff1f1f1f);
+Color black4 = const Color(0xffD5D5D5);
 
 Color gray = const Color(0xffAAAAAA);
 Color gray2 = const Color(0xff575757);

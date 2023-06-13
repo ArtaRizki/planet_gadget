@@ -40,6 +40,11 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
         floatingActionButton: Visibility(
           visible: MediaQuery.of(context).viewInsets.bottom == 0,
           child: FloatingNavbar(
+            itemBorderRadius: 12,
+            selectedBackgroundColor: primaryBlue,
+            selectedItemColor: white,
+            unselectedItemColor: black,
+            backgroundColor: white,
             items: [
               FloatingNavbarItem(
                   customWidget: SvgPicture.asset(

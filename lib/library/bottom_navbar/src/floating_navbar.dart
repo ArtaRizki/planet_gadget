@@ -123,11 +123,11 @@ ItemBuilder _defaultItemBuilder({
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             AnimatedContainer(
-              duration: const Duration(milliseconds: 0),
+              duration: const Duration(milliseconds: 300),
               decoration: BoxDecoration(
                   color: currentIndex == items!.indexOf(item)
                       ? selectedBackgroundColor
-                      : Colors.transparent,
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(itemBorderRadius!)),
               child: InkWell(
                 onTap: () {

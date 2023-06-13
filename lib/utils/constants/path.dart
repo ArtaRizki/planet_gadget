@@ -1,4 +1,5 @@
 String iconsPath = "assets/icons/";
+String backgroundsPath = "assets/backgrounds/";
 String shippingPath = "assets/icons/metode_pengiriman/";
 String imagesPath = "assets/images/";
 String promoPath = "assets/images/promo/";

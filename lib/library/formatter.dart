@@ -7,17 +7,17 @@ class Formatter {
   }
 
   static String getFormatted(value) {
-    var f = new NumberFormat("#,##0", "eu");
+    var f = NumberFormat("#,##0", "eu");
     return f.format(value);
   }
 
   static String getFormattedDecimal(value) {
-    var f = new NumberFormat("#,##0.00", "eu");
+    var f = NumberFormat("#,##0.00", "eu");
     return f.format(value);
   }
 
   static String getFormattedDecimal2(value) {
-    var f = new NumberFormat("#,##0.##", "eu");
+    var f = NumberFormat("#,##0.##", "eu");
     return f.format(value);
   }
 

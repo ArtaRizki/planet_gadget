@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:intl/intl.dart';
 
 String convertBulan(int angkaBulan) {
@@ -23,7 +21,7 @@ String convertBulan(int angkaBulan) {
 String convertTglIndo(String date) {
   date = DateFormat('dd-MM-yyyy').format(DateTime.parse(date));
   final datted = date.split('-');
-  return datted[0] + " " + convertBulan(int.parse(datted[1])) + " " + datted[2];
+  return "${datted[0]} ${convertBulan(int.parse(datted[1]))} ${datted[2]}";
 }
 
 String convertTglIndoShortMonth(String date) =>

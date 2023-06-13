@@ -1,10 +1,6 @@
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/utils/constants/path.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../library/color.dart';
 import '../../../library/convert_currency.dart';
@@ -25,7 +21,7 @@ class _PurchasePageState extends State<PurchasePage> {
       child: DefaultTabController(
         length: 6,
         child: Builder(builder: (context) {
-          final TabController tabController = DefaultTabController.of(context)!;
+          final TabController tabController = DefaultTabController.of(context);
           tabController.addListener(() {
             if (!tabController.indexIsChanging) {
               if (tabController.index == 0) {

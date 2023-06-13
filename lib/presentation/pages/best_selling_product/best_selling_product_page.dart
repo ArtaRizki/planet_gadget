@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/toast.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
-import '../purchase/purchase_page.dart';
 
 class BestSeliingProductPage extends StatefulWidget {
   const BestSeliingProductPage({super.key});

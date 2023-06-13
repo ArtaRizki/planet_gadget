@@ -9,7 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' as _getx;
+import 'package:get/get.dart' as get_x;
 
 // class pengganti Dio / APIService
 // untuk Tisco baru dipakai untuk menambahkan security (Code)
@@ -143,10 +143,10 @@ class DioClient<T> {
     try {
       // create param
       param.forEach((key, value) {
-        paramStr += (key + "=" + Uri.encodeComponent(value.toString()) + "&");
+        paramStr += ("$key=${Uri.encodeComponent(value.toString())}&");
       });
 
-      printLog('DioConn', 'Url = ' + url + ' ' + uniqueCode.toString());
+      printLog('DioConn', 'Url = $url $uniqueCode');
       // log('Execute Formatted = ' + url + "?" + paramStr);
 
       // init dio
@@ -233,10 +233,10 @@ class DioClient<T> {
     try {
       // create param
       param.forEach((key, value) {
-        paramStr += (key + "=" + Uri.encodeComponent(value.toString()) + "&");
+        paramStr += ("$key=${Uri.encodeComponent(value.toString())}&");
       });
 
-      printLog('DioConn', 'Url = ' + url);
+      printLog('DioConn', 'Url = $url');
       // init dio
       Dio dio = Dio(baseOptions);
       dio.interceptors.add(
@@ -268,11 +268,7 @@ class DioClient<T> {
       }
 
       printLog(
-          'DioConn ║ Time',
-          'Url = ' +
-              url +
-              ' / ' +
-              (DateTime.now().difference(start)).toString());
+          'DioConn ║ Time', 'Url = $url / ${DateTime.now().difference(start)}');
 
       return response;
     } on DioError catch (e) {
@@ -316,8 +312,7 @@ class DioClient<T> {
   void _messageDialog(
       {String? title, String? content, String? detail, bool? showError}) async {
     if (showError == true) {
-      printLog('DioConn',
-          'Connection error. ' + title! + ' ' + content! + ' ' + detail!);
+      printLog('DioConn', 'Connection error. ${title!} ${content!} ${detail!}');
 
       _isDialogOpen = true;
       _hasConectivity = false;
@@ -338,8 +333,8 @@ class DioClient<T> {
 
         _hasConectivity = true;
         _isDialogOpen = false;
-        while (_getx.Get.isDialogOpen == true) {
-          _getx.Get.back();
+        while (get_x.Get.isDialogOpen == true) {
+          get_x.Get.back();
         }
 
         printLog('DioConn', 'Connected (Manual)');
@@ -372,7 +367,7 @@ class DioClient<T> {
   void _startTimer() {
     // _cancelTimer();
 
-    const oneSec = const Duration(seconds: 1);
+    const oneSec = Duration(seconds: 1);
     _timerTick = _timeout;
 
     _timer = Timer.periodic(oneSec, (Timer timer) async {
@@ -388,8 +383,8 @@ class DioClient<T> {
           //     _hasConectivity = true;
 
           //     printLog('DioConn', 'Connected (Auto - onTimer)');
-          //     while (_getx.Get.isBottomSheetOpen) {
-          //       _getx.Get.back();
+          //     while (get_x.Get.isBottomSheetOpen) {
+          //       get_x.Get.back();
           //     }
           //     if (onConnected() != null) {
           //       onConnected();
@@ -407,7 +402,7 @@ class DioClient<T> {
         }
       } else {
         _timerTick = _timerTick - 1;
-        log('Timer : ' + _timerTick.toString());
+        log('Timer : $_timerTick');
       }
     });
   }
@@ -466,8 +461,8 @@ class DioClient<T> {
   }
 
   printLog(String _title, String _message) {
-    log('╔ ' + _title + ' ══════════');
-    log('║ ' + _message);
+    log('╔ $_title ══════════');
+    log('║ $_message');
     log('╚══════════════════════════════════════════════════════════════════════════════════════════');
   }
 }

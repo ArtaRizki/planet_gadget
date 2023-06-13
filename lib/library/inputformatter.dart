@@ -13,7 +13,7 @@ class CurrencyInputFormatter extends TextInputFormatter {
     String newText = formatter.format(value);
     return newValue.copyWith(
         text: newText,
-        selection: new TextSelection.collapsed(offset: newText.length));
+        selection: TextSelection.collapsed(offset: newText.length));
   }
 }
 

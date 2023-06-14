@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:planet_gadget/presentation/core/bottom_nav_widget.dart';
 import 'package:sizer/sizer.dart';
 
@@ -22,14 +23,17 @@ class AppWidget extends StatelessWidget {
             }
           }
         },
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-              fontFamily: 'Inter',
-              primarySwatch: Colors.yellow,
-              textSelectionTheme:
-                  TextSelectionThemeData(selectionHandleColor: primaryBlue)),
-          home: const BottomNavWidget(),
+        child: OverlaySupport(
+          child: MaterialApp(
+            title: 'Planet Gadget',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                fontFamily: 'Inter',
+                primarySwatch: Colors.yellow,
+                textSelectionTheme:
+                    TextSelectionThemeData(selectionHandleColor: primaryBlue)),
+            home: const BottomNavWidget(),
+          ),
         ),
       ),
     );

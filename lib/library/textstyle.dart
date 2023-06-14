@@ -15,6 +15,10 @@ inter12MediumBlack2() =>
     TextStyle(fontSize: 12, color: black2, fontWeight: FontWeight.w500);
 inter12BoldBlack() =>
     TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w700);
+inter12BoldWhite() =>
+    TextStyle(fontSize: 12, color: white, fontWeight: FontWeight.w700);
+inter12BoldActiveYellow() => TextStyle(
+    fontSize: 12, color: activeYellowColor, fontWeight: FontWeight.w700);
 inter12BBoldSuccess() => TextStyle(
     fontSize: 12, color: successTextColor, fontWeight: FontWeight.w700);
 inter12BBoldError() =>
@@ -54,8 +58,8 @@ inter14MediumWhite() => const TextStyle(
 inter14MediumYellow() =>
     TextStyle(fontSize: 14, color: secondaryBlue, fontWeight: FontWeight.w500);
 
-inter14BoldWhite() => const TextStyle(
-    fontSize: 14, color: Colors.white, fontWeight: FontWeight.bold);
+inter14BoldWhite() =>
+    TextStyle(fontSize: 14, color: white, fontWeight: FontWeight.bold);
 
 inter14MediumGray() =>
     TextStyle(fontSize: 14, color: gray, fontWeight: FontWeight.w500);
@@ -126,11 +130,15 @@ inter18Medium() =>
 
 inter20Bold() =>
     TextStyle(fontSize: 20, color: black, fontWeight: FontWeight.w700);
+inter20BoldWhite() =>
+    TextStyle(fontSize: 20, color: white, fontWeight: FontWeight.w700);
 
 inter22Bold() =>
     TextStyle(fontSize: 22, color: black, fontWeight: FontWeight.w700);
 
 inter28Bold() => const TextStyle(fontSize: 28, fontWeight: FontWeight.bold);
+inter28BoldWhite() =>
+    TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: white);
 
 inter22BoldYellow() =>
     TextStyle(fontSize: 22, color: yellow5, fontWeight: FontWeight.bold);

@@ -1,0 +1,201 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS D:\INFORMATICS\FLUTTER\planet_gadget\android> gradlew signingReport
+gradlew : The term 'gradlew' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify t
+At line:1 char:1
++ gradlew signingReport
++ ~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (gradlew:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+ 
+
+Suggestion [3,General]: The command gradlew was not found, but does exist in the current location. Windows PowerShell does not load commands from the current location by default. If yo
+u trust this command, instead type: ".\gradlew". See "get-help about_Command_Precedence" for more details.
+PS D:\INFORMATICS\FLUTTER\planet_gadget\android> ./gradlew signingReport
+
+Welcome to Gradle 7.5!
+
+Here are the highlights of this release:
+ - Support for Java 18
+ - Support for building with Groovy 4
+ - Much more responsive continuous builds
+ - Improved diagnostics for dependency resolution
+
+For more details see https://docs.gradle.org/7.5/release-notes.html
+
+Starting a Gradle Daemon, 1 busy and 1 incompatible Daemons could not be reused, use --status for details
+
+> Task :app:signingReport
+Variant: debug
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+Variant: release
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+Variant: profile
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :connectivity_plus:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :flutter_plugin_android_lifecycle:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :fluttertoast:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :image_picker_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :path_provider_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :permission_handler_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :share_plus:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :shared_preferences_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :social_share:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :sqflite:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+> Task :url_launcher_android:signingReport
+Variant: debugAndroidTest
+Config: debug
+Store: C:\Users\HP\.android\debug.keystore
+Alias: AndroidDebugKey
+MD5: 5A:EF:B6:16:AA:6E:19:47:F0:2F:8A:27:97:77:61:11
+SHA1: E7:5B:20:A4:62:7C:40:11:C7:20:7F:83:6D:03:E6:02:64:D3:40:6B
+SHA-256: E2:B9:52:EA:A7:63:F1:2B:8A:EC:F3:C4:79:10:08:77:D2:8A:10:2F:0F:69:F2:0C:2C:9A:CD:C7:80:09:AD:59
+Valid until: Sunday, May 12, 2052
+----------
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 8.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+See https://docs.gradle.org/7.5/userguide/command_line_interface.html#sec:command_line_warnings
+
+BUILD SUCCESSFUL in 32s
+12 actionable tasks: 12 executed
+PS D:\INFORMATICS\FLUTTER\planet_gadget\android> 
+
+
+

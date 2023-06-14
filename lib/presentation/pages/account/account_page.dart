@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/textstyle.dart';
+import 'package:planet_gadget/presentation/pages/account/setting_account_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../library/color.dart';
@@ -53,6 +54,7 @@ class _AccountPageState extends State<AccountPage> {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(20, 40, 20, 0),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Expanded(
                             flex: 1,
@@ -65,13 +67,13 @@ class _AccountPageState extends State<AccountPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 20),
+                          const SizedBox(width: 16),
                           Expanded(
-                              flex: 7,
+                              flex: 8,
                               child:
                                   Text("Account", style: inter20BoldWhite())),
                           Expanded(
-                            flex: 2,
+                            flex: 4,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
@@ -86,7 +88,11 @@ class _AccountPageState extends State<AccountPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 20),
                                   child: InkWell(
-                                    onTap: () => Navigator.pop(context),
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SettingAccountPage())),
                                     child: SvgPicture.asset(
                                       '${iconsAccountPath}edit_white.svg',
                                       width: 24,
@@ -109,7 +115,7 @@ class _AccountPageState extends State<AccountPage> {
                             iconPath: "member.svg",
                             backgroundPath: "bg_yellow.jpg")),
                     Container(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                      padding: const EdgeInsets.fromLTRB(20, 8, 20, 20),
                       decoration: BoxDecoration(
                         color: white,
                         borderRadius: const BorderRadius.only(
@@ -120,229 +126,120 @@ class _AccountPageState extends State<AccountPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text("My Purchases", style: inter16Bold()),
-                                Text("Purchase history", style: inter12Black2())
-                              ],
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text("My Purchases", style: inter16Bold()),
+                              InkWell(
+                                onTap: () {},
+                                child: Row(
+                                  children: [
+                                    Text("Purchase history",
+                                        style: inter12Black2()),
+                                    Icon(
+                                      Icons.navigate_next,
+                                      color: black,
+                                      size: 20,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
-                          SizedBox(
-                            height: 141,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 20),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return imageBox(
-                                    width: 233,
-                                    height: 131,
-                                    borderRadius: 12,
-                                    imagePath: "${bannerPath}promo.png");
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 3,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Special for members only",
-                                    style: inter16Bold()),
-                                InkWell(
-                                    onTap: () {},
-                                    child: Text("See More",
-                                        style: inter12MediumBlack())),
-                              ],
-                            ),
+                          Divider(thickness: 1, color: black3),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              iconBox(name: "To Pay", iconName: "to_pay.svg"),
+                              iconBox(name: "Packing", iconName: "packing.svg"),
+                              iconBox(
+                                  name: "Delivery", iconName: "delivery.svg"),
+                              iconBox(name: "Arrived", iconName: "arrived.svg"),
+                            ],
                           ),
                           const SizedBox(height: 16),
-                          SizedBox(
-                            height: 258,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 28),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return imageBox(
-                                    width: 175,
-                                    height: 248,
-                                    borderRadius: 12,
-                                    imagePath: "${bannerPath}promo3.jpg");
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 3,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Preferred brands", style: inter16Bold()),
-                                InkWell(
-                                    onTap: () {},
-                                    child: Text("See More",
-                                        style: inter12MediumBlack())),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            height: 80,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 28),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return imageBox(
-                                    width: 120,
-                                    height: 60,
-                                    borderRadius: 12,
-                                    imagePath: "${merekPath}asus.png");
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 3,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Choice for you", style: inter16Bold()),
-                                InkWell(
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ChoiceForYouPage())),
-                                    child: Text("See More",
-                                        style: inter12MediumBlack())),
-                              ],
-                            ),
+                          Text("Account Setting", style: inter16Bold()),
+                          Divider(thickness: 1, color: black3),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: SvgPicture.asset(
+                                    "${iconsAccountPath}address_list.svg"),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                  flex: 9,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text("Address List",
+                                          style: inter14Bold()),
+                                      const SizedBox(height: 4),
+                                      Text("Set your gadget delivery address",
+                                          style: inter12Gray5()),
+                                      const SizedBox(height: 4),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text("Address: ",
+                                                style: inter14BoldBlack2()),
+                                          ),
+                                          Expanded(
+                                            flex: 8,
+                                            child: Text(
+                                                "Green Mansion Juanda 2 Safir J-05, Sidoarjo, Jawa Timur",
+                                                style: inter14MediumBlack2()),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                            ],
                           ),
                           const SizedBox(height: 16),
-                          SizedBox(
-                            height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProductPage()));
-                                    });
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("New product", style: inter16Bold()),
-                                InkWell(
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const ChoiceForYouPage())),
-                                    child: Text("See More",
-                                        style: inter12MediumBlack())),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const NewProductPage()));
-                                    });
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Best selling product",
-                                    style: inter16Bold()),
-                                InkWell(
-                                    onTap: () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const BestSeliingProductPage())),
-                                    child: Text("See More",
-                                        style: inter12MediumBlack())),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProductPage()));
-                                    });
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
-                            ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: SvgPicture.asset(
+                                    "${iconsAccountPath}payment.svg"),
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                  flex: 9,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text("Payment", style: inter14Bold()),
+                                      const SizedBox(height: 4),
+                                      Text("Set how you make payments",
+                                          style: inter12Gray5()),
+                                      const SizedBox(height: 4),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text("Payment: ",
+                                                style: inter14BoldBlack2()),
+                                          ),
+                                          Expanded(
+                                            flex: 8,
+                                            child: Text("Gopay",
+                                                style: inter14MediumBlack2()),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )),
+                            ],
                           ),
                         ],
                       ),
@@ -519,12 +416,33 @@ class _AccountPageState extends State<AccountPage> {
               style: textColor == null ? inter14Bold() : inter14BoldWhite()),
           const SizedBox(height: 24),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
                 color: black3, borderRadius: BorderRadius.circular(8)),
             child:
                 Text("Join priority member", style: inter12BoldActiveYellow()),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget iconBox(
+      {required String name, required String iconName, Function()? onClick}) {
+    return InkWell(
+      onTap: onClick,
+      child: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(bottom: 6, top: 16),
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+                border: Border.all(color: primaryBlue),
+                borderRadius: BorderRadius.circular(8)),
+            child: SvgPicture.asset("$iconsAccountPath$iconName",
+                width: 36, height: 36),
+          ),
+          Text(name, style: inter12()),
         ],
       ),
     );

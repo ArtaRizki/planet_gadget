@@ -15,15 +15,13 @@ paketDetailDecoration(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -40,15 +38,13 @@ paketDecoration(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -67,15 +63,13 @@ paketDetailHargaJualDisableDecoration(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -92,9 +86,7 @@ paketDecorationDatePicker(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
@@ -104,7 +96,7 @@ paketDecorationDatePicker(String hintTxt, bool isEmpty) {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -120,9 +112,7 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
@@ -133,7 +123,7 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -150,9 +140,7 @@ generalDecoration(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
@@ -162,7 +150,7 @@ generalDecoration(String hintTxt, bool isEmpty) {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -172,23 +160,23 @@ generalDecoration(String hintTxt, bool isEmpty) {
 viewOnlyDecoration(String hintTxt, bool isEmpty) {
   return InputDecoration(
       enabled: false,
-      border: const UnderlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          borderSide: BorderSide(color: Color(0xff575757))),
-      focusedBorder: const UnderlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          borderSide: BorderSide(color: Color.fromRGBO(24, 204, 113, 1))),
-      enabledBorder: const UnderlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          borderSide: BorderSide(color: Color(0xff575757))),
-      disabledBorder: const UnderlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
-          borderSide: BorderSide(color: Color(0xff575757))),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      border: UnderlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          borderSide: BorderSide(color: gray4)),
+      focusedBorder: UnderlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          borderSide: BorderSide(color: primaryBlue)),
+      enabledBorder: UnderlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          borderSide: BorderSide(color: gray4)),
+      disabledBorder: UnderlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          borderSide: BorderSide(color: gray4)),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
-      hintStyle: inter14Gray2());
+      hintStyle: inter14Medium());
 }
 
 generalDecorationWoIcon(String hintTxt, bool isEmpty) {
@@ -199,15 +187,13 @@ generalDecorationWoIcon(String hintTxt, bool isEmpty) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -224,15 +210,13 @@ generalDecorationWoIconWPrefix(String hintTxt, bool isEmpty, String prefixTxt) {
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -251,9 +235,7 @@ generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(
-            color:
-                isEmpty ? Colors.red : const Color.fromRGBO(24, 204, 113, 1)),
+        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
@@ -264,7 +246,7 @@ generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),
       alignLabelWithHint: true,
       hintText: hintTxt,
@@ -343,7 +325,7 @@ searchDecorationGray(String hintTxt, {required Function onClear, clearIcon}) {
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: gray),
       ),
-      focusColor: const Color.fromRGBO(24, 204, 113, 1),
+      focusColor: primaryBlue,
       contentPadding: const EdgeInsets.fromLTRB(0, 10, 10, 10),
       prefixIconConstraints: const BoxConstraints(minWidth: 30, minHeight: 30),
       alignLabelWithHint: true,

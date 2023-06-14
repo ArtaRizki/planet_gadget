@@ -28,6 +28,7 @@ Color gray = const Color(0xffAAAAAA);
 Color gray2 = const Color(0xff575757);
 Color gray3 = const Color(0xff393939);
 Color gray4 = const Color(0xffB6B6B6);
+Color gray5 = const Color(0xff6e6e6e);
 Color grayBorder = const Color(0xffB6B6B6);
 
 Color red = const Color(0xffCB3A31);

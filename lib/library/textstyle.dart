@@ -6,6 +6,7 @@ inter12() => const TextStyle(
     );
 
 inter12Gray() => const TextStyle(fontSize: 12, color: Colors.grey);
+inter12Gray5() => TextStyle(fontSize: 12, color: gray5);
 inter12Black2() => TextStyle(fontSize: 12, color: black2);
 inter12MediumGray() => const TextStyle(
     fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500);
@@ -81,6 +82,8 @@ inter14MediumDibatalkan() => TextStyle(
 
 inter14Bold() =>
     TextStyle(fontSize: 14, color: black, fontWeight: FontWeight.bold);
+inter14BoldBlack2() =>
+    TextStyle(fontSize: 14, color: black2, fontWeight: FontWeight.bold);
 
 inter14BoldGray() => const TextStyle(
     fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold);
@@ -124,6 +127,8 @@ inter16BoldRed() =>
 
 inter16Bold() =>
     TextStyle(fontSize: 16, color: black, fontWeight: FontWeight.bold);
+inter16BoldWhite() =>
+    TextStyle(fontSize: 16, color: white, fontWeight: FontWeight.bold);
 
 inter18Medium() =>
     TextStyle(fontSize: 18, color: black, fontWeight: FontWeight.w500);

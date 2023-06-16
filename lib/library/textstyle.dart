@@ -16,6 +16,8 @@ inter12MediumBlack2() =>
     TextStyle(fontSize: 12, color: black2, fontWeight: FontWeight.w500);
 inter12BoldBlack() =>
     TextStyle(fontSize: 12, color: black, fontWeight: FontWeight.w700);
+inter12BoldBlack2() =>
+    TextStyle(fontSize: 12, color: black2, fontWeight: FontWeight.w700);
 inter12BoldWhite() =>
     TextStyle(fontSize: 12, color: white, fontWeight: FontWeight.w700);
 inter12BoldActiveYellow() => TextStyle(

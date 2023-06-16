@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
+import 'package:planet_gadget/presentation/pages/checkout/checkout_page.dart';
 import 'package:planet_gadget/presentation/pages/store_pickup/store_pickup_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -266,21 +267,29 @@ class _ProductPageState extends State<ProductPage> {
           const SizedBox(width: 12),
           Expanded(
             flex: 5,
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              decoration: BoxDecoration(
-                color: primaryBlue,
-                border: Border.all(color: primaryBlue, width: 2),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SvgPicture.asset("${iconsPath}shopping-cart.svg",
-                      width: 20, height: 20),
-                  const SizedBox(width: 8),
-                  Text("Add to cart", style: inter16Bold()),
-                ],
+            child: InkWell(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CheckoutPage())),
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  color: primaryBlue,
+                  border: Border.all(color: primaryBlue, width: 2),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SvgPicture.asset(
+                      "${iconsPath}shopping-cart.svg",
+                      width: 20,
+                      height: 20,
+                      color: white,
+                    ),
+                    const SizedBox(width: 8),
+                    Text("Add to cart", style: inter16BoldWhite()),
+                  ],
+                ),
               ),
             ),
           )

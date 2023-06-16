@@ -3,6 +3,7 @@ String iconsMemberPath = "assets/icons/member/";
 String iconsAccountPath = "assets/icons/account/";
 String iconsCheckoutPath = "assets/icons/checkout/";
 String iconsPaymentPath = "assets/icons/payment/";
+String iconsShoppingCartPath = "assets/icons/shopping_cart/";
 String backgroundsPath = "assets/backgrounds/";
 String shippingPath = "assets/icons/metode_pengiriman/";
 String imagesPath = "assets/images/";

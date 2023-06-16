@@ -93,7 +93,7 @@ class _CatalogPageState extends State {
     _messaging.getToken().then((token) {
       log("token is $token");
     });
-    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       badge: true,

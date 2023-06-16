@@ -92,6 +92,7 @@ flutter:
     - assets/icons/account/
     - assets/icons/checkout/
     - assets/icons/payment/
+    - assets/icons/shopping_cart/
     - assets/icons/bottom_navbar/
     - assets/icons/metode_pengiriman/
     - assets/images/

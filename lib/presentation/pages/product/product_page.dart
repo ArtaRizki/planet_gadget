@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/presentation/pages/checkout/checkout_page.dart';
+import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:planet_gadget/presentation/pages/store_pickup/store_pickup_page.dart';
 import 'package:sizer/sizer.dart';
 
@@ -269,7 +270,7 @@ class _ProductPageState extends State<ProductPage> {
             flex: 5,
             child: InkWell(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CheckoutPage())),
+                  MaterialPageRoute(builder: (context) => ShoppingCartPage())),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 decoration: BoxDecoration(

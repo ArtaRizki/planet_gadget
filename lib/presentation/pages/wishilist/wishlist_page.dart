@@ -9,14 +9,14 @@ import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
 
-class BestSeliingProductPage extends StatefulWidget {
-  const BestSeliingProductPage({super.key});
+class WishlistPage extends StatefulWidget {
+  const WishlistPage({super.key});
 
   @override
-  State<BestSeliingProductPage> createState() => _BestSeliingProductPageState();
+  State<WishlistPage> createState() => _WishlistPageState();
 }
 
-class _BestSeliingProductPageState extends State<BestSeliingProductPage> {
+class _WishlistPageState extends State<WishlistPage> {
   DraggableScrollableController dragC = DraggableScrollableController();
   TextEditingController searchC = TextEditingController();
   String searchValue = "";
@@ -34,7 +34,7 @@ class _BestSeliingProductPageState extends State<BestSeliingProductPage> {
       top: false,
       child: Scaffold(
         backgroundColor: white,
-        appBar: appBarWidget(title: "Best Selling", context: context),
+        appBar: appBarWidget(title: "Wishlist", context: context),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: RefreshIndicator(

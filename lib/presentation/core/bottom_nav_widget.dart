@@ -11,6 +11,7 @@ import '../pages/account/account_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
 import '../../library/bottom_navbar/floating_bottom_navigation_bar.dart';
 import '../pages/member/catalog/catalog_page.dart';
+import '../pages/wishilist/wishlist_page.dart';
 
 class BottomNavWidget extends StatefulWidget {
   const BottomNavWidget({super.key});
@@ -39,7 +40,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           DashboardPage(),
           CatalogPage(),
           MemberPage(),
-          CatalogView(),
+          WishlistPage(),
           AccountPage(),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/textstyle.dart';
+import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../library/color.dart';
@@ -14,6 +15,7 @@ import '../brand/all_brand_page.dart';
 import '../choice_for_you/choice_for_you_page.dart';
 import '../new_product/new_product_page.dart';
 import '../product/product_page.dart';
+import '../catalog/catalog_page.dart';
 import '../promo/promo_page.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -81,7 +83,11 @@ class _DashboardPageState extends State<DashboardPage> {
                           Expanded(
                             flex: 1,
                             child: InkWell(
-                                onTap: () {},
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const NotificationPage())),
                                 child: const Icon(Icons.notifications_outlined,
                                     color: Colors.black)),
                           ),
@@ -219,10 +225,19 @@ class _DashboardPageState extends State<DashboardPage> {
                                   ),
                                 ),
                                 colorBox(
-                                    bgColor: 0xffF8D3E4,
-                                    mainColor: 0xffE7408F,
-                                    imageName: "clipboard-list.svg",
-                                    name: "E-Catalog"),
+                                  bgColor: 0xffF8D3E4,
+                                  mainColor: 0xffE7408F,
+                                  imageName: "clipboard-list.svg",
+                                  name: "E-Catalog",
+                                  onClick: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const CatalogPage();
+                                      },
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),

@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/application/account/edit_account_state.dart';
+import 'package:planet_gadget/domain/entity/core/textfield_model.dart';
 import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/presentation/core/appbar_widget.dart';
 // import 'package:planet_gadget/application/account/edit_account_notifier.dart';
@@ -29,12 +32,16 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
   Widget build(BuildContext context) {
     EditAccountState state = ref.watch(editAccountNotifier);
     final editNotifier = ref.read(editAccountNotifier.notifier);
+    TextFieldModel name = state.name,
+        ktp = state.ktp,
+        phoneNumber = state.phoneNumber,
+        birthday = state.birthday;
     return SafeArea(
       top: false,
       child: Scaffold(
         backgroundColor: white,
         appBar: appBarWidget(title: "Setting", context: context),
-        bottomNavigationBar: bottomButton(onClick: () => editNotifier.login()),
+        bottomNavigationBar: bottomButton(onClick: () {}),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: RefreshIndicator(
@@ -69,17 +76,25 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                       value: "Yoshua",
                       hint: "Name",
                       controller: nameC,
-                      empty: state.name.isEmpty,
-                      error: state.name.errorMessage,
+                      empty: name.isEmpty,
+                      error: name.errorMessage,
                       suggest: "Nama harus diisi",
                       onchanged: (val) {
-                        state = state.copyWith(
-                            name: state.name.copyWith(value: val));
+                        state = state.copyWith(name: name.copyWith(value: val));
                         editNotifier.checkField(
-                            val: state.name.value,
-                            fieldEmpty: state.name.isEmpty,
-                            fieldErrorMsg: state.name.errorMessage,
-                            errorMsg: "Nama harus diisi");
+                            val: name.value,
+                            fieldEmpty: name.isEmpty,
+                            fieldErrorMsg: name.errorMessage,
+                            errorMsg: "Nama harus diisi",
+                            onFieldEmpty: () {
+                              log("NAMA ON FIELD");
+                              state = state.copyWith(
+                                  name: name.copyWith(isEmpty: true));
+                            },
+                            errorMessageSetter: (String msg) {
+                              state = state.copyWith(
+                                  name: name.copyWith(errorMessage: msg));
+                            });
                       },
                     ),
                     field(
@@ -87,15 +102,24 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                       value: "3502173009970010",
                       hint: "KTP/SIM/Kitas",
                       controller: ktpC,
-                      empty: state.ktp.isEmpty,
-                      error: state.ktp.errorMessage,
+                      empty: ktp.isEmpty,
+                      error: ktp.errorMessage,
                       suggest: "KTP harus diisi",
                       onchanged: (val) {
+                        state = state.copyWith(ktp: ktp.copyWith(value: val));
                         editNotifier.checkField(
-                            val: state.ktp.value,
-                            fieldEmpty: state.ktp.isEmpty,
-                            fieldErrorMsg: state.ktp.errorMessage,
-                            errorMsg: "KTP harus diisi");
+                            val: ktp.value,
+                            fieldEmpty: ktp.isEmpty,
+                            fieldErrorMsg: ktp.errorMessage,
+                            errorMsg: "KTP harus diisi",
+                            onFieldEmpty: () {
+                              state = state.copyWith(
+                                  ktp: ktp.copyWith(isEmpty: true));
+                            },
+                            errorMessageSetter: (String msg) {
+                              state = state.copyWith(
+                                  ktp: ktp.copyWith(errorMessage: msg));
+                            });
                       },
                     ),
                     field(
@@ -103,15 +127,27 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                       value: "082233444849",
                       hint: "Phone number",
                       controller: phoneNumberC,
-                      empty: state.phoneNumber.isEmpty,
-                      error: state.phoneNumber.errorMessage,
+                      empty: phoneNumber.isEmpty,
+                      error: phoneNumber.errorMessage,
                       suggest: "Nomor HP harus diisi",
                       onchanged: (val) {
+                        state = state.copyWith(
+                            phoneNumber: phoneNumber.copyWith(value: val));
                         editNotifier.checkField(
-                            val: state.phoneNumber.value,
-                            fieldEmpty: state.phoneNumber.isEmpty,
-                            fieldErrorMsg: state.phoneNumber.errorMessage,
-                            errorMsg: "Nomor HP harus diisi");
+                            val: phoneNumber.value,
+                            fieldEmpty: phoneNumber.isEmpty,
+                            fieldErrorMsg: phoneNumber.errorMessage,
+                            errorMsg: "Nomor HP harus diisi",
+                            onFieldEmpty: () {
+                              state = state.copyWith(
+                                  phoneNumber:
+                                      phoneNumber.copyWith(isEmpty: true));
+                            },
+                            errorMessageSetter: (String msg) {
+                              state = state.copyWith(
+                                  phoneNumber:
+                                      phoneNumber.copyWith(errorMessage: msg));
+                            });
                       },
                     ),
                     field(
@@ -119,15 +155,26 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                       value: "30 September 1997",
                       hint: "Birthday",
                       controller: birthdayC,
-                      empty: state.birthday.isEmpty,
-                      error: state.birthday.errorMessage,
+                      empty: birthday.isEmpty,
+                      error: birthday.errorMessage,
                       suggest: "Tanggal lahir harus diisi",
                       onchanged: (val) {
+                        state = state.copyWith(
+                            birthday: birthday.copyWith(value: val));
                         editNotifier.checkField(
-                            val: state.birthday.value,
-                            fieldEmpty: state.birthday.isEmpty,
-                            fieldErrorMsg: state.birthday.errorMessage,
-                            errorMsg: "Tanggal Lahir harus diisi");
+                            val: birthday.value,
+                            fieldEmpty: birthday.isEmpty,
+                            fieldErrorMsg: birthday.errorMessage,
+                            errorMsg: "Tanggal Lahir harus diisi",
+                            onFieldEmpty: () {
+                              state = state.copyWith(
+                                  birthday: birthday.copyWith(isEmpty: true));
+                            },
+                            errorMessageSetter: (String msg) {
+                              state = state.copyWith(
+                                  birthday:
+                                      birthday.copyWith(errorMessage: msg));
+                            });
                       },
                     ),
                     Padding(

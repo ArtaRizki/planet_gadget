@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:planet_gadget/library/textstyle.dart';
 import '../../../../library/color.dart';
@@ -12,6 +14,7 @@ Widget field(
     required bool empty,
     required TextEditingController controller,
     required Function(String)? onchanged}) {
+  log("ERROR : $error");
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
     child: Column(
@@ -28,7 +31,7 @@ Widget field(
           decoration: generalDecoration(hint, error),
           scrollPadding: const EdgeInsets.only(bottom: 52),
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 8),
         Text(empty ? error : "", style: redValidateErrorRequired()),
         const SizedBox(height: 16),
       ],

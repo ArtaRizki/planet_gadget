@@ -2,6 +2,15 @@ import 'dart:developer';
 
 import 'package:string_validator/string_validator.dart' as s_validator;
 
+checkGeneralField({String? val, required String errorMsg}) {
+  val = val.toString().trim();
+  if (val == "" || val.isEmpty || val == "null") {
+    return errorMsg;
+    // return "Nama Lengkap belum diisi";
+  }
+  return null;
+}
+
 registerNamaLengkap(String? val) {
   val = val.toString().trim();
   if (val == "" || val.isEmpty || val == "null") {

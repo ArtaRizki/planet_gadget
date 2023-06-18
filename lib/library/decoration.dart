@@ -130,25 +130,25 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
       hintStyle: inter14MediumBlack2());
 }
 
-generalDecoration(String hintTxt, bool isEmpty) {
+generalDecoration(String hintTxt, String error) {
   return InputDecoration(
-      suffixIcon:
-          Icon(Icons.warning, color: isEmpty ? Colors.red : Colors.transparent),
+      suffixIcon: Icon(Icons.warning,
+          color: error != "" ? Colors.red : Colors.transparent),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
+        borderSide: BorderSide(color: error != "" ? Colors.red : Colors.grey),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: isEmpty ? Colors.red : primaryBlue),
+        borderSide: BorderSide(color: error != "" ? Colors.red : primaryBlue),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
+        borderSide: BorderSide(color: error != "" ? Colors.red : Colors.grey),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
-        borderSide: BorderSide(color: isEmpty ? Colors.red : Colors.grey),
+        borderSide: BorderSide(color: error != "" ? Colors.red : Colors.grey),
       ),
       focusColor: primaryBlue,
       contentPadding: const EdgeInsets.all(10),

@@ -28,7 +28,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
     @override
     void initState() {
       _messaging = FirebaseMessaging.instance;
-      log("TOken ${_messaging.getToken()}");
+      log("Token ${_messaging.getToken()}");
       super.initState();
     }
 

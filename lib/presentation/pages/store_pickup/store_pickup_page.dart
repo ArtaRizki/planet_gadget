@@ -170,7 +170,7 @@ class _StorePickupPageState extends State<StorePickupPage> {
                         style: inter12(),
                         cursorColor: primaryBlue,
                         decoration: generalDecoration(
-                            "Input your number KTP/SIM/KITAS", false),
+                            "Input your number KTP/SIM/KITAS", ""),
                         scrollPadding: const EdgeInsets.only(bottom: 52),
                       ),
                     ),

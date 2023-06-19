@@ -4,11 +4,15 @@ import '../../library/validator.dart';
 import 'edit_account_state.dart';
 
 final editAccountNotifier =
-    StateNotifierProvider<EditAccountNotifier, EditAccountState>(
+    StateNotifierProvider.autoDispose<EditAccountNotifier, EditAccountState>(
         (ref) => EditAccountNotifier());
 
 class EditAccountNotifier extends StateNotifier<EditAccountState> {
   EditAccountNotifier() : super(EditAccountState.empty());
+
+  init() {
+    state = EditAccountState.empty();
+  }
 
   checkField(
       {String? val,

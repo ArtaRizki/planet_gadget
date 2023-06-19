@@ -50,7 +50,8 @@ class _SettingAccountPageState extends State<SettingAccountPage> {
                             onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => EditAccountPage())),
+                                    builder: (context) =>
+                                        const EditAccountPage())),
                             child: SvgPicture.asset(
                               '${iconsAccountPath}edit.svg',
                               width: 24,

@@ -60,7 +60,7 @@ class EditAccountNotifier extends StateNotifier<EditAccountState> {
       state = state.copyWith(
           phoneNumber: state.phoneNumber.copyWith(isEmpty: true));
     }
-    if (type == "birthdat") {
+    if (type == "birthday") {
       state = state.copyWith(birthday: state.birthday.copyWith(isEmpty: true));
     }
   }
@@ -81,51 +81,29 @@ class EditAccountNotifier extends StateNotifier<EditAccountState> {
     }
   }
 
-  // Future<void> login() async {
-  //   TextFieldModel name = state.name,
-  //       ktp = state.ktp,
-  //       phoneNumber = state.phoneNumber,
-  //       birthday = state.birthday;
-  //   List<TextFieldModel> textFieldModel = [
-  //     name,
-  //     ktp,
-  //     phoneNumber,
-  //     birthday,
-  //   ];
-  //   List<Function()> emptyFuncList = [
-  //     () => state = state.copyWith(name: name.copyWith(isEmpty: true)),
-  //     () => state = state.copyWith(ktp: ktp.copyWith(isEmpty: true)),
-  //     () => state =
-  //         state.copyWith(phoneNumber: phoneNumber.copyWith(isEmpty: true)),
-  //     () => state = state.copyWith(birthday: birthday.copyWith(isEmpty: true)),
-  //   ];
-  //   List<Function()> errorSetterList = [
-  //     () => state =
-  //         state.copyWith(name: name.copyWith(errorMessage: name.errorMessage)),
-  //     () => state =
-  //         state.copyWith(ktp: ktp.copyWith(errorMessage: ktp.errorMessage)),
-  //     () => state = state.copyWith(
-  //         phoneNumber:
-  //             phoneNumber.copyWith(errorMessage: phoneNumber.errorMessage)),
-  //     () => state = state.copyWith(
-  //         birthday: birthday.copyWith(errorMessage: birthday.errorMessage)),
-  //   ];
-  //   List<String> errorMsgStringList = [
-  //     "Nama",
-  //     "KTP",
-  //     "Nomor HP",
-  //     "Tanggal Lahir"
-  //   ];
-  //   for (int i = 0; i < textFieldModel.length; i++) {
-  //     TextFieldModel item = textFieldModel[i];
-  //     checkField(
-  //       val: item.value,
-  //       fieldEmpty: item.isEmpty,
-  //       fieldErrorMsg: item.errorMessage,
-  //       errorMsg: "${errorMsgStringList[i]} harus diisi",
-  //       onFieldEmpty: emptyFuncList[i],
-  //       errorMessageSetter: errorSetterList[i],
-  //     );
-  //   }
-  // }
+  Future<void> login() async {
+    List<TextFieldModel> textFieldModel = [
+      state.name,
+      state.ktp,
+      state.phoneNumber,
+      state.birthday,
+    ];
+    List<String> typeList = ["name", "ktp", "phoneNumber", "birthday"];
+    List<String> errorMsgStringList = [
+      "Nama",
+      "KTP",
+      "Nomor HP",
+      "Tanggal Lahir",
+    ];
+    for (int i = 0; i < textFieldModel.length; i++) {
+      TextFieldModel item = textFieldModel[i];
+      checkField(
+        val: item.value,
+        fieldEmpty: item.isEmpty,
+        fieldErrorMsg: item.errorMessage,
+        errorMsg: "${errorMsgStringList[i]} harus diisi",
+        type: typeList[i],
+      );
+    }
+  }
 }

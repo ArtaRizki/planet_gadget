@@ -13,13 +13,19 @@ Widget field(
     required String suggest,
     required bool empty,
     required TextEditingController controller,
-    required Function(String)? onchanged}) {
+    required Function(String)? onchanged,
+    bool required = false}) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(name, style: inter14Medium()),
+        Row(
+          children: [
+            Text(name, style: inter14Medium()),
+            required ? Text("*", style: inter14MediumRed()) : const SizedBox(),
+          ],
+        ),
         const SizedBox(height: 8),
         TextFormField(
           controller: controller,

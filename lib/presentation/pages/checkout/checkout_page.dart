@@ -897,7 +897,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                     ),
                     Expanded(
                       flex: 7,
-                      child: Text(": $redeem", style: inter12MediumBlack2()),
+                      child: Text(": $address", style: inter12MediumBlack2()),
                     ),
                   ],
                 ),

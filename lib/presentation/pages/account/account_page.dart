@@ -26,6 +26,17 @@ class _AccountPageState extends State<AccountPage> {
       phoneNumberC = TextEditingController(),
       addressC = TextEditingController();
   DraggableScrollableController dragC = DraggableScrollableController();
+  DraggableScrollableController addressListC = DraggableScrollableController();
+  DraggableScrollableController addAddressC = DraggableScrollableController();
+  DraggableScrollableController addAddressCloseConfirmC =
+      DraggableScrollableController();
+  DraggableScrollableController editAddressC = DraggableScrollableController();
+  DraggableScrollableController editAddressConfirmC =
+      DraggableScrollableController();
+  DraggableScrollableController editAddressCloseConfirmC =
+      DraggableScrollableController();
+  DraggableScrollableController deleteAddressConfirmC =
+      DraggableScrollableController();
   bool redeem = false;
   bool address1 = false;
   String address1Value = "Address 1";
@@ -469,8 +480,8 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
-          initialChildSize: 0.5,
+          controller: addAddressC,
+          initialChildSize: 0.82,
           minChildSize: 0.1,
           maxChildSize: 0.96,
           expand: false,
@@ -508,9 +519,14 @@ class _AccountPageState extends State<AccountPage> {
                                         style: inter28Bold())),
                                 Expanded(
                                     flex: 5,
-                                    child: InkWell(
-                                      onTap: closeConfirmAddAddressSheet,
-                                      child: const Icon(Icons.close),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: closeConfirmAddAddressSheet,
+                                          child: const Icon(Icons.close),
+                                        ),
+                                      ],
                                     )),
                               ],
                             ),
@@ -530,23 +546,31 @@ class _AccountPageState extends State<AccountPage> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Row(
-                                children: [
-                                  Text("Address Labels",
-                                      style: inter14Medium()),
-                                  Text("*", style: inter14MediumRed()),
-                                ],
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Text("Address Labels",
+                                        style: inter14Medium()),
+                                    Text("*", style: inter14MediumRed()),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  addressLabel(title: "Home", value: true),
-                                  const SizedBox(width: 12),
-                                  addressLabel(title: "Office", value: false),
-                                ],
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    addressLabel(title: "Home", value: true),
+                                    const SizedBox(width: 12),
+                                    addressLabel(title: "Office", value: false),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 12),
-                              field(
+                              fieldAddress(
                                 required: true,
                                 name: "Recipient's Name",
                                 value: "",
@@ -568,31 +592,31 @@ class _AccountPageState extends State<AccountPage> {
                                       type: "recipient");
                                 },
                               ),
-                              const SizedBox(height: 16),
-                              field(
+                              // const SizedBox(height: 16),
+                              fieldAddress(
                                 required: true,
                                 name: "Mobile Phone Number",
                                 value: "",
                                 hint: "Mobile Phone Number",
-                                controller: recipientC,
-                                empty: state.recipient.isEmpty,
-                                error: state.recipient.errorMessage,
+                                controller: phoneNumberC,
+                                empty: state.phoneNumber.isEmpty,
+                                error: state.phoneNumber.errorMessage,
                                 suggest: "Nomor HP harus diisi",
                                 onchanged: (val) {
                                   state = state.copyWith(
-                                      recipient:
-                                          state.recipient.copyWith(value: val));
+                                      phoneNumber: state.phoneNumber
+                                          .copyWith(value: val));
                                   editAddressNotifer.checkField(
-                                      val: state.recipient.value,
-                                      fieldEmpty: state.recipient.isEmpty,
+                                      val: state.phoneNumber.value,
+                                      fieldEmpty: state.phoneNumber.isEmpty,
                                       fieldErrorMsg:
-                                          state.recipient.errorMessage,
+                                          state.phoneNumber.errorMessage,
                                       errorMsg: "Nomor HP harus diisi",
                                       type: "phoneNumber");
                                 },
                               ),
-                              const SizedBox(height: 16),
-                              field(
+                              // const SizedBox(height: 16),
+                              fieldAddress(
                                 required: true,
                                 name: "Complete Address",
                                 value: "",
@@ -643,7 +667,7 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: addressListC,
           initialChildSize: 0.46,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -711,7 +735,7 @@ class _AccountPageState extends State<AccountPage> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20, vertical: 12),
                                   decoration: BoxDecoration(
-                                    color: primaryYellow,
+                                    color: secondaryBlue,
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   child: Column(
@@ -763,8 +787,8 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
-          initialChildSize: 0.5,
+          controller: editAddressC,
+          initialChildSize: 0.82,
           minChildSize: 0.1,
           maxChildSize: 0.96,
           expand: false,
@@ -836,23 +860,31 @@ class _AccountPageState extends State<AccountPage> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Row(
-                                children: [
-                                  Text("Address Labels",
-                                      style: inter14Medium()),
-                                  Text("*", style: inter14MediumRed()),
-                                ],
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Text("Address Labels",
+                                        style: inter14Medium()),
+                                    Text("*", style: inter14MediumRed()),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  addressLabel(title: "Home", value: true),
-                                  const SizedBox(width: 12),
-                                  addressLabel(title: "Office", value: false),
-                                ],
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    addressLabel(title: "Home", value: true),
+                                    const SizedBox(width: 12),
+                                    addressLabel(title: "Office", value: false),
+                                  ],
+                                ),
                               ),
                               const SizedBox(height: 12),
-                              field(
+                              fieldAddress(
                                 required: true,
                                 name: "Recipient's Name",
                                 value: "Yoshua",
@@ -874,31 +906,31 @@ class _AccountPageState extends State<AccountPage> {
                                       type: "recipient");
                                 },
                               ),
-                              const SizedBox(height: 16),
-                              field(
+                              // const SizedBox(height: 16),
+                              fieldAddress(
                                 required: true,
                                 name: "Mobile Phone Number",
                                 value: "0822334449460",
                                 hint: "Mobile Phone Number",
-                                controller: recipientC,
-                                empty: state.recipient.isEmpty,
-                                error: state.recipient.errorMessage,
+                                controller: phoneNumberC,
+                                empty: state.phoneNumber.isEmpty,
+                                error: state.phoneNumber.errorMessage,
                                 suggest: "Nomor HP harus diisi",
                                 onchanged: (val) {
                                   state = state.copyWith(
-                                      recipient:
-                                          state.recipient.copyWith(value: val));
+                                      phoneNumber: state.phoneNumber
+                                          .copyWith(value: val));
                                   editAddressNotifer.checkField(
-                                      val: state.recipient.value,
-                                      fieldEmpty: state.recipient.isEmpty,
+                                      val: state.phoneNumber.value,
+                                      fieldEmpty: state.phoneNumber.isEmpty,
                                       fieldErrorMsg:
-                                          state.recipient.errorMessage,
+                                          state.phoneNumber.errorMessage,
                                       errorMsg: "Nomor HP harus diisi",
                                       type: "phoneNumber");
                                 },
                               ),
-                              const SizedBox(height: 16),
-                              field(
+                              // const SizedBox(height: 16),
+                              fieldAddress(
                                 required: true,
                                 name: "Complete Address",
                                 value:
@@ -946,8 +978,8 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
-          initialChildSize: 0.4,
+          controller: editAddressConfirmC,
+          initialChildSize: 0.47,
           minChildSize: 0.1,
           maxChildSize: 0.96,
           expand: false,
@@ -981,16 +1013,20 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Text(
-                                "It looks like you've made some changes to the existing data. Do you want to save these changes before continuing ?",
-                                style: inter16Bold()),
+                              "It looks like you've made some changes to the existing data. Do you want to save these changes before continuing ?",
+                              style: inter16Bold(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: Text(
-                                "By pressing yes, the data changes you make will be saved",
-                                style: inter14Black2()),
+                              "By pressing yes, the data changes you make will be saved",
+                              style: inter14Black2(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -1027,7 +1063,7 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: editAddressCloseConfirmC,
           initialChildSize: 0.4,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -1061,16 +1097,21 @@ class _AccountPageState extends State<AccountPage> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(20),
-                            child: Text("Are you sure to close the edit form ?",
-                                style: inter16Bold()),
+                            child: Text(
+                              "Are you sure to close the edit form ?",
+                              style: inter16Bold(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: Text(
-                                "closing the edit form will cancel the changes made",
-                                style: inter14Black2()),
+                              "closing the edit form will cancel the changes made",
+                              style: inter14Black2(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -1107,7 +1148,7 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: addAddressCloseConfirmC,
           initialChildSize: 0.4,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -1142,16 +1183,20 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Text(
-                                "Are you sure you want to close the add data form?",
-                                style: inter16Bold()),
+                              "Are you sure you want to close the add data form?",
+                              style: inter16Bold(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: Text(
-                                "Pressing the yes button, will cancel adding data",
-                                style: inter14Black2()),
+                              "Pressing the yes button, will cancel adding data",
+                              style: inter14Black2(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -1188,7 +1233,7 @@ class _AccountPageState extends State<AccountPage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: deleteAddressConfirmC,
           initialChildSize: 0.4,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -1222,16 +1267,21 @@ class _AccountPageState extends State<AccountPage> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(20),
-                            child: Text("Are you sure you delete this data?",
-                                style: inter16Bold()),
+                            child: Text(
+                              "Are you sure you delete this data?",
+                              style: inter16Bold(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: Text(
-                                "Pressing the Yes button will delete the data permanently",
-                                style: inter14Black2()),
+                              "Pressing the Yes button will delete the data permanently",
+                              style: inter14Black2(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -1369,7 +1419,7 @@ class _AccountPageState extends State<AccountPage> {
                     InkWell(
                       onTap: editAddressSheet,
                       child: SvgPicture.asset(
-                        '${iconsAccountPath}edit_white.svg',
+                        '${iconsAccountPath}edit.svg',
                         width: 15,
                         height: 15,
                       ),
@@ -1411,7 +1461,11 @@ class _AccountPageState extends State<AccountPage> {
                     ),
                     Expanded(
                       flex: 7,
-                      child: Text(": $address", style: inter12MediumBlack2()),
+                      child: Text(
+                        ": $address",
+                        style: inter12MediumBlack2(),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),
@@ -1429,9 +1483,10 @@ class _AccountPageState extends State<AccountPage> {
       height: 44,
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
           color: value ? secondaryBlue : white,
           border: Border.all(color: primaryBlue)),
-      child: Text(title, style: inter14Medium()),
+      child: Center(child: Text(title, style: inter14Medium())),
     );
   }
 }

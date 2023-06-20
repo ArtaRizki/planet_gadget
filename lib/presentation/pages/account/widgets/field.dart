@@ -43,3 +43,43 @@ Widget field(
     ),
   );
 }
+
+Widget fieldAddress(
+    {required String name,
+    required String value,
+    required String hint,
+    required String error,
+    required String suggest,
+    required bool empty,
+    required TextEditingController controller,
+    required Function(String)? onchanged,
+    bool required = false}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 20),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(name, style: inter14Medium()),
+            required ? Text("*", style: inter14MediumRed()) : const SizedBox(),
+          ],
+        ),
+        const SizedBox(height: 8),
+        TextFormField(
+          controller: controller,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          onChanged: onchanged,
+          style: inter14Medium(),
+          cursorColor: primaryBlue,
+          decoration: generalDecoration(hint, error),
+          scrollPadding: const EdgeInsets.only(bottom: 52),
+        ),
+        const SizedBox(height: 4),
+        Text(error, style: redValidateErrorRequired()),
+        SizedBox(height: error != "" ? 8 : 0),
+      ],
+    ),
+  );
+}

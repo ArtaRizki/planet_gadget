@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/utils/constants/path.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../library/color.dart';
 import '../../../library/convert_currency.dart';
 import '../../../library/decoration.dart';
 import '../../../library/toast.dart';
 import '../../core/appbar_widget.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PurchasePage extends StatefulWidget {
   const PurchasePage({super.key});
@@ -20,6 +24,10 @@ class _PurchasePageState extends State<PurchasePage> {
   String reviewValue = "";
   List reviewResult = [];
   DraggableScrollableController dragC = DraggableScrollableController();
+  DraggableScrollableController refundC = DraggableScrollableController();
+  DraggableScrollableController receivedC = DraggableScrollableController();
+  DraggableScrollableController thankyouC = DraggableScrollableController();
+  DraggableScrollableController rateReviewC = DraggableScrollableController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -223,6 +231,7 @@ class _PurchasePageState extends State<PurchasePage> {
                   ),
                 ),
               ),
+              const SizedBox(width: 8),
               Expanded(
                 flex: 5,
                 child: Container(
@@ -463,8 +472,7 @@ class _PurchasePageState extends State<PurchasePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PurchasePage())),
+          onTap: rateAndReviewSheet,
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
@@ -549,37 +557,44 @@ class _PurchasePageState extends State<PurchasePage> {
         ),
         Row(
           children: [
-            InkWell(
-              onTap: refundSheet,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  color: white,
-                  border: Border.all(color: primaryBlue, width: 2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Refund", style: inter16Bold()),
-                  ],
+            Expanded(
+              flex: 5,
+              child: InkWell(
+                onTap: refundSheet,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: white,
+                    border: Border.all(color: primaryBlue, width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Refund", style: inter16Bold()),
+                    ],
+                  ),
                 ),
               ),
             ),
-            InkWell(
-              onTap: receivedSheet,
-              child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                decoration: BoxDecoration(
-                  color: primaryBlue,
-                  border: Border.all(color: primaryBlue, width: 2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text("Received", style: inter16BoldWhite()),
-                  ],
+            const SizedBox(width: 8),
+            Expanded(
+              flex: 5,
+              child: InkWell(
+                onTap: receivedSheet,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    color: primaryBlue,
+                    border: Border.all(color: primaryBlue, width: 2),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Received", style: inter16BoldWhite()),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -683,7 +698,7 @@ class _PurchasePageState extends State<PurchasePage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: refundC,
           initialChildSize: 0.4,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -721,12 +736,14 @@ class _PurchasePageState extends State<PurchasePage> {
                                 style: inter16Bold()),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                             child: Text(
-                                "Remember, this will cancel your order. Are you sure you want to proceed?",
-                                style: inter14Black2()),
+                              "Remember, this will cancel your order. Are you sure you want to proceed?",
+                              style: inter14Black2(),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
-                          const SizedBox(height: 16),
+                          // const SizedBox(height: 16),
                         ],
                       ),
                     ),
@@ -737,13 +754,13 @@ class _PurchasePageState extends State<PurchasePage> {
                         thankyouSheet(
                             text:
                                 "Thank you for confirming. Your refund process is now initiated. Expect funds to be returned to your account within 3-5 business days");
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
                       },
                       onClick2: () {
                         thankyouSheet(
                             text:
                                 "Great, your order remains active! If you need further assistance, feel free to contact our customer service. We're here to help!");
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
                       },
                     ),
                   ],
@@ -765,7 +782,7 @@ class _PurchasePageState extends State<PurchasePage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
+          controller: receivedC,
           initialChildSize: 0.4,
           minChildSize: 0.1,
           maxChildSize: 0.96,
@@ -795,16 +812,15 @@ class _PurchasePageState extends State<PurchasePage> {
 
                     /// Listview (list of data with check box for multiple selection & on tile tap single selection)
                     Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Text(
-                                "you are confirming that you have physically received your ordered item(s). Please confirm only if you've thoroughly checked the product. Do you want to proceed?",
-                                style: inter14Black2()),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                          child: Text(
+                            "you are confirming that you have physically received your ordered item(s). Please confirm only if you've thoroughly checked the product. Do you want to proceed?",
+                            style: inter14Black2(),
+                            textAlign: TextAlign.center,
                           ),
-                          const SizedBox(height: 16),
-                        ],
+                        ),
                       ),
                     ),
                     afterChangeDoubleButton(
@@ -814,13 +830,13 @@ class _PurchasePageState extends State<PurchasePage> {
                         thankyouSheet(
                             text:
                                 "Thank you for confirming the receipt. We hope you enjoy your product. Don't forget to leave a review!");
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
                       },
                       onClick2: () {
                         thankyouSheet(
                             text:
                                 "Alright, please check your item more thoroughly. If you have any questions or issues, feel free to contact our customer service");
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
                       },
                     ),
                   ],
@@ -842,9 +858,9 @@ class _PurchasePageState extends State<PurchasePage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
-          initialChildSize: 0.5,
-          minChildSize: 0.1,
+          controller: rateReviewC,
+          initialChildSize: 0.6,
+          minChildSize: 0.6,
           maxChildSize: 0.96,
           expand: false,
           snap: true,
@@ -873,18 +889,13 @@ class _PurchasePageState extends State<PurchasePage> {
                                 top: 24.0,
                                 bottom: 12.0),
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 /// Bottom sheet title text
-                                Expanded(
-                                    flex: 5,
-                                    child: Text("Rate and Review",
-                                        style: inter20Bold())),
-                                Expanded(
-                                  flex: 5,
-                                  child: InkWell(
-                                      onTap: () => Navigator.pop(context),
-                                      child: const Icon(Icons.close)),
-                                ),
+                                Text("Rate and Review", style: inter20Bold()),
+                                InkWell(
+                                    onTap: () => Navigator.pop(context),
+                                    child: const Icon(Icons.close)),
                               ],
                             ),
                           ),
@@ -894,12 +905,15 @@ class _PurchasePageState extends State<PurchasePage> {
 
                     /// Listview (list of data with check box for multiple selection & on tile tap single selection)
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: ListView(
+                        controller: scrollController,
+                        // crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.all(20),
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Expanded(
                                   flex: 2,
@@ -914,27 +928,52 @@ class _PurchasePageState extends State<PurchasePage> {
                                 Expanded(
                                   flex: 7,
                                   child: Text("Apple Iphone 12 128Gb",
-                                      style: inter14MediumBlack2()),
+                                      style: inter16Bold()),
                                 ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 12),
-                          //BINTANG
+                          Center(
+                            child: RatingBar(
+                              initialRating: 3,
+                              direction: Axis.horizontal,
+                              itemCount: 5,
+                              ratingWidget: RatingWidget(
+                                full:
+                                    Icon(Icons.star, color: activeYellowColor),
+                                half:
+                                    Icon(Icons.star, color: activeYellowColor),
+                                empty: Icon(Icons.star_border,
+                                    color: activeYellowColor),
+                              ),
+                              itemPadding:
+                                  EdgeInsets.symmetric(horizontal: 5.w),
+                              onRatingUpdate: (rating) {
+                                log("RATING : $rating");
+                              },
+                            ),
+                          ),
                           const SizedBox(height: 12),
-                          Text("Review", style: inter14Medium()),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Text("Review", style: inter14Medium()),
+                          ),
                           const SizedBox(height: 8),
-                          TextFormField(
-                            // autofocus: true,
-                            controller: reviewC,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            onChanged: (val) => onChangedReview(val),
-                            style: inter14Medium(),
-                            cursorColor: primaryBlue,
-                            decoration:
-                                generalDecoration("Enter Recipient", ""),
-                            scrollPadding: const EdgeInsets.only(bottom: 52),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: TextFormField(
+                              // autofocus: true,
+                              controller: reviewC,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              onChanged: (val) => onChangedReview(val),
+                              style: inter14Medium(),
+                              cursorColor: primaryBlue,
+                              decoration:
+                                  generalDecoration("Enter Recipient", ""),
+                              scrollPadding: const EdgeInsets.only(bottom: 52),
+                            ),
                           )
                         ],
                       ),
@@ -963,8 +1002,8 @@ class _PurchasePageState extends State<PurchasePage> {
       context: context,
       builder: (context) {
         return DraggableScrollableSheet(
-          controller: dragC,
-          initialChildSize: 0.4,
+          controller: thankyouC,
+          initialChildSize: 0.25,
           minChildSize: 0.1,
           maxChildSize: 0.96,
           expand: false,
@@ -972,28 +1011,37 @@ class _PurchasePageState extends State<PurchasePage> {
           builder: (BuildContext context, ScrollController scrollController) {
             return StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: const BoxDecoration(color: Color(0xfff8faf7)),
-                      child: Column(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              color: activeBgColor,
-                              width: 100,
-                              height: 4,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration:
+                            const BoxDecoration(color: Color(0xfff8faf7)),
+                        child: Column(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                color: activeBgColor,
+                                width: 100,
+                                height: 4,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Text(text, style: inter14Black2()),
-                    ),
-                  ],
+                      Expanded(
+                        child: Center(
+                            child: Text(
+                          text,
+                          style: inter14Black2(),
+                          textAlign: TextAlign.center,
+                        )),
+                      ),
+                    ],
+                  ),
                 );
               },
             );
@@ -1085,5 +1133,96 @@ class _PurchasePageState extends State<PurchasePage> {
       //     .toList();
     }
     setState(() {});
+  }
+
+  Future<dynamic> filterModalBottom(BuildContext context) {
+    return showModalBottomSheet(
+      isScrollControlled: true,
+      isDismissible: false,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+      ),
+      context: context,
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          padding: EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  height: 4,
+                  width: 0.27.w,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                    color: Color(0xffd3d5d6),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Filter',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  IconButton(
+                    padding: EdgeInsets.zero,
+                    icon: const Icon(
+                      Icons.close,
+                      color: Color(0xff0084CE),
+                      size: 20,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 8),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const Text("AAAA"),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      SizedBox(width: 8),
+                    ],
+                  ),
+                  const SizedBox(height: 35),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [Text("TERAPKAN")],
+                  ),
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

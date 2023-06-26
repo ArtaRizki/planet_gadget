@@ -27,11 +27,26 @@ class _ArticlePageState extends State<ArticlePage> {
   TextEditingController reviewC = TextEditingController();
   String reviewValue = "";
   List reviewResult = [];
+  int index = 0;
   DraggableScrollableController dragC = DraggableScrollableController();
   DraggableScrollableController refundC = DraggableScrollableController();
   DraggableScrollableController receivedC = DraggableScrollableController();
   DraggableScrollableController thankyouC = DraggableScrollableController();
   DraggableScrollableController rateReviewC = DraggableScrollableController();
+  // late TabController tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    // tabController = TabController(length: 3, vsync: this)..addListener(() {});
+  }
+
+  @override
+  void dispose() {
+    // tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,16 +56,7 @@ class _ArticlePageState extends State<ArticlePage> {
         child: Builder(builder: (context) {
           final TabController tabController = DefaultTabController.of(context);
           tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              if (tabController.index == 0) {
-                // paketProvider.setContainerHeight =
-                //     (MediaQuery.of(context).size.height +
-                //         (MediaQuery.of(context).size.height * .12));
-              }
-              if (tabController.index == 1) {
-                // paketProvider.containerHeightAddDetailPaket();
-              }
-            }
+            setState(() => index = tabController.index);
           });
           return Scaffold(
             appBar: appBarWidget(title: "Article", context: context),
@@ -63,18 +69,39 @@ class _ArticlePageState extends State<ArticlePage> {
                 },
                 child: Column(
                   children: <Widget>[
-                    TabBar(
-                      controller: tabController,
-                      isScrollable: true,
-                      labelColor: black,
-                      indicatorColor: activeBgColor,
-                      indicatorWeight: 5,
-                      unselectedLabelColor: black,
-                      tabs: const <Tab>[
-                        Tab(text: "Information Store"),
-                        Tab(text: "News"),
-                        Tab(text: "Tips & Tricks"),
-                      ],
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: white,
+                          border: Border(
+                              bottom:
+                                  BorderSide(color: secondaryBlue, width: 5))),
+                      child: TabBar(
+                        // padding: const EdgeInsets.all(18),
+                        controller: tabController,
+                        // isScrollable: true,
+                        labelColor: black,
+                        indicatorColor: activeBgColor,
+                        indicatorWeight: 5,
+                        unselectedLabelColor: black,
+                        tabs: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Information Store",
+                                textAlign: TextAlign.center,
+                                style: index == 0
+                                    ? inter14Bold()
+                                    : inter14Medium()),
+                          ),
+                          Text("News",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 1 ? inter14Bold() : inter14Medium()),
+                          Text("Tips & Tricks",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 2 ? inter14Bold() : inter14Medium()),
+                        ],
+                      ),
                     ),
                     Expanded(
                       child: TabBarView(

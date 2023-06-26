@@ -23,6 +23,7 @@ class _PurchasePageState extends State<PurchasePage> {
   TextEditingController reviewC = TextEditingController();
   String reviewValue = "";
   List reviewResult = [];
+  int index = 0;
   DraggableScrollableController dragC = DraggableScrollableController();
   DraggableScrollableController refundC = DraggableScrollableController();
   DraggableScrollableController receivedC = DraggableScrollableController();
@@ -37,16 +38,7 @@ class _PurchasePageState extends State<PurchasePage> {
         child: Builder(builder: (context) {
           final TabController tabController = DefaultTabController.of(context);
           tabController.addListener(() {
-            if (!tabController.indexIsChanging) {
-              if (tabController.index == 0) {
-                // paketProvider.setContainerHeight =
-                //     (MediaQuery.of(context).size.height +
-                //         (MediaQuery.of(context).size.height * .12));
-              }
-              if (tabController.index == 1) {
-                // paketProvider.containerHeightAddDetailPaket();
-              }
-            }
+            setState(() => index = tabController.index);
           });
           return Scaffold(
             appBar: appBarWidget(title: "My Purchases", context: context),
@@ -59,21 +51,50 @@ class _PurchasePageState extends State<PurchasePage> {
                 },
                 child: Column(
                   children: <Widget>[
-                    TabBar(
-                      controller: tabController,
-                      isScrollable: true,
-                      labelColor: black,
-                      indicatorColor: activeBgColor,
-                      indicatorWeight: 5,
-                      unselectedLabelColor: black,
-                      tabs: const <Tab>[
-                        Tab(text: "To Pay"),
-                        Tab(text: "Packing"),
-                        Tab(text: "Delivery"),
-                        Tab(text: "Arrived"),
-                        Tab(text: "Completed"),
-                        Tab(text: "Cancelled"),
-                      ],
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: white,
+                          border: Border(
+                              bottom:
+                                  BorderSide(color: secondaryBlue, width: 5))),
+                      child: TabBar(
+                        controller: tabController,
+                        isScrollable: true,
+                        labelColor: black,
+                        indicatorColor: activeBgColor,
+                        indicatorWeight: 5,
+                        unselectedLabelColor: black,
+                        tabs: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: Text("To Pay",
+                                textAlign: TextAlign.center,
+                                style: index == 0
+                                    ? inter14Bold()
+                                    : inter14Medium()),
+                          ),
+                          Text("Packing",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 1 ? inter14Bold() : inter14Medium()),
+                          Text("Delivery",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 2 ? inter14Bold() : inter14Medium()),
+                          Text("Arrived",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 3 ? inter14Bold() : inter14Medium()),
+                          Text("Completed",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 4 ? inter14Bold() : inter14Medium()),
+                          Text("Cancelled",
+                              textAlign: TextAlign.center,
+                              style:
+                                  index == 5 ? inter14Bold() : inter14Medium()),
+                        ],
+                      ),
                     ),
                     Expanded(
                       child: TabBarView(

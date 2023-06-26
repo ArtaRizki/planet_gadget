@@ -130,10 +130,20 @@ paketDecorationWoIconDropdown(String hintTxt, bool isEmpty) {
       hintStyle: inter14MediumBlack2());
 }
 
-generalDecoration(String hintTxt, String error) {
+generalDecoration(String hintTxt, String error,
+    {bool isPassword = false,
+    bool visiblePassword = false,
+    Function()? onClickSuffix}) {
   return InputDecoration(
-      suffixIcon: Icon(Icons.warning,
-          color: error != "" ? Colors.red : Colors.transparent),
+      suffixIcon: isPassword
+          ? IconButton(
+              onPressed: onClickSuffix,
+              icon: Icon(visiblePassword
+                  ? Icons.visibility_off
+                  : Icons.remove_red_eye),
+              color: visiblePassword ? Colors.grey : primaryBlue)
+          : Icon(Icons.warning,
+              color: error != "" ? Colors.red : Colors.transparent),
       border: OutlineInputBorder(
         borderRadius: const BorderRadius.all(Radius.circular(6)),
         borderSide: BorderSide(color: error != "" ? Colors.red : Colors.grey),

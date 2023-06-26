@@ -1,41 +1,21 @@
-// import 'package:flutter/material.dart';
-// import 'package:mgresto/models/history_langganan.dart';
-// import 'package:mgresto/models/menu.dart';
-// import 'package:mgresto/models/paket.dart';
-// import 'package:mgresto/models/paket_detail.dart';
-// import 'package:mgresto/views/detail_history_langganan_view.dart';
-// import 'package:mgresto/views/history_langganan_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/add_paket_menu_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/add_paket_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/edit_add_paket_menu_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/edit_paket_menu.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/edit_paket_menu_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/edit_paket_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/history_harga_paket_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/paket_makanan_view.dart';
-// import 'package:mgresto/views/history_harga_menu_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/search_paket_view.dart';
-// import 'package:mgresto/views/kategori_view.dart';
-// import 'package:mgresto/views/landing_view.dart';
-// import 'package:mgresto/views/menu_view.dart';
-// import 'package:mgresto/views/menunggu_pembayaran_view.dart';
-// import 'package:mgresto/views/paket_langganan_view.dart';
-// import 'package:mgresto/views/search_kategori_view.dart';
-// import 'package:mgresto/views/katalog_paket_makanan/view_paket_makanan_view.dart';
-// import '../main.dart';
-// import '../models/paket_langganan_model.dart';
-// import '../views/add_kategori_view.dart';
-// import '../views/add_menu_view.dart';
-// import '../views/detail_pembayaran_view.dart';
-// import '../views/edit_kategori_view.dart';
-// import '../views/edit_menu_view.dart';
-// import '../views/home_view.dart';
-// import '../views/login_view.dart';
-// import '../views/pembayaran_view.dart';
-// import '../views/register_view.dart';
-// import '../views/search_menu_view.dart';
-// import '../views/view_menu_view.dart';
+import 'package:flutter/material.dart';
 
+class Routes {
+  navigateTo(BuildContext context, {required Widget page}) => Navigator.push(
+      context,
+      PageRouteBuilder(
+          pageBuilder: ((context, animation, secondaryAnimation) => page),
+          transitionDuration: const Duration(seconds: 0),
+          reverseTransitionDuration: Duration.zero));
+
+  navigateReplacementTo(BuildContext context, {required Widget page}) =>
+      Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+              pageBuilder: ((context, animation, secondaryAnimation) => page),
+              transitionDuration: const Duration(seconds: 0),
+              reverseTransitionDuration: Duration.zero));
+}
 // class Routes {
 //   loginView() => Navigator.push(
 //       navigatorKey.currentState!.context,

@@ -11,6 +11,22 @@ checkGeneralField({String? val, required String errorMsg}) {
   return null;
 }
 
+checkEmailField({String? val, required String errorMsg}) {
+  val = val.toString().trim();
+  if (val.isNotEmpty && !s_validator.isEmail(val)) {
+    return "Email tidak valid";
+  }
+  return null;
+}
+
+checkPasswordField({String? val, required String errorMsg}) {
+  val = val.toString().trim();
+  if (val == "" || val.isEmpty || val == "null") {
+    return "Password belum diisi";
+  }
+  return null;
+}
+
 registerNamaLengkap(String? val) {
   val = val.toString().trim();
   if (val == "" || val.isEmpty || val == "null") {

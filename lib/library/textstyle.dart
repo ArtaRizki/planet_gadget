@@ -123,6 +123,8 @@ inter14HyperlinkBold() => TextStyle(
 
 inter16Medium() =>
     TextStyle(fontSize: 16, color: black, fontWeight: FontWeight.w500);
+inter16MediumBlack2() =>
+    TextStyle(fontSize: 16, color: black, fontWeight: FontWeight.w500);
 
 inter16BoldRed() =>
     TextStyle(fontSize: 16, color: red, fontWeight: FontWeight.w700);

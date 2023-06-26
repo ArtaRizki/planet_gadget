@@ -136,7 +136,7 @@ class _WishlistPageState extends State<WishlistPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Expanded(
-                                  flex: 8,
+                                  flex: 10,
                                   child: Center(
                                     child: SizedBox(
                                       width: 131,
@@ -150,7 +150,7 @@ class _WishlistPageState extends State<WishlistPage> {
                                 ),
                                 // const SizedBox(height: 8),
                                 Expanded(
-                                    flex: 2,
+                                    flex: 3,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12),
@@ -169,6 +169,47 @@ class _WishlistPageState extends State<WishlistPage> {
                                           convertToIdr(nominal: "Rp12.999.000"),
                                           style: inter14Bold()),
                                     )),
+                                Expanded(
+                                  flex: 3,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          flex: 2,
+                                          child: Container(
+                                            padding: const EdgeInsets.all(4),
+                                            decoration: BoxDecoration(
+                                                color: white,
+                                                border: Border.all(
+                                                    color: primaryBlue),
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: Icon(
+                                              Icons.favorite,
+                                              size: 16,
+                                              color: primaryBlue,
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          flex: 8,
+                                          child: Container(
+                                            padding: const EdgeInsets.all(8),
+                                            decoration: BoxDecoration(
+                                                color: secondaryBlue,
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: Text("Add to cart",
+                                                style: inter12MediumBlack()),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           );

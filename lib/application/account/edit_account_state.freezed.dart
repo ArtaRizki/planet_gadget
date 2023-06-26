@@ -20,6 +20,7 @@ mixin _$EditAccountState {
   TextFieldModel get ktp => throw _privateConstructorUsedError;
   TextFieldModel get phoneNumber => throw _privateConstructorUsedError;
   TextFieldModel get birthday => throw _privateConstructorUsedError;
+  String get genre => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditAccountStateCopyWith<EditAccountState> get copyWith =>
@@ -36,7 +37,8 @@ abstract class $EditAccountStateCopyWith<$Res> {
       {TextFieldModel name,
       TextFieldModel ktp,
       TextFieldModel phoneNumber,
-      TextFieldModel birthday});
+      TextFieldModel birthday,
+      String genre});
 
   $TextFieldModelCopyWith<$Res> get name;
   $TextFieldModelCopyWith<$Res> get ktp;
@@ -61,6 +63,7 @@ class _$EditAccountStateCopyWithImpl<$Res, $Val extends EditAccountState>
     Object? ktp = null,
     Object? phoneNumber = null,
     Object? birthday = null,
+    Object? genre = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
@@ -79,6 +82,10 @@ class _$EditAccountStateCopyWithImpl<$Res, $Val extends EditAccountState>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as TextFieldModel,
+      genre: null == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -127,7 +134,8 @@ abstract class _$$_EditAccountStateCopyWith<$Res>
       {TextFieldModel name,
       TextFieldModel ktp,
       TextFieldModel phoneNumber,
-      TextFieldModel birthday});
+      TextFieldModel birthday,
+      String genre});
 
   @override
   $TextFieldModelCopyWith<$Res> get name;
@@ -154,6 +162,7 @@ class __$$_EditAccountStateCopyWithImpl<$Res>
     Object? ktp = null,
     Object? phoneNumber = null,
     Object? birthday = null,
+    Object? genre = null,
   }) {
     return _then(_$_EditAccountState(
       name: null == name
@@ -172,6 +181,10 @@ class __$$_EditAccountStateCopyWithImpl<$Res>
           ? _value.birthday
           : birthday // ignore: cast_nullable_to_non_nullable
               as TextFieldModel,
+      genre: null == genre
+          ? _value.genre
+          : genre // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -183,7 +196,8 @@ class _$_EditAccountState implements _EditAccountState {
       {required this.name,
       required this.ktp,
       required this.phoneNumber,
-      required this.birthday});
+      required this.birthday,
+      this.genre = "Male"});
 
   @override
   final TextFieldModel name;
@@ -193,10 +207,13 @@ class _$_EditAccountState implements _EditAccountState {
   final TextFieldModel phoneNumber;
   @override
   final TextFieldModel birthday;
+  @override
+  @JsonKey()
+  final String genre;
 
   @override
   String toString() {
-    return 'EditAccountState(name: $name, ktp: $ktp, phoneNumber: $phoneNumber, birthday: $birthday)';
+    return 'EditAccountState(name: $name, ktp: $ktp, phoneNumber: $phoneNumber, birthday: $birthday, genre: $genre)';
   }
 
   @override
@@ -209,12 +226,13 @@ class _$_EditAccountState implements _EditAccountState {
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
             (identical(other.birthday, birthday) ||
-                other.birthday == birthday));
+                other.birthday == birthday) &&
+            (identical(other.genre, genre) || other.genre == genre));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, name, ktp, phoneNumber, birthday);
+      Object.hash(runtimeType, name, ktp, phoneNumber, birthday, genre);
 
   @JsonKey(ignore: true)
   @override
@@ -228,7 +246,8 @@ abstract class _EditAccountState implements EditAccountState {
       {required final TextFieldModel name,
       required final TextFieldModel ktp,
       required final TextFieldModel phoneNumber,
-      required final TextFieldModel birthday}) = _$_EditAccountState;
+      required final TextFieldModel birthday,
+      final String genre}) = _$_EditAccountState;
 
   @override
   TextFieldModel get name;
@@ -238,6 +257,8 @@ abstract class _EditAccountState implements EditAccountState {
   TextFieldModel get phoneNumber;
   @override
   TextFieldModel get birthday;
+  @override
+  String get genre;
   @override
   @JsonKey(ignore: true)
   _$$_EditAccountStateCopyWith<_$_EditAccountState> get copyWith =>

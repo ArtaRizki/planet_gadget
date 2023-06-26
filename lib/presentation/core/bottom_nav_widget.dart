@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/color.dart';
+import 'package:planet_gadget/presentation/pages/auth/login/login_page.dart';
 import 'package:planet_gadget/presentation/pages/member/member_page.dart';
 
 import '../../catalog.dart';
@@ -40,7 +41,7 @@ class _BottomNavWidgetState extends State<BottomNavWidget> {
           DashboardPage(),
           CatalogPage(),
           MemberPage(),
-          WishlistPage(),
+          LoginPage(),
           AccountPage(),
         ],
       ),

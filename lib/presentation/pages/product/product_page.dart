@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/presentation/pages/checkout/checkout_page.dart';
@@ -8,21 +9,31 @@ import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_pag
 import 'package:planet_gadget/presentation/pages/store_pickup/store_pickup_page.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../application/product/product_notifier.dart';
 import '../../../library/color.dart';
 import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends ConsumerStatefulWidget {
   const ProductPage({super.key});
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  ConsumerState<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductPageState extends ConsumerState<ProductPage> {
   DraggableScrollableController dragC = DraggableScrollableController();
+
+  @override
+  void initState() {
+    ref.read(productNotifier.notifier).getProduct();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final productState = ref.watch(productNotifier);
+    final productStateNotifier = ref.read(productNotifier.notifier);
     return SafeArea(
       top: false,
       child: Scaffold(

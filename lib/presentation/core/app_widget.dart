@@ -23,17 +23,15 @@ class AppWidget extends StatelessWidget {
             }
           }
         },
-        child: OverlaySupport(
-          child: MaterialApp(
-            title: 'Planet Gadget',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-                fontFamily: 'Inter',
-                primarySwatch: Colors.yellow,
-                textSelectionTheme:
-                    TextSelectionThemeData(selectionHandleColor: primaryBlue)),
-            home: const BottomNavWidget(),
-          ),
+        child: MaterialApp(
+          title: 'Planet Gadget',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              fontFamily: 'Inter',
+              primarySwatch: Colors.yellow,
+              textSelectionTheme:
+                  TextSelectionThemeData(selectionHandleColor: primaryBlue)),
+          home: const BottomNavWidget(),
         ),
       ),
     );

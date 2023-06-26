@@ -25,16 +25,16 @@ class DioClient<T> {
   // dalam detik, waktu tunggu sebelum melakukan cek ulang koneksi,
   // jika tidak ada trigger untuk pengecekan ulang koneksi
 
-  final int _connectTimeOut = 30000; // timeout connect ke server
-  final int _sendTimeout = 30000; // timeout send data ke server
-  final int _receiveTimeOut = 30000; // timeout receive data dari server
+  final int _connectTimeOut = 60000; // timeout connect ke server
+  final int _sendTimeout = 60000; // timeout send data ke server
+  final int _receiveTimeOut = 60000; // timeout receive data dari server
 
   bool _hasConectivity = true;
   bool _isDialogOpen = false;
   BaseOptions baseOptions = BaseOptions(
       baseUrl: kReleaseMode
-          ? "http://47.74.214.215:82/mgrestov2/api"
-          : "http://47.74.214.215:82/mgrestov2/api",
+          ? "http://mcstaging.planetgadget.store/rest/V1/api"
+          : "http://mcstaging.planetgadget.store/rest/V1/api",
       connectTimeout: const Duration(milliseconds: 30000),
       sendTimeout: const Duration(milliseconds: 30000),
       receiveTimeout: const Duration(milliseconds: 30000));
@@ -47,13 +47,14 @@ class DioClient<T> {
   }
 
   // request API (POST) tanpa simpan data di lokal -> sementara dipakai untuk update security
-  Future<Response?> requestPost(
-    String url,
-    Map<String, dynamic> param, {
+  Future<Response?> requestPost({
+    required String url,
+    required Map<String, dynamic> param,
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
     Options? options,
     FormData? formData,
+    bool? isJson,
   }) async {
     param = param;
 
@@ -68,6 +69,8 @@ class DioClient<T> {
         onSendProgress: onSendProgress ?? (p0, p1) {},
         onReceiveProgress: onReceiveProgress ?? (p0, p1) {},
         formDataa: formData,
+        options: options,
+        isJson: isJson,
       );
       return response;
     } catch (error) {
@@ -76,12 +79,14 @@ class DioClient<T> {
   }
 
   // request API (GET) tanpa simpan data di lokal -> sementara dipakai untuk update security
-  Future<Response?> requestGet(String url, Map<String, dynamic> param) async {
+  Future<Response?> requestGet(
+      {required String url, required Map<String, dynamic> param}) async {
     // request data ke server
     param = param;
     try {
       var response =
           await _dioGet(url, param, showError: false, timeOut: _connectTimeOut);
+      // log("RESPONSE : ${response!.data}");
       return response;
     } catch (error) {}
     return null;
@@ -90,8 +95,11 @@ class DioClient<T> {
   // request API tanpa simpan data di lokal -> dengan pengecekan koneksi
   // sementara tidak dipakai, karena untuk Tisco belum ada fitur pengecekan koneksi
   Future<Response?> _request(
-      String url, Map<String, dynamic> param, Function onGetData,
-      {bool showError = true, int timeOut = 30000}) async {
+      {required String url,
+      required Map<String, dynamic> param,
+      required Function onGetData,
+      bool showError = true,
+      int timeOut = 30000}) async {
     // request data ke server
 
     bool connAvail = await _checkConnectionAvailable();
@@ -136,6 +144,7 @@ class DioClient<T> {
     required ProgressCallback onReceiveProgress,
     Options? options,
     FormData? formDataa,
+    bool? isJson,
   }) async {
     String uniqueCode = DateTime.now().toString();
     String paramStr = "";
@@ -160,7 +169,7 @@ class DioClient<T> {
       Dio dio = Dio(baseOptions);
       dio.interceptors.add(
         PrettyDioLogger(
-          request: false, //true,
+          request: true, //true,
           requestHeader: false,
           requestBody: true,
           responseHeader: false,
@@ -177,7 +186,7 @@ class DioClient<T> {
 
       // post dio
       Response response = await dio.post(url,
-          data: formData,
+          data: isJson == true ? jsonEncode(param) : formData,
           onSendProgress: onSendProgress,
           onReceiveProgress: onReceiveProgress,
           options: options);
@@ -241,11 +250,11 @@ class DioClient<T> {
       Dio dio = Dio(baseOptions);
       dio.interceptors.add(
         PrettyDioLogger(
-          request: false, //true,
+          request: true, //true,
           requestHeader: true,
           requestBody: true,
           responseHeader: false,
-          responseBody: false, //true,
+          responseBody: true, //true,
           error: true,
           compact: true,
           maxWidth: 90,
@@ -257,19 +266,19 @@ class DioClient<T> {
       // post dio
       Response response =
           await dio.get(url, queryParameters: param); // json.decode(paramStr));
-      Logger().d(jsonDecode(response.toString()));
+      // Logger().d(jsonDecode(response.toString()));
+      // Logger().d(response.data);
 
-      if (response.toString() != "") {
-        Map<String, dynamic> json = jsonDecode(response.toString());
-        if (json.toString() != "[]") {
-          if (json["status_code"].toString().toUpperCase() ==
-              "false".toUpperCase()) {}
-        }
-      }
+      // if (response.toString() != "") {
+      //   Map<String, dynamic> json = jsonDecode(response.toString());
+      //   if (json.toString() != "[]") {
+      //     if (json["status_code"].toString().toUpperCase() ==
+      //         "false".toUpperCase()) {}
+      //   }
+      // }
 
       printLog(
           'DioConn ║ Time', 'Url = $url / ${DateTime.now().difference(start)}');
-
       return response;
     } on DioError catch (e) {
       String log = "Error : " +

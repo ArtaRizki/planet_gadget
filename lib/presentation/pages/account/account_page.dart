@@ -482,173 +482,181 @@ class _AccountPageState extends State<AccountPage> {
         return DraggableScrollableSheet(
           controller: addAddressC,
           initialChildSize: 0.82,
-          minChildSize: 0.1,
+          minChildSize: 0.82,
           maxChildSize: 0.96,
           expand: false,
           snap: true,
           builder: (BuildContext context, ScrollController scrollController) {
             return StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: const BoxDecoration(color: Color(0xfff8faf7)),
-                      child: Column(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              color: activeBgColor,
-                              width: 100,
-                              height: 4,
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration:
+                            const BoxDecoration(color: Color(0xfff8faf7)),
+                        child: Column(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                color: activeBgColor,
+                                width: 100,
+                                height: 4,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 24.0,
-                                bottom: 12.0),
-                            child: Row(
-                              children: [
-                                /// Bottom sheet title text
-                                Expanded(
-                                    flex: 5,
-                                    child: Text("Add Address",
-                                        style: inter28Bold())),
-                                Expanded(
-                                    flex: 5,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          onTap: closeConfirmAddAddressSheet,
-                                          child: const Icon(Icons.close),
-                                        ),
-                                      ],
-                                    )),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0,
+                                  right: 20.0,
+                                  top: 24.0,
+                                  bottom: 12.0),
+                              child: Row(
+                                children: [
+                                  /// Bottom sheet title text
+                                  Expanded(
+                                      flex: 5,
+                                      child: Text("Add Address",
+                                          style: inter28Bold())),
+                                  Expanded(
+                                      flex: 5,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: closeConfirmAddAddressSheet,
+                                            child: const Icon(Icons.close),
+                                          ),
+                                        ],
+                                      )),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-                    Expanded(
-                      child: Consumer(
-                        builder: (context, ref, child) {
-                          AccountAddressState state =
-                              ref.watch(accountAddressNotifier);
-                          final editAddressNotifer =
-                              ref.watch(accountAddressNotifier.notifier);
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    Text("Address Labels",
-                                        style: inter14Medium()),
-                                    Text("*", style: inter14MediumRed()),
-                                  ],
+                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                      Expanded(
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            AccountAddressState state =
+                                ref.watch(accountAddressNotifier);
+                            final editAddressNotifer =
+                                ref.watch(accountAddressNotifier.notifier);
+                            return ListView(
+                              controller: scrollController,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    children: [
+                                      Text("Address Labels",
+                                          style: inter14Medium()),
+                                      Text("*", style: inter14MediumRed()),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    addressLabel(title: "Home", value: true),
-                                    const SizedBox(width: 12),
-                                    addressLabel(title: "Office", value: false),
-                                  ],
+                                const SizedBox(height: 8),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    children: [
+                                      addressLabel(title: "Home", value: true),
+                                      const SizedBox(width: 12),
+                                      addressLabel(
+                                          title: "Office", value: false),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              fieldAddress(
-                                required: true,
-                                name: "Recipient's Name",
-                                value: "",
-                                hint: "Recipient's Name",
-                                controller: recipientC,
-                                empty: state.recipient.isEmpty,
-                                error: state.recipient.errorMessage,
-                                suggest: "Recepient harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      recipient:
-                                          state.recipient.copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.recipient.value,
-                                      fieldEmpty: state.recipient.isEmpty,
-                                      fieldErrorMsg:
-                                          state.recipient.errorMessage,
-                                      errorMsg: "Nama Recepient harus diisi",
-                                      type: "recipient");
-                                },
-                              ),
-                              // const SizedBox(height: 16),
-                              fieldAddress(
-                                required: true,
-                                name: "Mobile Phone Number",
-                                value: "",
-                                hint: "Mobile Phone Number",
-                                controller: phoneNumberC,
-                                empty: state.phoneNumber.isEmpty,
-                                error: state.phoneNumber.errorMessage,
-                                suggest: "Nomor HP harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      phoneNumber: state.phoneNumber
-                                          .copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.phoneNumber.value,
-                                      fieldEmpty: state.phoneNumber.isEmpty,
-                                      fieldErrorMsg:
-                                          state.phoneNumber.errorMessage,
-                                      errorMsg: "Nomor HP harus diisi",
-                                      type: "phoneNumber");
-                                },
-                              ),
-                              // const SizedBox(height: 16),
-                              fieldAddress(
-                                required: true,
-                                name: "Complete Address",
-                                value: "",
-                                hint: "Complete Address",
-                                controller: addressC,
-                                empty: state.address.isEmpty,
-                                error: state.address.errorMessage,
-                                suggest: "Alamat harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      address:
-                                          state.address.copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.address.value,
-                                      fieldEmpty: state.address.isEmpty,
-                                      fieldErrorMsg: state.address.errorMessage,
-                                      errorMsg: "Alamat harus diisi",
-                                      type: "address");
-                                },
-                              )
-                            ],
-                          );
-                        },
+                                const SizedBox(height: 12),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Recipient's Name",
+                                  value: "",
+                                  hint: "Recipient's Name",
+                                  controller: recipientC,
+                                  empty: state.recipient.isEmpty,
+                                  error: state.recipient.errorMessage,
+                                  suggest: "Recepient harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        recipient: state.recipient
+                                            .copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.recipient.value,
+                                        fieldEmpty: state.recipient.isEmpty,
+                                        fieldErrorMsg:
+                                            state.recipient.errorMessage,
+                                        errorMsg: "Nama Recepient harus diisi",
+                                        type: "recipient");
+                                  },
+                                ),
+                                // const SizedBox(height: 16),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Mobile Phone Number",
+                                  value: "",
+                                  hint: "Mobile Phone Number",
+                                  controller: phoneNumberC,
+                                  empty: state.phoneNumber.isEmpty,
+                                  error: state.phoneNumber.errorMessage,
+                                  suggest: "Nomor HP harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        phoneNumber: state.phoneNumber
+                                            .copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.phoneNumber.value,
+                                        fieldEmpty: state.phoneNumber.isEmpty,
+                                        fieldErrorMsg:
+                                            state.phoneNumber.errorMessage,
+                                        errorMsg: "Nomor HP harus diisi",
+                                        type: "phoneNumber");
+                                  },
+                                ),
+                                // const SizedBox(height: 16),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Complete Address",
+                                  value: "",
+                                  hint: "Complete Address",
+                                  controller: addressC,
+                                  empty: state.address.isEmpty,
+                                  error: state.address.errorMessage,
+                                  suggest: "Alamat harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        address:
+                                            state.address.copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.address.value,
+                                        fieldEmpty: state.address.isEmpty,
+                                        fieldErrorMsg:
+                                            state.address.errorMessage,
+                                        errorMsg: "Alamat harus diisi",
+                                        type: "address");
+                                  },
+                                )
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    afterChangeButton(
-                        name: "Save",
-                        onClick: () {
-                          showToast("Data saved successfully", context);
-                          Navigator.pop(context);
-                        }),
-                  ],
+                      afterChangeButton(
+                          name: "Save",
+                          onClick: () {
+                            showToast("Data saved successfully", context);
+                            Navigator.pop(context);
+                          }),
+                    ],
+                  ),
                 );
               },
             );
@@ -789,177 +797,185 @@ class _AccountPageState extends State<AccountPage> {
         return DraggableScrollableSheet(
           controller: editAddressC,
           initialChildSize: 0.82,
-          minChildSize: 0.1,
+          minChildSize: 0.82,
           maxChildSize: 0.96,
           expand: false,
           snap: true,
           builder: (BuildContext context, ScrollController scrollController) {
             return StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: const BoxDecoration(color: Color(0xfff8faf7)),
-                      child: Column(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              color: activeBgColor,
-                              width: 100,
-                              height: 4,
+                return Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration:
+                            const BoxDecoration(color: Color(0xfff8faf7)),
+                        child: Column(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                color: activeBgColor,
+                                width: 100,
+                                height: 4,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 20.0,
-                                right: 20.0,
-                                top: 24.0,
-                                bottom: 12.0),
-                            child: Row(
-                              children: [
-                                /// Bottom sheet title text
-                                Expanded(
-                                    flex: 5,
-                                    child: Text("Edit Address",
-                                        style: inter28Bold())),
-                                Expanded(
-                                    flex: 5,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        InkWell(
-                                          onTap: deleteConfirmAddressSheet,
-                                          child: SvgPicture.asset(
-                                              "${iconsPath}trash.svg",
-                                              color: red),
-                                        ),
-                                        const SizedBox(width: 16),
-                                        InkWell(
-                                          onTap: closeConfirmEditAddressSheet,
-                                          child: const Icon(Icons.close),
-                                        )
-                                      ],
-                                    )),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0,
+                                  right: 20.0,
+                                  top: 24.0,
+                                  bottom: 12.0),
+                              child: Row(
+                                children: [
+                                  /// Bottom sheet title text
+                                  Expanded(
+                                      flex: 5,
+                                      child: Text("Edit Address",
+                                          style: inter28Bold())),
+                                  Expanded(
+                                      flex: 5,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          InkWell(
+                                            onTap: deleteConfirmAddressSheet,
+                                            child: SvgPicture.asset(
+                                                "${iconsPath}trash.svg",
+                                                color: red),
+                                          ),
+                                          const SizedBox(width: 16),
+                                          InkWell(
+                                            onTap: closeConfirmEditAddressSheet,
+                                            child: const Icon(Icons.close),
+                                          )
+                                        ],
+                                      )),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-                    Expanded(
-                      child: Consumer(
-                        builder: (context, ref, child) {
-                          AccountAddressState state =
-                              ref.watch(accountAddressNotifier);
-                          final editAddressNotifer =
-                              ref.watch(accountAddressNotifier.notifier);
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    Text("Address Labels",
-                                        style: inter14Medium()),
-                                    Text("*", style: inter14MediumRed()),
-                                  ],
+                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                      Expanded(
+                        child: Consumer(
+                          builder: (context, ref, child) {
+                            AccountAddressState state =
+                                ref.watch(accountAddressNotifier);
+                            final editAddressNotifer =
+                                ref.watch(accountAddressNotifier.notifier);
+                            return ListView(
+                              controller: scrollController,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    children: [
+                                      Text("Address Labels",
+                                          style: inter14Medium()),
+                                      Text("*", style: inter14MediumRed()),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  children: [
-                                    addressLabel(title: "Home", value: true),
-                                    const SizedBox(width: 12),
-                                    addressLabel(title: "Office", value: false),
-                                  ],
+                                const SizedBox(height: 8),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    children: [
+                                      addressLabel(title: "Home", value: true),
+                                      const SizedBox(width: 12),
+                                      addressLabel(
+                                          title: "Office", value: false),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(height: 12),
-                              fieldAddress(
-                                required: true,
-                                name: "Recipient's Name",
-                                value: "Yoshua",
-                                hint: "Recipient's Name",
-                                controller: recipientC,
-                                empty: state.recipient.isEmpty,
-                                error: state.recipient.errorMessage,
-                                suggest: "Recepient harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      recipient:
-                                          state.recipient.copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.recipient.value,
-                                      fieldEmpty: state.recipient.isEmpty,
-                                      fieldErrorMsg:
-                                          state.recipient.errorMessage,
-                                      errorMsg: "Nama Recepient harus diisi",
-                                      type: "recipient");
-                                },
-                              ),
-                              // const SizedBox(height: 16),
-                              fieldAddress(
-                                required: true,
-                                name: "Mobile Phone Number",
-                                value: "0822334449460",
-                                hint: "Mobile Phone Number",
-                                controller: phoneNumberC,
-                                empty: state.phoneNumber.isEmpty,
-                                error: state.phoneNumber.errorMessage,
-                                suggest: "Nomor HP harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      phoneNumber: state.phoneNumber
-                                          .copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.phoneNumber.value,
-                                      fieldEmpty: state.phoneNumber.isEmpty,
-                                      fieldErrorMsg:
-                                          state.phoneNumber.errorMessage,
-                                      errorMsg: "Nomor HP harus diisi",
-                                      type: "phoneNumber");
-                                },
-                              ),
-                              // const SizedBox(height: 16),
-                              fieldAddress(
-                                required: true,
-                                name: "Complete Address",
-                                value:
-                                    "Green Mansion Juanda 2 Safir J-05, Sidoarjo, Jawa Timur",
-                                hint: "Complete Address",
-                                controller: addressC,
-                                empty: state.address.isEmpty,
-                                error: state.address.errorMessage,
-                                suggest: "Alamat harus diisi",
-                                onchanged: (val) {
-                                  state = state.copyWith(
-                                      address:
-                                          state.address.copyWith(value: val));
-                                  editAddressNotifer.checkField(
-                                      val: state.address.value,
-                                      fieldEmpty: state.address.isEmpty,
-                                      fieldErrorMsg: state.address.errorMessage,
-                                      errorMsg: "Alamat harus diisi",
-                                      type: "address");
-                                },
-                              )
-                            ],
-                          );
-                        },
+                                const SizedBox(height: 12),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Recipient's Name",
+                                  value: "Yoshua",
+                                  hint: "Recipient's Name",
+                                  controller: recipientC,
+                                  empty: state.recipient.isEmpty,
+                                  error: state.recipient.errorMessage,
+                                  suggest: "Recepient harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        recipient: state.recipient
+                                            .copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.recipient.value,
+                                        fieldEmpty: state.recipient.isEmpty,
+                                        fieldErrorMsg:
+                                            state.recipient.errorMessage,
+                                        errorMsg: "Nama Recepient harus diisi",
+                                        type: "recipient");
+                                  },
+                                ),
+                                // const SizedBox(height: 16),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Mobile Phone Number",
+                                  value: "0822334449460",
+                                  hint: "Mobile Phone Number",
+                                  controller: phoneNumberC,
+                                  empty: state.phoneNumber.isEmpty,
+                                  error: state.phoneNumber.errorMessage,
+                                  suggest: "Nomor HP harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        phoneNumber: state.phoneNumber
+                                            .copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.phoneNumber.value,
+                                        fieldEmpty: state.phoneNumber.isEmpty,
+                                        fieldErrorMsg:
+                                            state.phoneNumber.errorMessage,
+                                        errorMsg: "Nomor HP harus diisi",
+                                        type: "phoneNumber");
+                                  },
+                                ),
+                                // const SizedBox(height: 16),
+                                fieldAddress(
+                                  required: true,
+                                  name: "Complete Address",
+                                  value:
+                                      "Green Mansion Juanda 2 Safir J-05, Sidoarjo, Jawa Timur",
+                                  hint: "Complete Address",
+                                  controller: addressC,
+                                  empty: state.address.isEmpty,
+                                  error: state.address.errorMessage,
+                                  suggest: "Alamat harus diisi",
+                                  onchanged: (val) {
+                                    state = state.copyWith(
+                                        address:
+                                            state.address.copyWith(value: val));
+                                    editAddressNotifer.checkField(
+                                        val: state.address.value,
+                                        fieldEmpty: state.address.isEmpty,
+                                        fieldErrorMsg:
+                                            state.address.errorMessage,
+                                        errorMsg: "Alamat harus diisi",
+                                        type: "address");
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    afterChangeButton(
-                        name: "Save", onClick: editConfirmAddressSheet),
-                  ],
+                      afterChangeButton(
+                          name: "Save", onClick: editConfirmAddressSheet),
+                    ],
+                  ),
                 );
               },
             );

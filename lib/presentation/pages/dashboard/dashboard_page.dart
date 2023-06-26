@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
+import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/textstyle.dart';
+import 'package:planet_gadget/presentation/pages/article/article_page.dart';
 import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../application/product/product_notifier.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../utils/constants/path.dart';
+import '../../../utils/constants/url.dart';
 import '../best_selling_product/best_selling_product_page.dart';
 import '../brand/all_brand_page.dart';
 import '../choice_for_you/choice_for_you_page.dart';
@@ -18,19 +23,27 @@ import '../product/product_page.dart';
 import '../catalog/catalog_page.dart';
 import '../promo/promo_page.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  ConsumerState<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends ConsumerState<DashboardPage> {
   TextEditingController searchC = TextEditingController();
   String searchValue = "";
   List searchResult = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final productState = ref.watch(productNotifier);
+    final productStateNotifier = ref.read(productNotifier.notifier);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -214,12 +227,26 @@ class _DashboardPageState extends State<DashboardPage> {
                                   bgColor: 0xffCFFCDB,
                                   mainColor: 0xff35E565,
                                   imageName: "badge-check.svg",
-                                  name: "AllBrand",
+                                  name: "All Brand",
                                   onClick: () => Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
                                         return const AllBrandPage();
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                colorBox(
+                                  bgColor: 0xffFCE3CF,
+                                  mainColor: 0xffE68831,
+                                  imageName: "book-open.svg",
+                                  name: "Article",
+                                  onClick: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const ArticlePage();
                                       },
                                     ),
                                   ),
@@ -349,20 +376,24 @@ class _DashboardPageState extends State<DashboardPage> {
                               padding:
                                   const EdgeInsets.only(right: 20, bottom: 32),
                               scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProductPage()));
-                                    });
-                              },
+                              itemBuilder: (context, index) =>
+                                  productState.when(
+                                      initial: () => loadingWidget,
+                                      loading: () => loadingWidget,
+                                      error: (error) => Text(error ?? "Error"),
+                                      data: (product) {
+                                        final item = product.first[index];
+                                        return cardProduct(
+                                            imageName: "$baseUrl${item.url}",
+                                            price: convertToIdr(
+                                                nominal: "12999000"),
+                                            productName: item.name,
+                                            onClick: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ProductPage())));
+                                      }),
                               separatorBuilder: (context, index) =>
                                   const SizedBox(width: 8),
                               itemCount: 5,
@@ -395,7 +426,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               itemBuilder: (context, index) {
                                 return cardProduct(
                                     imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
+                                        "http://mcstaging.planetgadget.store/rest/V1/products/100ar001-lc-armband-ss-note-3",
                                     price: convertToIdr(nominal: "12999000"),
                                     productName: "Apple Iphone 12 128Gb",
                                     onClick: () {
@@ -439,7 +470,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               itemBuilder: (context, index) {
                                 return cardProduct(
                                     imageName:
-                                        "iphone_12_mini_blue_1_1_5_2 1.png",
+                                        "http://mcstaging.planetgadget.store/rest/V1/products/100ar001-lc-armband-ss-note-3",
                                     price: convertToIdr(nominal: "12999000"),
                                     productName: "Apple Iphone 12 128Gb",
                                     onClick: () {
@@ -566,17 +597,15 @@ class _DashboardPageState extends State<DashboardPage> {
               child: SizedBox(
                 width: 131,
                 height: 145,
-                child: Image.asset(
-                  '$productsPath$imageName',
+                child: Image.network(
+                  imageName,
                   fit: BoxFit.contain,
                 ),
               ),
             ),
             const SizedBox(height: 8),
             Expanded(
-                flex: 3,
-                child: Text(productName + "aaaaaaaaaaaaaaaa",
-                    style: inter12MediumBlack())),
+                flex: 3, child: Text(productName, style: inter12MediumBlack())),
             const SizedBox(height: 8),
             Expanded(flex: 3, child: Text(price, style: inter14Bold())),
           ],

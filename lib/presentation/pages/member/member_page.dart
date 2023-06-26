@@ -76,7 +76,7 @@ class _MemberPageState extends State<MemberPage> {
                       const SizedBox(height: 16),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 12),
+                            horizontal: 0, vertical: 12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[

@@ -9,9 +9,10 @@ import 'package:planet_gadget/presentation/pages/member/member_page.dart';
 
 import '../../catalog.dart';
 import '../pages/account/account_page.dart';
+import '../pages/catalog/catalog_page.dart';
 import '../pages/dashboard/dashboard_page.dart';
 import '../../library/bottom_navbar/floating_bottom_navigation_bar.dart';
-import '../pages/member/catalog/catalog_page.dart';
+// import '../pages/member/catalog/catalog_page.dart';
 import '../pages/wishilist/wishlist_page.dart';
 
 class BottomNavWidget extends StatefulWidget {

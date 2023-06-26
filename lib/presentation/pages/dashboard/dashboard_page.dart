@@ -371,7 +371,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           ),
                           const SizedBox(height: 16),
                           SizedBox(
-                            height: 251,
+                            // height: 251,
                             child: ListView.separated(
                               padding:
                                   const EdgeInsets.only(right: 20, bottom: 32),
@@ -590,13 +590,14 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           ],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              flex: 12,
+              flex: 8,
               child: SizedBox(
                 width: 131,
-                height: 145,
+                // height: 145,
                 child: Image.network(
                   imageName,
                   fit: BoxFit.contain,
@@ -604,10 +605,14 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
               ),
             ),
             const SizedBox(height: 8),
-            Expanded(
-                flex: 3, child: Text(productName, style: inter12MediumBlack())),
-            const SizedBox(height: 8),
-            Expanded(flex: 3, child: Text(price, style: inter14Bold())),
+            Flexible(
+                flex: 2,
+                child: Text(productName,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: inter12MediumBlack())),
+            const SizedBox(height: 4),
+            Text(price, style: inter14Bold()),
           ],
         ),
       ),

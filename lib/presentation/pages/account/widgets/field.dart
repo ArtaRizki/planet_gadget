@@ -7,11 +7,8 @@ import '../../../../library/decoration.dart';
 
 Widget field(
     {required String name,
-    required String value,
     required String hint,
     required String error,
-    required String suggest,
-    required bool empty,
     required TextEditingController controller,
     required Function(String)? onchanged,
     Function()? changeVisiblePassword,
@@ -53,11 +50,8 @@ Widget field(
 
 Widget fieldAddress(
     {required String name,
-    required String value,
     required String hint,
     required String error,
-    required String suggest,
-    required bool empty,
     required TextEditingController controller,
     required Function(String)? onchanged,
     bool required = false}) {
@@ -88,5 +82,26 @@ Widget fieldAddress(
         SizedBox(height: error != "" ? 8 : 0),
       ],
     ),
+  );
+}
+
+Widget searchField(
+    {required String hint,
+    required TextEditingController controller,
+    required Function(String)? onChanged,
+    required Function() onClear,
+    bool borderColor = false,
+    bool required = false}) {
+  return TextFormField(
+    controller: controller,
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    onChanged: onChanged,
+    style: inter14Medium(),
+    cursorColor: primaryBlue,
+    decoration: searchDecoration(hint,
+        onClear: onClear,
+        borderColor: borderColor ? secondaryBlue : null,
+        clearIcon: controller.text.isNotEmpty),
+    scrollPadding: const EdgeInsets.only(bottom: 52),
   );
 }

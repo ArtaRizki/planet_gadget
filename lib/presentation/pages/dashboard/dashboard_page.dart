@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/textstyle.dart';
+import 'package:planet_gadget/presentation/pages/account/widgets/field.dart';
 import 'package:planet_gadget/presentation/pages/article/article_page.dart';
 import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
 import 'package:sizer/sizer.dart';
@@ -75,22 +76,16 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                         children: <Widget>[
                           Expanded(
                             flex: 7,
-                            child: TextFormField(
-                              // autofocus: true,
+                            child: searchField(
+                              hint: "Find the product you want",
                               controller: searchC,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
                               onChanged: (val) => onChangedSearch(val),
-                              style: inter14Medium(),
-                              cursorColor: primaryBlue,
-                              decoration: searchDecoration(
-                                  "Find the product you want", onClear: () {
+                              onClear: () {
                                 searchC.clear();
                                 searchValue = "";
                                 searchResult.clear();
                                 setState(() {});
-                              }),
-                              scrollPadding: const EdgeInsets.only(bottom: 52),
+                              },
                             ),
                           ),
                           Expanded(
@@ -371,7 +366,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           ),
                           const SizedBox(height: 16),
                           SizedBox(
-                            // height: 251,
+                            height: 251,
                             child: ListView.separated(
                               padding:
                                   const EdgeInsets.only(right: 20, bottom: 32),

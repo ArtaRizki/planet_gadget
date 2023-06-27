@@ -11,6 +11,7 @@ import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
+import '../account/widgets/field.dart';
 import '../purchase/purchase_page.dart';
 
 class StorePickupPage extends StatefulWidget {
@@ -55,25 +56,17 @@ class _StorePickupPageState extends State<StorePickupPage> {
                         children: <Widget>[
                           Expanded(
                             flex: 6,
-                            child: TextFormField(
-                              // autofocus: true,
+                            child: searchField(
+                              hint: "Cari Produk",
                               controller: searchC,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
                               onChanged: (val) => onChangedSearch(val),
-                              style: inter14Medium(),
-                              cursorColor: primaryBlue,
-                              decoration: searchDecoration(
-                                "Masukkan lokasi Toko",
-                                onClear: () {
-                                  searchC.clear();
-                                  searchValue = "";
-                                  searchResult.clear();
-                                  setState(() {});
-                                },
-                                borderColor: secondaryBlue,
-                              ),
-                              scrollPadding: const EdgeInsets.only(bottom: 52),
+                              borderColor: true,
+                              onClear: () {
+                                searchC.clear();
+                                searchValue = "";
+                                searchResult.clear();
+                                setState(() {});
+                              },
                             ),
                           ),
                           const SizedBox(width: 12),

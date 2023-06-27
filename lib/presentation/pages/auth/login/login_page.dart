@@ -63,12 +63,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         children: <Widget>[
                           field(
                             name: "Email",
-                            value: "",
                             hint: "Please enter your registered email",
                             controller: emailC,
-                            empty: loginFieldState.email.isEmpty,
                             error: loginFieldState.email.errorMessage,
-                            suggest: "Nama harus diisi",
                             onchanged: (val) {
                               loginFieldStateNotifier.checkField(
                                   val: loginFieldState.email.value,
@@ -83,12 +80,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             isPassword: true,
                             visiblePassword: loginFieldState.visiblePassword,
                             name: "Password",
-                            value: "",
                             hint: "Please enter your registered email",
                             controller: passwordC,
-                            empty: loginFieldState.password.isEmpty,
                             error: loginFieldState.password.errorMessage,
-                            suggest: "Password harus diisi",
                             onchanged: (val) {
                               loginFieldStateNotifier.checkField(
                                   val: loginFieldState.password.value,

@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:planet_gadget/domain/entity/core/textfield_model.dart';
 import '../../library/validator.dart';
@@ -21,6 +20,7 @@ class AccountAddressNotifier extends StateNotifier<AccountAddressState> {
       required String fieldErrorMsg,
       required String errorMsg,
       required String type}) {
+    changeValue(type: type, value: val ?? "");
     String? msg = checkGeneralField(val: val, errorMsg: errorMsg);
     fieldEmpty = msg != null;
     if (fieldEmpty) {
@@ -28,6 +28,19 @@ class AccountAddressNotifier extends StateNotifier<AccountAddressState> {
     }
     fieldErrorMsg = msg ?? "";
     changeErrorMessage(type: type, fieldErrorMsg: fieldErrorMsg);
+  }
+
+  changeValue({required String type, required String value}) {
+    if (type == "recipient") {
+      state = state.copyWith(recipient: state.recipient.copyWith(value: value));
+    }
+    if (type == "phoneNumber") {
+      state =
+          state.copyWith(phoneNumber: state.phoneNumber.copyWith(value: value));
+    }
+    if (type == "address") {
+      state = state.copyWith(address: state.address.copyWith(value: value));
+    }
   }
 
   changeErrorMessage({required String type, required String fieldErrorMsg}) {
@@ -56,19 +69,6 @@ class AccountAddressNotifier extends StateNotifier<AccountAddressState> {
     }
     if (type == "address") {
       state = state.copyWith(address: state.address.copyWith(isEmpty: true));
-    }
-  }
-
-  changeValue({required String type, required String value}) {
-    if (type == "recipient") {
-      state = state.copyWith(recipient: state.recipient.copyWith(value: value));
-    }
-    if (type == "phoneNumber") {
-      state =
-          state.copyWith(phoneNumber: state.phoneNumber.copyWith(value: value));
-    }
-    if (type == "address") {
-      state = state.copyWith(address: state.address.copyWith(value: value));
     }
   }
 

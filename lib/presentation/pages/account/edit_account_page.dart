@@ -74,12 +74,9 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                     ),
                     field(
                       name: "Name",
-                      value: "Yoshua",
                       hint: "Name",
                       controller: nameC,
-                      empty: state.name.isEmpty,
                       error: state.name.errorMessage,
-                      suggest: "Nama harus diisi",
                       onchanged: (val) {
                         state = state.copyWith(
                             name: state.name.copyWith(value: val));
@@ -93,12 +90,9 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                     ),
                     field(
                       name: "KTP/SIM/Kitas",
-                      value: "3502173009970010",
                       hint: "KTP/SIM/Kitas",
                       controller: ktpC,
-                      empty: state.ktp.isEmpty,
                       error: state.ktp.errorMessage,
-                      suggest: "KTP harus diisi",
                       onchanged: (val) {
                         state =
                             state.copyWith(ktp: state.ktp.copyWith(value: val));
@@ -112,12 +106,9 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                     ),
                     field(
                       name: "Phone number",
-                      value: "082233444849",
                       hint: "Phone number",
                       controller: phoneNumberC,
-                      empty: state.phoneNumber.isEmpty,
                       error: state.phoneNumber.errorMessage,
-                      suggest: "Nomor HP harus diisi",
                       onchanged: (val) {
                         state = state.copyWith(
                             phoneNumber:
@@ -132,12 +123,9 @@ class _EditAccountPageState extends ConsumerState<EditAccountPage> {
                     ),
                     field(
                       name: "Birthday",
-                      value: "30 September 1997",
                       hint: "Birthday",
                       controller: birthdayC,
-                      empty: state.birthday.isEmpty,
                       error: state.birthday.errorMessage,
-                      suggest: "Tanggal lahir harus diisi",
                       onchanged: (val) {
                         state = state.copyWith(
                             birthday: state.birthday.copyWith(value: val));

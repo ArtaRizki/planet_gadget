@@ -9,6 +9,7 @@ import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
+import '../account/widgets/field.dart';
 
 class BrandPage extends StatefulWidget {
   const BrandPage({super.key});
@@ -54,24 +55,17 @@ class _BrandPageState extends State<BrandPage> {
                         children: <Widget>[
                           Expanded(
                             flex: 6,
-                            child: TextFormField(
-                              // autofocus: true,
+                            child: searchField(
+                              hint: "Cari Produk",
                               controller: searchC,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
                               onChanged: (val) => onChangedSearch(val),
-                              style: inter14Medium(),
-                              cursorColor: primaryBlue,
-                              decoration: searchDecoration("Cari produk",
-                                  onClear: () {
+                              borderColor: true,
+                              onClear: () {
                                 searchC.clear();
                                 searchValue = "";
                                 searchResult.clear();
                                 setState(() {});
                               },
-                                  borderColor: secondaryBlue,
-                                  clearIcon: searchC.text.isNotEmpty),
-                              scrollPadding: const EdgeInsets.only(bottom: 52),
                             ),
                           ),
                           const SizedBox(width: 12),

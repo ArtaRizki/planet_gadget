@@ -579,12 +579,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Recipient's Name",
-                                  value: "",
                                   hint: "Recipient's Name",
                                   controller: recipientC,
-                                  empty: state.recipient.isEmpty,
                                   error: state.recipient.errorMessage,
-                                  suggest: "Recepient harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         recipient: state.recipient
@@ -602,12 +599,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Mobile Phone Number",
-                                  value: "",
                                   hint: "Mobile Phone Number",
                                   controller: phoneNumberC,
-                                  empty: state.phoneNumber.isEmpty,
                                   error: state.phoneNumber.errorMessage,
-                                  suggest: "Nomor HP harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         phoneNumber: state.phoneNumber
@@ -625,12 +619,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Complete Address",
-                                  value: "",
                                   hint: "Complete Address",
                                   controller: addressC,
-                                  empty: state.address.isEmpty,
                                   error: state.address.errorMessage,
-                                  suggest: "Alamat harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         address:
@@ -901,12 +892,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Recipient's Name",
-                                  value: "Yoshua",
                                   hint: "Recipient's Name",
                                   controller: recipientC,
-                                  empty: state.recipient.isEmpty,
                                   error: state.recipient.errorMessage,
-                                  suggest: "Recepient harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         recipient: state.recipient
@@ -924,12 +912,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Mobile Phone Number",
-                                  value: "0822334449460",
                                   hint: "Mobile Phone Number",
                                   controller: phoneNumberC,
-                                  empty: state.phoneNumber.isEmpty,
                                   error: state.phoneNumber.errorMessage,
-                                  suggest: "Nomor HP harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         phoneNumber: state.phoneNumber
@@ -947,13 +932,9 @@ class _AccountPageState extends State<AccountPage> {
                                 fieldAddress(
                                   required: true,
                                   name: "Complete Address",
-                                  value:
-                                      "Green Mansion Juanda 2 Safir J-05, Sidoarjo, Jawa Timur",
                                   hint: "Complete Address",
                                   controller: addressC,
-                                  empty: state.address.isEmpty,
                                   error: state.address.errorMessage,
-                                  suggest: "Alamat harus diisi",
                                   onchanged: (val) {
                                     state = state.copyWith(
                                         address:

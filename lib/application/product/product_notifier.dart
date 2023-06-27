@@ -19,7 +19,6 @@ class ProductNotifier extends StateNotifier<ProductState> {
       : _iProductRepository = productRepository,
         super(const ProductState.initial()) {
     getProduct();
-    getProductNew(mode: "new", page: "1", limit: "10");
   }
 
   Future<void> getProduct({

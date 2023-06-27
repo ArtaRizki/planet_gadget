@@ -8,12 +8,14 @@ import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/presentation/pages/account/widgets/field.dart';
 import 'package:planet_gadget/presentation/pages/article/article_page.dart';
 import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
+import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../application/product/best/product_best_notiifer.dart';
 import '../../../application/product/new/product_new_notiifer.dart';
 import '../../../application/product/product_notifier.dart';
 import '../../../library/color.dart';
+import '../../../main.dart';
 import '../../../utils/constants/path.dart';
 import '../../../utils/constants/url.dart';
 import '../best_selling_product/best_selling_product_page.dart';
@@ -106,7 +108,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           Expanded(
                             flex: 1,
                             child: InkWell(
-                                onTap: () {},
+                                onTap: () => routes.navigateTo(context,
+                                    page: ShoppingCartPage()),
                                 child: const Icon(Icons.shopping_cart_outlined,
                                     color: Colors.black)),
                           )
@@ -146,7 +149,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: primaryYellow,
+                        color: secondaryBlue,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -274,11 +277,16 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                   const EdgeInsets.only(right: 20, bottom: 20),
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) {
-                                return imageBox(
-                                    width: 233,
-                                    height: 131,
-                                    borderRadius: 12,
-                                    imagePath: "${bannerPath}promo.png");
+                                return InkWell(
+                                  onTap: () => routes.navigateTo(context,
+                                      page: const PromoPage()),
+                                  child: imageBox(
+                                      width: 233,
+                                      height: 131,
+                                      borderRadius: 12,
+                                      imagePath:
+                                          "$bannerPath${index % 2 != 0 ? "promo2" : "promo"}.png"),
+                                );
                               },
                               separatorBuilder: (context, index) =>
                                   const SizedBox(width: 8),

@@ -19,13 +19,39 @@ class ProductNotifier extends StateNotifier<ProductState> {
       : _iProductRepository = productRepository,
         super(const ProductState.initial()) {
     getProduct();
+    getProductNew(mode: "new", page: "1", limit: "10");
   }
 
-  Future<void> getProduct() async {
+  Future<void> getProduct({
+    String mode = "",
+    String page = "1",
+    String limit = "10",
+  }) async {
     // _productFieldState = _productFieldState.copyWith();
     state = const ProductState.loading();
     // try {
-    final product = await _iProductRepository.getProduct();
+    final product = await _iProductRepository.getProduct(
+        mode: mode, page: page, limit: limit);
+    if (product != []) {
+      state = ProductState.data(product: product);
+    } else {
+      state = const ProductState.error('Gagal');
+    }
+    // } catch (e) {
+    // }
+    // state = const ProductState.initial();
+  }
+
+  Future<void> getProductNew({
+    String mode = "",
+    String page = "1",
+    String limit = "10",
+  }) async {
+    // _productFieldState = _productFieldState.copyWith();
+    state = const ProductState.loading();
+    // try {
+    final product = await _iProductRepository.getProduct(
+        mode: mode, page: page, limit: limit);
     if (product != []) {
       state = ProductState.data(product: product);
     } else {

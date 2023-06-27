@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
@@ -11,9 +10,10 @@ import 'package:planet_gadget/presentation/pages/article/article_page.dart';
 import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../application/product/best/product_best_notiifer.dart';
+import '../../../application/product/new/product_new_notiifer.dart';
 import '../../../application/product/product_notifier.dart';
 import '../../../library/color.dart';
-import '../../../library/decoration.dart';
 import '../../../utils/constants/path.dart';
 import '../../../utils/constants/url.dart';
 import '../best_selling_product/best_selling_product_page.dart';
@@ -44,7 +44,11 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final productState = ref.watch(productNotifier);
+    final productNewState = ref.watch(productNewNotifier);
+    final productBestState = ref.watch(productBestNotifier);
     final productStateNotifier = ref.read(productNotifier.notifier);
+    final productNewStateNotifier = ref.read(productNewNotifier.notifier);
+    final productBestStateNotifier = ref.read(productBestNotifier.notifier);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -367,31 +371,32 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           const SizedBox(height: 16),
                           SizedBox(
                             height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) =>
-                                  productState.when(
-                                      initial: () => loadingWidget,
-                                      loading: () => loadingWidget,
-                                      error: (error) => Text(error ?? "Error"),
-                                      data: (product) {
-                                        final item = product.first[index];
-                                        return cardProduct(
-                                            imageName: "$baseUrl${item.url}",
-                                            price: convertToIdr(
-                                                nominal: "12999000"),
-                                            productName: item.name,
-                                            onClick: () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const ProductPage())));
-                                      }),
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
+                            child: productState.when(
+                              initial: () => const SizedBox(),
+                              loading: () => loadingWidget,
+                              data: (product) => ListView.separated(
+                                padding: const EdgeInsets.only(
+                                    right: 20, bottom: 32),
+                                scrollDirection: Axis.horizontal,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(width: 8),
+                                itemCount: product.first.length,
+                                itemBuilder: (context, index) {
+                                  final item = product.first[index];
+                                  return cardProduct(
+                                    imageName: "$baseUrl${item.url}",
+                                    price: convertToIdr(nominal: "12999000"),
+                                    productName: item.name,
+                                    onClick: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ProductPage()),
+                                    ),
+                                  );
+                                },
+                              ),
+                              error: (error) => Text(error ?? "Error"),
                             ),
                           ),
                           Padding(
@@ -414,28 +419,33 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           const SizedBox(height: 16),
                           SizedBox(
                             height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "http://mcstaging.planetgadget.store/rest/V1/products/100ar001-lc-armband-ss-note-3",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const NewProductPage()));
-                                    });
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
-                            ),
+                            child: productNewState.when(
+                                initial: () => const SizedBox(),
+                                loading: () => loadingWidget,
+                                data: (productNew) => ListView.separated(
+                                      padding: const EdgeInsets.only(
+                                          right: 20, bottom: 32),
+                                      scrollDirection: Axis.horizontal,
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(width: 8),
+                                      itemCount: productNew.first.length,
+                                      itemBuilder: (context, index) {
+                                        final item = productNew.first[index];
+                                        return cardProduct(
+                                          imageName: "$baseUrl${item.url}",
+                                          price:
+                                              convertToIdr(nominal: "12999000"),
+                                          productName: item.name,
+                                          onClick: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ProductPage()),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                error: (error) => Text(error ?? "Error")),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 20),
@@ -458,28 +468,33 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           const SizedBox(height: 16),
                           SizedBox(
                             height: 251,
-                            child: ListView.separated(
-                              padding:
-                                  const EdgeInsets.only(right: 20, bottom: 32),
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return cardProduct(
-                                    imageName:
-                                        "http://mcstaging.planetgadget.store/rest/V1/products/100ar001-lc-armband-ss-note-3",
-                                    price: convertToIdr(nominal: "12999000"),
-                                    productName: "Apple Iphone 12 128Gb",
-                                    onClick: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ProductPage()));
-                                    });
-                              },
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 8),
-                              itemCount: 5,
-                            ),
+                            child: productBestState.when(
+                                initial: () => const SizedBox(),
+                                loading: () => loadingWidget,
+                                data: (productBest) => ListView.separated(
+                                      padding: const EdgeInsets.only(
+                                          right: 20, bottom: 32),
+                                      scrollDirection: Axis.horizontal,
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(width: 8),
+                                      itemCount: productBest.first.length,
+                                      itemBuilder: (context, index) {
+                                        final item = productBest.first[index];
+                                        return cardProduct(
+                                          imageName: "$baseUrl${item.url}",
+                                          price:
+                                              convertToIdr(nominal: "12999000"),
+                                          productName: item.name,
+                                          onClick: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ProductPage()),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                error: (error) => Text(error ?? "Error")),
                           ),
                         ],
                       ),

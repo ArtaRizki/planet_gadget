@@ -1,1 +1,1 @@
-String baseUrl = "http://mcstaging.planetgadget.store/rest/V1/";
+String baseUrl = "http://www.planetgadget.store/rest/V1/";

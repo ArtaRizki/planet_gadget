@@ -33,8 +33,8 @@ class DioClient<T> {
   bool _isDialogOpen = false;
   BaseOptions baseOptions = BaseOptions(
       baseUrl: kReleaseMode
-          ? "http://mcstaging.planetgadget.store/rest/V1/api"
-          : "http://mcstaging.planetgadget.store/rest/V1/api",
+          ? "http://www.planetgadget.store/rest/V1/api"
+          : "http://www.planetgadget.store/rest/V1/api",
       connectTimeout: const Duration(milliseconds: 30000),
       sendTimeout: const Duration(milliseconds: 30000),
       receiveTimeout: const Duration(milliseconds: 30000));

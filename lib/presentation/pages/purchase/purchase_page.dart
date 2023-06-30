@@ -13,13 +13,15 @@ import '../../core/appbar_widget.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PurchasePage extends StatefulWidget {
-  const PurchasePage({super.key});
+  const PurchasePage({super.key, required this.initialIndex});
+  final int initialIndex;
 
   @override
   State<PurchasePage> createState() => _PurchasePageState();
 }
 
-class _PurchasePageState extends State<PurchasePage> {
+class _PurchasePageState extends State<PurchasePage>
+    with TickerProviderStateMixin {
   TextEditingController reviewC = TextEditingController();
   String reviewValue = "";
   List reviewResult = [];
@@ -29,98 +31,103 @@ class _PurchasePageState extends State<PurchasePage> {
   DraggableScrollableController receivedC = DraggableScrollableController();
   DraggableScrollableController thankyouC = DraggableScrollableController();
   DraggableScrollableController rateReviewC = DraggableScrollableController();
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(
+        initialIndex: widget.initialIndex, length: 6, vsync: this);
+    tabController.addListener(() {
+      setState(() => index = tabController.index);
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
       child: DefaultTabController(
         length: 6,
-        child: Builder(builder: (context) {
-          final TabController tabController = DefaultTabController.of(context);
-          tabController.addListener(() {
-            setState(() => index = tabController.index);
-          });
-          return Scaffold(
-            appBar: appBarWidget(title: "My Purchases", context: context),
-            backgroundColor: white,
-            body: GestureDetector(
-              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-              child: RefreshIndicator(
-                onRefresh: () {
-                  return refresh();
-                },
-                child: Column(
-                  children: <Widget>[
-                    DecoratedBox(
-                      decoration: BoxDecoration(
-                          color: white,
-                          border: Border(
-                              bottom:
-                                  BorderSide(color: secondaryBlue, width: 5))),
-                      child: TabBar(
-                        controller: tabController,
-                        isScrollable: true,
-                        labelColor: black,
-                        indicatorColor: activeBgColor,
-                        indicatorWeight: 5,
-                        unselectedLabelColor: black,
-                        tabs: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Text("To Pay",
-                                textAlign: TextAlign.center,
-                                style: index == 0
-                                    ? inter14Bold()
-                                    : inter14Medium()),
-                          ),
-                          Text("Packing",
+        child: Scaffold(
+          appBar: appBarWidget(title: "My Purchases", context: context),
+          backgroundColor: white,
+          body: GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: RefreshIndicator(
+              onRefresh: () {
+                return refresh();
+              },
+              child: Column(
+                children: <Widget>[
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                        color: white,
+                        border: Border(
+                            bottom:
+                                BorderSide(color: secondaryBlue, width: 5))),
+                    child: TabBar(
+                      controller: tabController,
+                      isScrollable: true,
+                      labelColor: black,
+                      indicatorColor: activeBgColor,
+                      indicatorWeight: 5,
+                      unselectedLabelColor: black,
+                      tabs: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text("To Pay",
                               textAlign: TextAlign.center,
                               style:
-                                  index == 1 ? inter14Bold() : inter14Medium()),
-                          Text("Delivery",
-                              textAlign: TextAlign.center,
-                              style:
-                                  index == 2 ? inter14Bold() : inter14Medium()),
-                          Text("Arrived",
-                              textAlign: TextAlign.center,
-                              style:
-                                  index == 3 ? inter14Bold() : inter14Medium()),
-                          Text("Completed",
-                              textAlign: TextAlign.center,
-                              style:
-                                  index == 4 ? inter14Bold() : inter14Medium()),
-                          Text("Cancelled",
-                              textAlign: TextAlign.center,
-                              style:
-                                  index == 5 ? inter14Bold() : inter14Medium()),
-                        ],
-                      ),
+                                  index == 0 ? inter14Bold() : inter14Medium()),
+                        ),
+                        Text("Packing",
+                            textAlign: TextAlign.center,
+                            style:
+                                index == 1 ? inter14Bold() : inter14Medium()),
+                        Text("Delivery",
+                            textAlign: TextAlign.center,
+                            style:
+                                index == 2 ? inter14Bold() : inter14Medium()),
+                        Text("Arrived",
+                            textAlign: TextAlign.center,
+                            style:
+                                index == 3 ? inter14Bold() : inter14Medium()),
+                        Text("Completed",
+                            textAlign: TextAlign.center,
+                            style:
+                                index == 4 ? inter14Bold() : inter14Medium()),
+                        Text("Cancelled",
+                            textAlign: TextAlign.center,
+                            style:
+                                index == 5 ? inter14Bold() : inter14Medium()),
+                      ],
                     ),
-                    Expanded(
-                      child: TabBarView(
-                        controller: tabController,
-                        children: <Widget>[
-                          productTabbarView(
-                              productTabbarItem: productToPayItem()),
-                          productTabbarView(
-                              productTabbarItem: productPackingItem()),
-                          productTabbarView(
-                              productTabbarItem: productDeliveryItem()),
-                          productTabbarView(
-                              productTabbarItem: productArrivedItem()),
-                          productTabbarView(
-                              productTabbarItem: productCompletedItem()),
-                          productTabbarView(
-                              productTabbarItem: productCancelledItem()),
-                        ],
-                      ),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: tabController,
+                      children: <Widget>[
+                        productTabbarView(
+                            productTabbarItem: productToPayItem()),
+                        productTabbarView(
+                            productTabbarItem: productPackingItem()),
+                        productTabbarView(
+                            productTabbarItem: productDeliveryItem()),
+                        productTabbarView(
+                            productTabbarItem: productArrivedItem()),
+                        productTabbarView(
+                            productTabbarItem: productCompletedItem()),
+                        productTabbarView(
+                            productTabbarItem: productCancelledItem()),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-          );
-        }),
+          ),
+        ),
       ),
     );
   }
@@ -231,8 +238,8 @@ class _PurchasePageState extends State<PurchasePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PurchasePage())),
+          // onTap: () => Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => const PurchasePage())),
           child: Row(
             children: [
               Expanded(
@@ -408,8 +415,8 @@ class _PurchasePageState extends State<PurchasePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PurchasePage())),
+          // onTap: () => Navigator.push(
+          //     context, MaterialPageRoute(builder: (context) => PurchasePage())),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
@@ -689,8 +696,8 @@ class _PurchasePageState extends State<PurchasePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PurchasePage())),
+          // onTap: () => Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => const PurchasePage())),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(

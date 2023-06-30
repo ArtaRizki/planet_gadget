@@ -8,7 +8,8 @@ appBarWidget(
     {required String title,
     required BuildContext context,
     PreferredSizeWidget? bottom,
-    double height = 0}) {
+    double height = 0,
+    bool back = true}) {
   return PreferredSize(
     preferredSize: Size.fromHeight(kToolbarHeight + height),
     child: AppBar(
@@ -17,18 +18,20 @@ appBarWidget(
       elevation: 0,
       backgroundColor: white,
       foregroundColor: black,
-      titleSpacing: 0,
-      leading: InkWell(
-        onTap: () => Navigator.pop(context),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Icon(
-            Icons.navigate_before,
-            color: black,
-            size: 32,
-          ),
-        ),
-      ),
+      titleSpacing: back ? 0 : 20,
+      leading: back
+          ? InkWell(
+              onTap: () => Navigator.pop(context),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Icon(
+                  Icons.navigate_before,
+                  color: black,
+                  size: 32,
+                ),
+              ),
+            )
+          : null,
       title: Text(title, style: inter20Bold()),
     ),
   );

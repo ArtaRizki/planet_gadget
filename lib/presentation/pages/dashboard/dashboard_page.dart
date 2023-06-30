@@ -418,7 +418,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                const ChoiceForYouPage())),
+                                                const NewProductPage())),
                                     child: Text("See More",
                                         style: inter12MediumBlack())),
                               ],
@@ -608,11 +608,10 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           ],
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              flex: 8,
+              flex: 9,
               child: SizedBox(
                 width: 131,
                 // height: 145,
@@ -623,12 +622,16 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
               ),
             ),
             const SizedBox(height: 8),
-            Flexible(
-                flex: 2,
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.centerLeft,
                 child: Text(productName,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: inter12MediumBlack())),
+                    style: inter12MediumBlack()),
+              ),
+            ),
             const SizedBox(height: 4),
             Text(price, style: inter14Bold()),
           ],

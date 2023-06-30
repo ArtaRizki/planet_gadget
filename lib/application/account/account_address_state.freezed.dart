@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AccountAddressState {
+  String get label => throw _privateConstructorUsedError;
   TextFieldModel get recipient => throw _privateConstructorUsedError;
   TextFieldModel get phoneNumber => throw _privateConstructorUsedError;
   TextFieldModel get address => throw _privateConstructorUsedError;
@@ -32,7 +33,8 @@ abstract class $AccountAddressStateCopyWith<$Res> {
       _$AccountAddressStateCopyWithImpl<$Res, AccountAddressState>;
   @useResult
   $Res call(
-      {TextFieldModel recipient,
+      {String label,
+      TextFieldModel recipient,
       TextFieldModel phoneNumber,
       TextFieldModel address});
 
@@ -54,11 +56,16 @@ class _$AccountAddressStateCopyWithImpl<$Res, $Val extends AccountAddressState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? label = null,
     Object? recipient = null,
     Object? phoneNumber = null,
     Object? address = null,
   }) {
     return _then(_value.copyWith(
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
       recipient: null == recipient
           ? _value.recipient
           : recipient // ignore: cast_nullable_to_non_nullable
@@ -108,7 +115,8 @@ abstract class _$$_AccountAddressStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {TextFieldModel recipient,
+      {String label,
+      TextFieldModel recipient,
       TextFieldModel phoneNumber,
       TextFieldModel address});
 
@@ -131,11 +139,16 @@ class __$$_AccountAddressStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? label = null,
     Object? recipient = null,
     Object? phoneNumber = null,
     Object? address = null,
   }) {
     return _then(_$_AccountAddressState(
+      label: null == label
+          ? _value.label
+          : label // ignore: cast_nullable_to_non_nullable
+              as String,
       recipient: null == recipient
           ? _value.recipient
           : recipient // ignore: cast_nullable_to_non_nullable
@@ -156,10 +169,13 @@ class __$$_AccountAddressStateCopyWithImpl<$Res>
 
 class _$_AccountAddressState implements _AccountAddressState {
   _$_AccountAddressState(
-      {required this.recipient,
+      {required this.label,
+      required this.recipient,
       required this.phoneNumber,
       required this.address});
 
+  @override
+  final String label;
   @override
   final TextFieldModel recipient;
   @override
@@ -169,7 +185,7 @@ class _$_AccountAddressState implements _AccountAddressState {
 
   @override
   String toString() {
-    return 'AccountAddressState(recipient: $recipient, phoneNumber: $phoneNumber, address: $address)';
+    return 'AccountAddressState(label: $label, recipient: $recipient, phoneNumber: $phoneNumber, address: $address)';
   }
 
   @override
@@ -177,6 +193,7 @@ class _$_AccountAddressState implements _AccountAddressState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AccountAddressState &&
+            (identical(other.label, label) || other.label == label) &&
             (identical(other.recipient, recipient) ||
                 other.recipient == recipient) &&
             (identical(other.phoneNumber, phoneNumber) ||
@@ -185,7 +202,8 @@ class _$_AccountAddressState implements _AccountAddressState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, recipient, phoneNumber, address);
+  int get hashCode =>
+      Object.hash(runtimeType, label, recipient, phoneNumber, address);
 
   @JsonKey(ignore: true)
   @override
@@ -197,10 +215,13 @@ class _$_AccountAddressState implements _AccountAddressState {
 
 abstract class _AccountAddressState implements AccountAddressState {
   factory _AccountAddressState(
-      {required final TextFieldModel recipient,
+      {required final String label,
+      required final TextFieldModel recipient,
       required final TextFieldModel phoneNumber,
       required final TextFieldModel address}) = _$_AccountAddressState;
 
+  @override
+  String get label;
   @override
   TextFieldModel get recipient;
   @override

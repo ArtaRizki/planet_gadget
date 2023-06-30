@@ -29,6 +29,14 @@ class _BestSeliingProductPageState extends State<BestSeliingProductPage> {
   String priceLowErrorText = "";
   String priceHighErrorText = "";
   bool agree = false;
+
+  int total = 0;
+  add() => setState(() => total++);
+  min() => setState(() {
+        if (total > 0) {
+          total--;
+        }
+      });
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -287,32 +295,49 @@ class _BestSeliingProductPageState extends State<BestSeliingProductPage> {
                     children: <Widget>[
                       Expanded(
                         flex: 3,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: disabledBgColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
+                        child: InkWell(
+                          onTap: min,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: activeBgColor,
+                              // color: disabledBgColor,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                bottomLeft: Radius.circular(8),
+                              ),
+                            ),
+                            child: SvgPicture.asset(
+                              "${iconsPath}minus.svg",
+                              color: white,
+                              // color: disabledTextColor,
                             ),
                           ),
-                          child: SvgPicture.asset("${iconsPath}minus.svg",
-                              color: disabledTextColor),
                         ),
                       ),
                       Expanded(
                         flex: 4,
                         child: Text(
-                          "1",
+                          "$total",
                           style: inter14MediumBlack2(),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         flex: 3,
-                        child: Container(
-                          color: activeBgColor,
-                          child: SvgPicture.asset("${iconsPath}plus.svg",
-                              color: black),
+                        child: InkWell(
+                          onTap: add,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: activeBgColor,
+                              // color: disabledBgColor,
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                              ),
+                            ),
+                            child: SvgPicture.asset("${iconsPath}plus.svg",
+                                color: white),
+                          ),
                         ),
                       ),
                     ],
@@ -738,7 +763,10 @@ class _BestSeliingProductPageState extends State<BestSeliingProductPage> {
         onPressed: onClick,
         child: Text(
           name,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+          style: TextStyle(
+              color: outlineColor == null ? white : black,
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

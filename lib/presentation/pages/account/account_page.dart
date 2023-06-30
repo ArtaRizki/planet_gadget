@@ -4,10 +4,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:planet_gadget/application/account/account_address_state.dart';
 import 'package:planet_gadget/library/textstyle.dart';
+import 'package:planet_gadget/main.dart';
 import 'package:planet_gadget/presentation/pages/account/setting_account_page.dart';
+import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../application/account/account_address_notifier.dart';
+import '../../../domain/entity/core/address_model.dart';
 import '../../../library/color.dart';
 import '../../../library/toast.dart';
 import '../../../utils/constants/path.dart';
@@ -39,11 +42,26 @@ class _AccountPageState extends State<AccountPage> {
       DraggableScrollableController();
   bool redeem = false;
   bool address1 = false;
-  String address1Value = "Address 1";
+  String address1Value = "Yoshua";
   String address2Value = "Address 2";
+  String payment1Value = "Transfer Bank";
   TextEditingController searchC = TextEditingController();
   String searchValue = "";
   List searchResult = [];
+  bool home = true;
+
+  List<String> paymentList = ["Transfer Bank", "Gopay"];
+  List<String> paymentFileList = ["bank_transfer2.png", "gopay.png"];
+
+  List<AddressModel> addressList = [
+    const AddressModel(
+      label: "Home",
+      name: "Yoshua",
+      phoneNumber: "0822334449460",
+      completeAddress: """Green Mansion Juanda 2 Safir J-05,
+        Sidoarjo, Jawa Timur""",
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,18 +90,19 @@ class _AccountPageState extends State<AccountPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Expanded(
-                            flex: 1,
-                            child: InkWell(
-                              onTap: () => Navigator.pop(context),
-                              child: Icon(
-                                Icons.navigate_before,
-                                color: white,
-                                size: 32,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 16),
+                          // Expanded(
+                          //   flex: 1,
+                          //   child: InkWell(
+                          //     onTap: null,
+                          //     // onTap: () => Navigator.pop(context),
+                          //     child: Icon(
+                          //       Icons.navigate_before,
+                          //       color: white,
+                          //       size: 32,
+                          //     ),
+                          //   ),
+                          // ),
+                          // const SizedBox(width: 16),
                           Expanded(
                               flex: 8,
                               child:
@@ -94,7 +113,8 @@ class _AccountPageState extends State<AccountPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
                                 InkWell(
-                                  onTap: () => Navigator.pop(context),
+                                  onTap: () => routes.navigateTo(context,
+                                      page: ShoppingCartPage()),
                                   child: SvgPicture.asset(
                                     '${iconsAccountPath}shopping-cart_white.svg',
                                     width: 24,
@@ -151,7 +171,8 @@ class _AccountPageState extends State<AccountPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const PurchasePage())),
+                                            const PurchasePage(
+                                                initialIndex: 0))),
                                 child: Row(
                                   children: [
                                     Text("Purchase history",
@@ -170,11 +191,30 @@ class _AccountPageState extends State<AccountPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              iconBox(name: "To Pay", iconName: "to_pay.svg"),
-                              iconBox(name: "Packing", iconName: "packing.svg"),
                               iconBox(
-                                  name: "Delivery", iconName: "delivery.svg"),
-                              iconBox(name: "Arrived", iconName: "arrived.svg"),
+                                  name: "To Pay",
+                                  iconName: "to_pay.svg",
+                                  onClick: () => routes.navigateTo(context,
+                                      page:
+                                          const PurchasePage(initialIndex: 0))),
+                              iconBox(
+                                  name: "Packing",
+                                  iconName: "packing.svg",
+                                  onClick: () => routes.navigateTo(context,
+                                      page:
+                                          const PurchasePage(initialIndex: 1))),
+                              iconBox(
+                                  name: "Delivery",
+                                  iconName: "delivery.svg",
+                                  onClick: () => routes.navigateTo(context,
+                                      page:
+                                          const PurchasePage(initialIndex: 2))),
+                              iconBox(
+                                  name: "Arrived",
+                                  iconName: "arrived.svg",
+                                  onClick: () => routes.navigateTo(context,
+                                      page:
+                                          const PurchasePage(initialIndex: 3))),
                             ],
                           ),
                           const SizedBox(height: 16),
@@ -237,30 +277,33 @@ class _AccountPageState extends State<AccountPage> {
                               const SizedBox(width: 8),
                               Expanded(
                                   flex: 9,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text("Payment", style: inter14Bold()),
-                                      const SizedBox(height: 4),
-                                      Text("Set how you make payments",
-                                          style: inter12Gray5()),
-                                      const SizedBox(height: 4),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Text("Payment: ",
-                                                style: inter14BoldBlack2()),
-                                          ),
-                                          Expanded(
-                                            flex: 8,
-                                            child: Text("Gopay",
-                                                style: inter14MediumBlack2()),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                                  child: InkWell(
+                                    onTap: paymentSheet,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text("Payment", style: inter14Bold()),
+                                        const SizedBox(height: 4),
+                                        Text("Set how you make payments",
+                                            style: inter12Gray5()),
+                                        const SizedBox(height: 4),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text("Payment: ",
+                                                  style: inter14BoldBlack2()),
+                                            ),
+                                            Expanded(
+                                              flex: 8,
+                                              child: Text("Gopay",
+                                                  style: inter14MediumBlack2()),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
                                   )),
                             ],
                           ),
@@ -489,166 +532,199 @@ class _AccountPageState extends State<AccountPage> {
           builder: (BuildContext context, ScrollController scrollController) {
             return StatefulBuilder(
               builder: (context, setState) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 8),
-                        decoration:
-                            const BoxDecoration(color: Color(0xfff8faf7)),
-                        child: Column(
-                          children: <Widget>[
-                            Center(
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 8),
-                                color: activeBgColor,
-                                width: 100,
-                                height: 4,
+                return Consumer(builder: (context, ref, child) {
+                  AccountAddressState state = ref.watch(accountAddressNotifier);
+                  final editAddressNotifer =
+                      ref.watch(accountAddressNotifier.notifier);
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          decoration:
+                              const BoxDecoration(color: Color(0xfff8faf7)),
+                          child: Column(
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 8),
+                                  color: activeBgColor,
+                                  width: 100,
+                                  height: 4,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 20.0,
-                                  right: 20.0,
-                                  top: 24.0,
-                                  bottom: 12.0),
-                              child: Row(
-                                children: [
-                                  /// Bottom sheet title text
-                                  Expanded(
-                                      flex: 5,
-                                      child: Text("Add Address",
-                                          style: inter28Bold())),
-                                  Expanded(
-                                      flex: 5,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          InkWell(
-                                            onTap: closeConfirmAddAddressSheet,
-                                            child: const Icon(Icons.close),
-                                          ),
-                                        ],
-                                      )),
-                                ],
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0,
+                                    right: 20.0,
+                                    top: 24.0,
+                                    bottom: 12.0),
+                                child: Row(
+                                  children: [
+                                    /// Bottom sheet title text
+                                    Expanded(
+                                        flex: 5,
+                                        child: Text("Add Address",
+                                            style: inter28Bold())),
+                                    Expanded(
+                                        flex: 5,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            InkWell(
+                                              onTap:
+                                                  closeConfirmAddAddressSheet,
+                                              child: const Icon(Icons.close),
+                                            ),
+                                          ],
+                                        )),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
 
-                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-                      Expanded(
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            AccountAddressState state =
-                                ref.watch(accountAddressNotifier);
-                            final editAddressNotifer =
-                                ref.watch(accountAddressNotifier.notifier);
-                            return ListView(
-                              controller: scrollController,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    children: [
-                                      Text("Address Labels",
-                                          style: inter14Medium()),
-                                      Text("*", style: inter14MediumRed()),
-                                    ],
-                                  ),
+                        /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                        Expanded(
+                          child: ListView(
+                            controller: scrollController,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Text("Address Labels",
+                                        style: inter14Medium()),
+                                    Text("*", style: inter14MediumRed()),
+                                  ],
                                 ),
-                                const SizedBox(height: 8),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    children: [
-                                      addressLabel(title: "Home", value: true),
-                                      const SizedBox(width: 12),
-                                      addressLabel(
-                                          title: "Office", value: false),
-                                    ],
-                                  ),
+                              ),
+                              const SizedBox(height: 8),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    addressLabel(
+                                        title: "Home",
+                                        value: home,
+                                        onClick: () =>
+                                            setState(() => home = true)),
+                                    const SizedBox(width: 12),
+                                    addressLabel(
+                                        title: "Office",
+                                        value: !home,
+                                        onClick: () =>
+                                            setState(() => home = false)),
+                                  ],
                                 ),
-                                const SizedBox(height: 12),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Recipient's Name",
-                                  hint: "Recipient's Name",
-                                  controller: recipientC,
-                                  error: state.recipient.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        recipient: state.recipient
-                                            .copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.recipient.value,
-                                        fieldEmpty: state.recipient.isEmpty,
-                                        fieldErrorMsg:
-                                            state.recipient.errorMessage,
-                                        errorMsg: "Nama Recepient harus diisi",
-                                        type: "recipient");
-                                  },
-                                ),
-                                // const SizedBox(height: 16),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Mobile Phone Number",
-                                  hint: "Mobile Phone Number",
-                                  controller: phoneNumberC,
-                                  error: state.phoneNumber.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        phoneNumber: state.phoneNumber
-                                            .copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.phoneNumber.value,
-                                        fieldEmpty: state.phoneNumber.isEmpty,
-                                        fieldErrorMsg:
-                                            state.phoneNumber.errorMessage,
-                                        errorMsg: "Nomor HP harus diisi",
-                                        type: "phoneNumber");
-                                  },
-                                ),
-                                // const SizedBox(height: 16),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Complete Address",
-                                  hint: "Complete Address",
-                                  controller: addressC,
-                                  error: state.address.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        address:
-                                            state.address.copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.address.value,
-                                        fieldEmpty: state.address.isEmpty,
-                                        fieldErrorMsg:
-                                            state.address.errorMessage,
-                                        errorMsg: "Alamat harus diisi",
-                                        type: "address");
-                                  },
-                                )
-                              ],
-                            );
-                          },
+                              ),
+                              const SizedBox(height: 12),
+                              fieldAddress(
+                                required: true,
+                                name: "Recipient's Name",
+                                hint: "Recipient's Name",
+                                controller: recipientC,
+                                error: state.recipient.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      recipient:
+                                          state.recipient.copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.recipient.value,
+                                      fieldEmpty: state.recipient.isEmpty,
+                                      fieldErrorMsg:
+                                          state.recipient.errorMessage,
+                                      errorMsg: "Nama Recepient harus diisi",
+                                      type: "recipient");
+                                },
+                              ),
+                              // const SizedBox(height: 16),
+                              fieldAddress(
+                                required: true,
+                                name: "Mobile Phone Number",
+                                hint: "Mobile Phone Number",
+                                controller: phoneNumberC,
+                                error: state.phoneNumber.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      phoneNumber: state.phoneNumber
+                                          .copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.phoneNumber.value,
+                                      fieldEmpty: state.phoneNumber.isEmpty,
+                                      fieldErrorMsg:
+                                          state.phoneNumber.errorMessage,
+                                      errorMsg: "Nomor HP harus diisi",
+                                      type: "phoneNumber");
+                                },
+                              ),
+                              // const SizedBox(height: 16),
+                              fieldAddress(
+                                required: true,
+                                name: "Complete Address",
+                                hint: "Complete Address",
+                                controller: addressC,
+                                error: state.address.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      address:
+                                          state.address.copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.address.value,
+                                      fieldEmpty: state.address.isEmpty,
+                                      fieldErrorMsg: state.address.errorMessage,
+                                      errorMsg: "Alamat harus diisi",
+                                      type: "address");
+                                },
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      afterChangeButton(
-                          name: "Save",
-                          onClick: () {
-                            showToast("Data saved successfully", context);
-                            Navigator.pop(context);
-                          }),
-                    ],
-                  ),
-                );
+                        afterChangeButton(
+                            name: "Save",
+                            onClick: () {
+                              editAddressNotifer.checkField(
+                                  val: state.recipient.value,
+                                  fieldEmpty: state.recipient.isEmpty,
+                                  fieldErrorMsg: state.recipient.errorMessage,
+                                  errorMsg: "Nama Recepient harus diisi",
+                                  type: "recipient");
+                              editAddressNotifer.checkField(
+                                  val: state.phoneNumber.value,
+                                  fieldEmpty: state.phoneNumber.isEmpty,
+                                  fieldErrorMsg: state.phoneNumber.errorMessage,
+                                  errorMsg: "Nomor HP harus diisi",
+                                  type: "phoneNumber");
+                              editAddressNotifer.checkField(
+                                  val: state.address.value,
+                                  fieldEmpty: state.address.isEmpty,
+                                  fieldErrorMsg: state.address.errorMessage,
+                                  errorMsg: "Alamat harus diisi",
+                                  type: "address");
+                              if (state.recipient.value != "" &&
+                                  state.phoneNumber.value != "" &&
+                                  state.address.value != "") {
+                                addressList.add(AddressModel(
+                                    label: state.label,
+                                    name: state.recipient.value,
+                                    phoneNumber: state.phoneNumber.value,
+                                    completeAddress: state.address.value));
+                                setState;
+                                showToast("Data saved successfully", context);
+                                Navigator.pop(context);
+                                Navigator.pop(context);
+                              }
+                            }),
+                      ],
+                    ),
+                  );
+                });
               },
             );
           },
@@ -727,46 +803,27 @@ class _AccountPageState extends State<AccountPage> {
                           padding: const EdgeInsets.all(20),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            if (index == 1) {
-                              return InkWell(
-                                onTap: addAddressSheet,
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 12),
-                                  decoration: BoxDecoration(
-                                    color: secondaryBlue,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      const SizedBox(height: 8),
-                                      SvgPicture.asset(
-                                          "${iconsCheckoutPath}add_address.svg"),
-                                      const SizedBox(height: 16),
-                                      Text("Add Address",
-                                          style: inter14Medium()),
-                                    ],
-                                  ),
-                                ),
-                              );
+                            if (index != addressList.length) {
+                              final item = addressList[index];
+                              return addressBox(
+                                  value: item.name,
+                                  groupValue: address1Value,
+                                  addressName: item.label,
+                                  name: item.name,
+                                  phone: item.phoneNumber,
+                                  address: item.completeAddress,
+                                  index: index);
                             }
-                            return addressBox(
-                              value: address1Value,
-                              groupValue: address1Value,
-                              addressName: "Office/Home",
-                              name: "Yoshua",
-                              phone: "0822334449460",
-                              address:
-                                  "Green Mansion Juanda 2 Safir J-05, Sidoarjo, Jawa Timur",
-                            );
+                            return addAddress();
                           },
                           separatorBuilder: (context, index) =>
                               const SizedBox(width: 8),
-                          itemCount: 2,
+                          itemCount: addressList.length + 1,
                         ),
                       ),
                     ),
-                    afterChangeButton(name: "Apply"),
+                    afterChangeButton(
+                        name: "Apply", onClick: () => Navigator.pop(context)),
                   ],
                 );
               },
@@ -777,28 +834,28 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  editAddressSheet() {
+  void paymentSheet() {
     showModalBottomSheet(
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
-      ),
-      context: context,
-      builder: (context) {
-        return DraggableScrollableSheet(
-          controller: editAddressC,
-          initialChildSize: 0.82,
-          minChildSize: 0.82,
-          maxChildSize: 0.96,
-          expand: false,
-          snap: true,
-          builder: (BuildContext context, ScrollController scrollController) {
-            return StatefulBuilder(
-              builder: (context, setState) {
-                return Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: Column(
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+        ),
+        context: context,
+        builder: (context) {
+          return DraggableScrollableSheet(
+            controller: dragC,
+            // initialChildSize: iconItems != null && (0.109 * iconItems!.length) < 1
+            //     ? 0.109 * iconItems!.length
+            //     : 0.96,
+            initialChildSize: 0.45,
+            minChildSize: 0.45,
+            maxChildSize: 0.96,
+            expand: false,
+            snap: true,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return Column(
                     children: <Widget>[
                       Container(
                         margin: const EdgeInsets.only(bottom: 8),
@@ -821,20 +878,169 @@ class _AccountPageState extends State<AccountPage> {
                                   top: 24.0,
                                   bottom: 12.0),
                               child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   /// Bottom sheet title text
                                   Expanded(
-                                      flex: 5,
-                                      child: Text("Edit Address",
+                                      child: Text("Payment List",
                                           style: inter28Bold())),
-                                  Expanded(
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: InkWell(
+                                      onTap: () {
+                                        FocusScope.of(context).unfocus();
+                                        Navigator.of(context).pop(null);
+                                      },
+                                      child: const Icon(Icons.close),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 8),
+                          // shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return paymentBox(
+                                borderRadius: 12,
+                                width: 178,
+                                imagePath: paymentFileList[index],
+                                groupValue: payment1Value,
+                                value: paymentList[index]);
+                          },
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 12),
+                          itemCount: paymentList.length,
+                        ),
+                      ),
+                      afterChangeButton(
+                          name: "Apply", onClick: () => Navigator.pop(context)),
+                    ],
+                  );
+                },
+              );
+            },
+          );
+        });
+  }
+
+  Widget paymentBox({
+    required double borderRadius,
+    double? height,
+    double? width,
+    required String imagePath,
+    required String? groupValue,
+    required String value,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      height: height,
+      width: width,
+      decoration: BoxDecoration(
+        color: secondaryBlue,
+        borderRadius: BorderRadius.circular(borderRadius),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Radio(
+              fillColor: MaterialStateProperty.all(primaryBlue),
+              groupValue: groupValue,
+              value: value,
+              onChanged: (val) => setState(() => groupValue = val.toString()),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 9,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(value, style: inter14Bold()),
+                const SizedBox(height: 4),
+                Image.asset("$iconsCheckoutPath$imagePath"),
+                const SizedBox(height: 4),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  editAddressSheet({required int index}) {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+      ),
+      context: context,
+      builder: (context) {
+        return DraggableScrollableSheet(
+          controller: editAddressC,
+          initialChildSize: 0.82,
+          minChildSize: 0.82,
+          maxChildSize: 0.96,
+          expand: false,
+          snap: true,
+          builder: (BuildContext context, ScrollController scrollController) {
+            return StatefulBuilder(
+              builder: (context, setState) {
+                return Consumer(builder: (context, ref, child) {
+                  AccountAddressState state = ref.watch(accountAddressNotifier);
+                  final editAddressNotifer =
+                      ref.watch(accountAddressNotifier.notifier);
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        bottom: MediaQuery.of(context).viewInsets.bottom),
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 8),
+                          decoration:
+                              const BoxDecoration(color: Color(0xfff8faf7)),
+                          child: Column(
+                            children: <Widget>[
+                              Center(
+                                child: Container(
+                                  margin: const EdgeInsets.only(top: 8),
+                                  color: activeBgColor,
+                                  width: 100,
+                                  height: 4,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 20.0,
+                                    right: 20.0,
+                                    top: 24.0,
+                                    bottom: 12.0),
+                                child: Row(
+                                  children: [
+                                    /// Bottom sheet title text
+                                    Expanded(
+                                        flex: 5,
+                                        child: Text("Edit Address",
+                                            style: inter28Bold())),
+                                    Expanded(
                                       flex: 5,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: [
                                           InkWell(
-                                            onTap: deleteConfirmAddressSheet,
+                                            onTap: () =>
+                                                deleteConfirmAddressSheet(
+                                                    index: index),
                                             child: SvgPicture.asset(
                                                 "${iconsPath}trash.svg",
                                                 color: red),
@@ -845,119 +1051,144 @@ class _AccountPageState extends State<AccountPage> {
                                             child: const Icon(Icons.close),
                                           )
                                         ],
-                                      )),
-                                ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
 
-                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-                      Expanded(
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            AccountAddressState state =
-                                ref.watch(accountAddressNotifier);
-                            final editAddressNotifer =
-                                ref.watch(accountAddressNotifier.notifier);
-                            return ListView(
-                              controller: scrollController,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    children: [
-                                      Text("Address Labels",
-                                          style: inter14Medium()),
-                                      Text("*", style: inter14MediumRed()),
-                                    ],
-                                  ),
+                        /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                        Expanded(
+                          child: ListView(
+                            controller: scrollController,
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    Text("Address Labels",
+                                        style: inter14Medium()),
+                                    Text("*", style: inter14MediumRed()),
+                                  ],
                                 ),
-                                const SizedBox(height: 8),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  child: Row(
-                                    children: [
-                                      addressLabel(title: "Home", value: true),
-                                      const SizedBox(width: 12),
-                                      addressLabel(
-                                          title: "Office", value: false),
-                                    ],
-                                  ),
+                              ),
+                              const SizedBox(height: 8),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Row(
+                                  children: [
+                                    addressLabel(
+                                        title: "Home",
+                                        value: home,
+                                        onClick: () =>
+                                            setState(() => home = true)),
+                                    const SizedBox(width: 12),
+                                    addressLabel(
+                                        title: "Office",
+                                        value: !home,
+                                        onClick: () =>
+                                            setState(() => home = false)),
+                                  ],
                                 ),
-                                const SizedBox(height: 12),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Recipient's Name",
-                                  hint: "Recipient's Name",
-                                  controller: recipientC,
-                                  error: state.recipient.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        recipient: state.recipient
-                                            .copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.recipient.value,
-                                        fieldEmpty: state.recipient.isEmpty,
-                                        fieldErrorMsg:
-                                            state.recipient.errorMessage,
-                                        errorMsg: "Nama Recepient harus diisi",
-                                        type: "recipient");
-                                  },
-                                ),
-                                // const SizedBox(height: 16),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Mobile Phone Number",
-                                  hint: "Mobile Phone Number",
-                                  controller: phoneNumberC,
-                                  error: state.phoneNumber.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        phoneNumber: state.phoneNumber
-                                            .copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.phoneNumber.value,
-                                        fieldEmpty: state.phoneNumber.isEmpty,
-                                        fieldErrorMsg:
-                                            state.phoneNumber.errorMessage,
-                                        errorMsg: "Nomor HP harus diisi",
-                                        type: "phoneNumber");
-                                  },
-                                ),
-                                // const SizedBox(height: 16),
-                                fieldAddress(
-                                  required: true,
-                                  name: "Complete Address",
-                                  hint: "Complete Address",
-                                  controller: addressC,
-                                  error: state.address.errorMessage,
-                                  onchanged: (val) {
-                                    state = state.copyWith(
-                                        address:
-                                            state.address.copyWith(value: val));
-                                    editAddressNotifer.checkField(
-                                        val: state.address.value,
-                                        fieldEmpty: state.address.isEmpty,
-                                        fieldErrorMsg:
-                                            state.address.errorMessage,
-                                        errorMsg: "Alamat harus diisi",
-                                        type: "address");
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                              ),
+                              const SizedBox(height: 12),
+                              fieldAddress(
+                                required: true,
+                                name: "Recipient's Name",
+                                hint: "Recipient's Name",
+                                controller: recipientC,
+                                error: state.recipient.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      recipient:
+                                          state.recipient.copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.recipient.value,
+                                      fieldEmpty: state.recipient.isEmpty,
+                                      fieldErrorMsg:
+                                          state.recipient.errorMessage,
+                                      errorMsg: "Nama Recepient harus diisi",
+                                      type: "recipient");
+                                },
+                              ),
+                              // const SizedBox(height: 16),
+                              fieldAddress(
+                                required: true,
+                                name: "Mobile Phone Number",
+                                hint: "Mobile Phone Number",
+                                controller: phoneNumberC,
+                                error: state.phoneNumber.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      phoneNumber: state.phoneNumber
+                                          .copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.phoneNumber.value,
+                                      fieldEmpty: state.phoneNumber.isEmpty,
+                                      fieldErrorMsg:
+                                          state.phoneNumber.errorMessage,
+                                      errorMsg: "Nomor HP harus diisi",
+                                      type: "phoneNumber");
+                                },
+                              ),
+                              // const SizedBox(height: 16),
+                              fieldAddress(
+                                required: true,
+                                name: "Complete Address",
+                                hint: "Complete Address",
+                                controller: addressC,
+                                error: state.address.errorMessage,
+                                onchanged: (val) {
+                                  state = state.copyWith(
+                                      address:
+                                          state.address.copyWith(value: val));
+                                  editAddressNotifer.checkField(
+                                      val: state.address.value,
+                                      fieldEmpty: state.address.isEmpty,
+                                      fieldErrorMsg: state.address.errorMessage,
+                                      errorMsg: "Alamat harus diisi",
+                                      type: "address");
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      afterChangeButton(
-                          name: "Save", onClick: editConfirmAddressSheet),
-                    ],
-                  ),
-                );
+                        afterChangeButton(
+                            name: "Save",
+                            onClick: () {
+                              editAddressNotifer.checkField(
+                                  val: state.recipient.value,
+                                  fieldEmpty: state.recipient.isEmpty,
+                                  fieldErrorMsg: state.recipient.errorMessage,
+                                  errorMsg: "Nama Recepient harus diisi",
+                                  type: "recipient");
+                              editAddressNotifer.checkField(
+                                  val: state.phoneNumber.value,
+                                  fieldEmpty: state.phoneNumber.isEmpty,
+                                  fieldErrorMsg: state.phoneNumber.errorMessage,
+                                  errorMsg: "Nomor HP harus diisi",
+                                  type: "phoneNumber");
+                              editAddressNotifer.checkField(
+                                  val: state.address.value,
+                                  fieldEmpty: state.address.isEmpty,
+                                  fieldErrorMsg: state.address.errorMessage,
+                                  errorMsg: "Alamat harus diisi",
+                                  type: "address");
+                              if (state.recipient.value != "" &&
+                                  state.phoneNumber.value != "" &&
+                                  state.address.value != "") {
+                                editConfirmAddressSheet(index: index);
+                              }
+                            }),
+                      ],
+                    ),
+                  );
+                });
               },
             );
           },
@@ -966,7 +1197,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  editConfirmAddressSheet() {
+  editConfirmAddressSheet({required int index}) {
     showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -984,65 +1215,90 @@ class _AccountPageState extends State<AccountPage> {
           builder: (BuildContext context, ScrollController scrollController) {
             return StatefulBuilder(
               builder: (context, setState) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      decoration: const BoxDecoration(color: Color(0xfff8faf7)),
-                      child: Column(
-                        children: <Widget>[
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 8),
-                              color: activeBgColor,
-                              width: 100,
-                              height: 4,
+                return Consumer(builder: (context, ref, child) {
+                  AccountAddressState state = ref.watch(accountAddressNotifier);
+                  final editAddressNotifer =
+                      ref.watch(accountAddressNotifier.notifier);
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                        margin: const EdgeInsets.only(bottom: 8),
+                        decoration:
+                            const BoxDecoration(color: Color(0xfff8faf7)),
+                        child: Column(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                color: activeBgColor,
+                                width: 100,
+                                height: 4,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
 
-                    /// Listview (list of data with check box for multiple selection & on tile tap single selection)
-                    Expanded(
-                      child: Column(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Text(
-                              "It looks like you've made some changes to the existing data. Do you want to save these changes before continuing ?",
-                              style: inter16Bold(),
-                              textAlign: TextAlign.center,
+                      /// Listview (list of data with check box for multiple selection & on tile tap single selection)
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Text(
+                                "It looks like you've made some changes to the existing data. Do you want to save these changes before continuing ?",
+                                style: inter16Bold(),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Text(
-                              "By pressing yes, the data changes you make will be saved",
-                              style: inter14Black2(),
-                              textAlign: TextAlign.center,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: Text(
+                                "By pressing yes, the data changes you make will be saved",
+                                style: inter14Black2(),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                          ),
-                          // const SizedBox(height: 16),
-                        ],
+                            // const SizedBox(height: 16),
+                          ],
+                        ),
                       ),
-                    ),
-                    afterChangeDoubleButton(
-                      name1: "Yes, I want to save data",
-                      name2: "No, I want to check the data",
-                      onClick1: () {
-                        showToast("Data changes have been successfully saved",
-                            context);
-                        Navigator.pop(context);
-                      },
-                      onClick2: () {
-                        showToast("Data changes have been successfully saved",
-                            context);
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                );
+                      afterChangeDoubleButton(
+                        name1: "Yes, I want to save data",
+                        name2: "No, I want to check the data",
+                        onClick1: () {
+                          List<AddressModel> temp = [];
+                          for (int i = 0; i < addressList.length; i++) {
+                            if (i == index) {
+                              temp.add(AddressModel(
+                                  label: state.label,
+                                  name: state.recipient.value,
+                                  phoneNumber: state.phoneNumber.value,
+                                  completeAddress: state.address.value));
+                              continue;
+                            }
+                            temp.add(AddressModel(
+                                label: addressList[i].label,
+                                name: addressList[i].name,
+                                phoneNumber: addressList[i].phoneNumber,
+                                completeAddress:
+                                    addressList[i].completeAddress));
+                          }
+                          addressList = temp;
+                          setState;
+                          showToast("Data changes have been successfully saved",
+                              context);
+
+                          Navigator.pop(context);
+                          Navigator.pop(context);
+                        },
+                        onClick2: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  );
+                });
               },
             );
           },
@@ -1221,7 +1477,7 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
-  deleteConfirmAddressSheet() {
+  deleteConfirmAddressSheet({required int index}) {
     showModalBottomSheet(
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
@@ -1283,14 +1539,17 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                     ),
                     afterChangeDoubleButton(
-                      name1: "Yes, I want to close the edit form",
-                      name2: "No, I want to go back to editing",
+                      name1: "Yes, I want to delete this data",
+                      name2: "No, I want to go back to editing data",
                       onClick1: () {
+                        addressList.removeAt(index);
                         showToast("Data deleted successfully", context);
+                        setState;
+                        Navigator.pop(context);
+                        Navigator.pop(context);
                         Navigator.pop(context);
                       },
                       onClick2: () {
-                        showToast("Data deleted successfully", context);
                         Navigator.pop(context);
                       },
                     ),
@@ -1383,7 +1642,8 @@ class _AccountPageState extends State<AccountPage> {
       required String addressName,
       required String name,
       required String phone,
-      required String address}) {
+      required String address,
+      required int index}) {
     return Container(
       // height: 98,
       width: 90.w,
@@ -1400,7 +1660,7 @@ class _AccountPageState extends State<AccountPage> {
               fillColor: MaterialStateProperty.all(primaryBlue),
               groupValue: groupValue,
               value: value,
-              onChanged: (val) => setState(() => value = val.toString()),
+              onChanged: (val) => setState(() => groupValue = val.toString()),
             ),
           ),
           const SizedBox(width: 8),
@@ -1414,7 +1674,7 @@ class _AccountPageState extends State<AccountPage> {
                   children: [
                     Text(addressName, style: inter14Bold()),
                     InkWell(
-                      onTap: editAddressSheet,
+                      onTap: () => editAddressSheet(index: index),
                       child: SvgPicture.asset(
                         '${iconsAccountPath}edit.svg',
                         width: 15,
@@ -1474,16 +1734,40 @@ class _AccountPageState extends State<AccountPage> {
     );
   }
 
+  Widget addAddress() {
+    return InkWell(
+      onTap: addAddressSheet,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        decoration: BoxDecoration(
+          color: secondaryBlue,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: <Widget>[
+            const SizedBox(height: 8),
+            SvgPicture.asset("${iconsCheckoutPath}add_address.svg"),
+            const SizedBox(height: 16),
+            Text("Add Address", style: inter14Medium()),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget addressLabel(
       {required String title, Function()? onClick, bool value = false}) {
-    return Container(
-      height: 44,
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: value ? secondaryBlue : white,
-          border: Border.all(color: primaryBlue)),
-      child: Center(child: Text(title, style: inter14Medium())),
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        height: 44,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: value ? secondaryBlue : white,
+            border: Border.all(color: primaryBlue)),
+        child: Center(child: Text(title, style: inter14Medium())),
+      ),
     );
   }
 }

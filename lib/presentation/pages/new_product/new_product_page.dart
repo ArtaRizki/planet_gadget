@@ -3,25 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
+import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/toast.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../application/product/new/product_new_notiifer.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
 import '../../../utils/constants/path.dart';
+import '../../../utils/constants/url.dart';
 import '../../core/appbar_widget.dart';
 import '../account/widgets/field.dart';
+import '../product/product_page.dart';
 import '../purchase/purchase_page.dart';
 
-class NewProductPage extends StatefulWidget {
+class NewProductPage extends ConsumerStatefulWidget {
   const NewProductPage({super.key});
 
   @override
-  State<NewProductPage> createState() => _NewProductPageState();
+  ConsumerState<NewProductPage> createState() => _NewProductPageState();
 }
 
-class _NewProductPageState extends State<NewProductPage> {
+class _NewProductPageState extends ConsumerState<NewProductPage> {
   DraggableScrollableController dragC = DraggableScrollableController();
   TextEditingController searchC = TextEditingController();
   String searchValue = "";
@@ -33,8 +37,30 @@ class _NewProductPageState extends State<NewProductPage> {
   String priceLowErrorText = "";
   String priceHighErrorText = "";
   bool agree = false;
+
+  late ScrollController _scrollController;
+  bool _isLoading = false;
+  bool allLoaded = false;
+  int page = 1;
+  int total = 0;
+  add() => setState(() => total++);
+  min() => setState(() {
+        if (total > 0) {
+          total--;
+        }
+      });
+
+  init() {}
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final productNewState = ref.watch(productNewNotifier);
+    final productNewStateNotifier = ref.read(productNewNotifier.notifier);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -42,11 +68,10 @@ class _NewProductPageState extends State<NewProductPage> {
         appBar: appBarWidget(title: "New product", context: context),
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: RefreshIndicator(
-            onRefresh: () {
-              return refresh();
-            },
-            child: SingleChildScrollView(
+          child: Builder(builder: (context) {
+            return RefreshIndicator(
+              onRefresh: () => productNewStateNotifier.getProductNew(
+                  mode: "new", page: "1", limit: "10", loading: false),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 16),
                 child: Column(
@@ -96,6 +121,7 @@ class _NewProductPageState extends State<NewProductPage> {
                       height: 68,
                       padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
                       child: ListView.separated(
+                        physics: const AlwaysScrollableScrollPhysics(),
                         padding: const EdgeInsets.only(right: 20),
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
@@ -108,81 +134,47 @@ class _NewProductPageState extends State<NewProductPage> {
                         itemCount: 5,
                       ),
                     ),
-                    GridView.builder(
-                        padding: const EdgeInsets.only(
-                            top: 12, bottom: 24, left: 20, right: 20),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 0.75,
-                                mainAxisSpacing: 8,
-                                crossAxisSpacing: 8),
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: white,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 4,
-                                    color: black25)
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 8,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 131,
-                                      height: 146,
-                                      child: Image.asset(
-                                        "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                // const SizedBox(height: 8),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Text(
-                                          "Apple Iphone 12 128Gb" +
-                                              "aaaaaaaaaaaaaaaa",
-                                          style: inter12MediumBlack()),
-                                    )),
-                                // const SizedBox(height: 8),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Text(
-                                          convertToIdr(nominal: "Rp12.999.000"),
-                                          style: inter14Bold()),
-                                    )),
-                              ],
-                            ),
-                          );
-                        },
-                        itemCount: 10),
+                    productNewState.when(
+                      initial: () => const SizedBox(),
+                      loading: () => loadingWidget,
+                      error: (error) => Text(error ?? "Error"),
+                      data: (productNew) => Expanded(
+                        child: GridView.builder(
+                          padding: const EdgeInsets.only(
+                              top: 12, bottom: 24, left: 20, right: 20),
+                          shrinkWrap: true,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.75,
+                                  mainAxisSpacing: 8,
+                                  crossAxisSpacing: 8),
+                          itemCount: productNew.first.length,
+                          itemBuilder: (context, index) {
+                            final item = productNew.first[index];
+                            return cardProduct(
+                              imageName: "$baseUrl${item.url}",
+                              price: convertToIdr(nominal: "12999000"),
+                              productName: item.name,
+                              onClick: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProductPage()),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-            ),
-          ),
+            );
+          }),
         ),
       ),
     );
   }
-
-  refresh() {}
 
   onChangedSearch(String val) {
     searchResult.clear();
@@ -193,6 +185,59 @@ class _NewProductPageState extends State<NewProductPage> {
       //     .toList();
     }
     setState(() {});
+  }
+
+  Widget cardProduct(
+      {required String imageName,
+      required String price,
+      required String productName,
+      Function()? onClick}) {
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: white,
+          boxShadow: <BoxShadow>[
+            BoxShadow(offset: const Offset(0, 0), blurRadius: 4, color: black25)
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Expanded(
+              flex: 9,
+              child: Center(
+                child: SizedBox(
+                  width: 131,
+                  // height: 146,
+                  child: Image.asset(
+                    "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+            ),
+            // const SizedBox(height: 8),
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  productName,
+                  style: inter12MediumBlack(),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+            // const SizedBox(height: 8),
+            Text(price, style: inter14Bold()),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget imageBox(
@@ -291,32 +336,49 @@ class _NewProductPageState extends State<NewProductPage> {
                     children: <Widget>[
                       Expanded(
                         flex: 3,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: disabledBgColor,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
+                        child: InkWell(
+                          onTap: min,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: activeBgColor,
+                              // color: disabledBgColor,
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(8),
+                                bottomLeft: Radius.circular(8),
+                              ),
+                            ),
+                            child: SvgPicture.asset(
+                              "${iconsPath}minus.svg",
+                              color: white,
+                              // color: disabledTextColor,
                             ),
                           ),
-                          child: SvgPicture.asset("${iconsPath}minus.svg",
-                              color: disabledTextColor),
                         ),
                       ),
                       Expanded(
                         flex: 4,
                         child: Text(
-                          "1",
+                          "$total",
                           style: inter14MediumBlack2(),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Expanded(
                         flex: 3,
-                        child: Container(
-                          color: activeBgColor,
-                          child: SvgPicture.asset("${iconsPath}plus.svg",
-                              color: black),
+                        child: InkWell(
+                          onTap: add,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: activeBgColor,
+                              // color: disabledBgColor,
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(8),
+                                bottomRight: Radius.circular(8),
+                              ),
+                            ),
+                            child: SvgPicture.asset("${iconsPath}plus.svg",
+                                color: white),
+                          ),
                         ),
                       ),
                     ],
@@ -742,7 +804,10 @@ class _NewProductPageState extends State<NewProductPage> {
         onPressed: onClick,
         child: Text(
           name,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+          style: TextStyle(
+              color: outlineColor == null ? white : black,
+              fontSize: 16,
+              fontWeight: FontWeight.bold),
         ),
       ),
     );

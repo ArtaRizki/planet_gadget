@@ -14,6 +14,7 @@ import 'package:sizer/sizer.dart';
 import '../../../application/product/best/product_best_notiifer.dart';
 import '../../../application/product/new/product_new_notiifer.dart';
 import '../../../application/product/product_notifier.dart';
+import '../../../domain/entity/product/product_model.dart';
 import '../../../library/color.dart';
 import '../../../main.dart';
 import '../../../utils/constants/path.dart';
@@ -51,6 +52,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     final productStateNotifier = ref.read(productNotifier.notifier);
     final productNewStateNotifier = ref.read(productNewNotifier.notifier);
     final productBestStateNotifier = ref.read(productBestNotifier.notifier);
+    List<List<ProductModel>> data = productNewState.maybeWhen(
+        data: (product) => product, orElse: () => [[]]);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -427,33 +430,31 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           const SizedBox(height: 16),
                           SizedBox(
                             height: 251,
-                            child: productNewState.when(
-                                initial: () => const SizedBox(),
-                                loading: () => loadingWidget,
-                                data: (productNew) => ListView.separated(
-                                      padding: const EdgeInsets.only(
-                                          right: 20, bottom: 32),
-                                      scrollDirection: Axis.horizontal,
-                                      separatorBuilder: (context, index) =>
-                                          const SizedBox(width: 8),
-                                      itemCount: productNew.first.length,
-                                      itemBuilder: (context, index) {
-                                        final item = productNew.first[index];
-                                        return cardProduct(
-                                          imageName: "$baseUrl${item.url}",
-                                          price:
-                                              convertToIdr(nominal: "12999000"),
-                                          productName: item.name,
-                                          onClick: () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ProductPage()),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                error: (error) => Text(error ?? "Error")),
+                            child: data.first.isEmpty
+                                ? Text("KOSONG")
+                                : ListView.separated(
+                                    padding: const EdgeInsets.only(
+                                        right: 20, bottom: 32),
+                                    scrollDirection: Axis.horizontal,
+                                    separatorBuilder: (context, index) =>
+                                        const SizedBox(width: 8),
+                                    itemCount: data.first.length,
+                                    itemBuilder: (context, index) {
+                                      final item = data.first[index];
+                                      return cardProduct(
+                                        imageName: "$baseUrl${item.url}",
+                                        price:
+                                            convertToIdr(nominal: "12999000"),
+                                        productName: item.name,
+                                        onClick: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ProductPage()),
+                                        ),
+                                      );
+                                    },
+                                  ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 20),

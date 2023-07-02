@@ -13,5 +13,8 @@ class ProductNewState with _$ProductNewState {
   const factory ProductNewState.loading() = _ProductNewStateLoading;
   const factory ProductNewState.data(
       {required List<List<ProductModel>> productNew}) = _ProductNewStateData;
+  // const factory ProductNewState.dataCompleted(
+  //         {required List<List<ProductModel>> productNew}) =
+  //     _ProductNewStateDataCompleted;
   const factory ProductNewState.error([String? error]) = _ProductNewStateError;
 }

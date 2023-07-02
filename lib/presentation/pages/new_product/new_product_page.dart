@@ -1,13 +1,13 @@
-import 'package:flutter/material.dart';
+import 'dart:developer';
 
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/toast.dart';
-import 'package:sizer/sizer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../application/product/new/product_new_notiifer.dart';
+import '../../../domain/entity/product/product_model.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
@@ -16,7 +16,6 @@ import '../../../utils/constants/url.dart';
 import '../../core/appbar_widget.dart';
 import '../account/widgets/field.dart';
 import '../product/product_page.dart';
-import '../purchase/purchase_page.dart';
 
 class NewProductPage extends ConsumerStatefulWidget {
   const NewProductPage({super.key});
@@ -40,17 +39,17 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
 
   late ScrollController _scrollController;
   bool _isLoading = false;
-  bool allLoaded = false;
   int page = 1;
+
   int total = 0;
   add() => setState(() => total++);
-  min() => setState(() {
-        if (total > 0) {
-          total--;
-        }
-      });
-
-  init() {}
+  min() {
+    setState(() {
+      if (total > 0) {
+        total--;
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -61,6 +60,11 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
   Widget build(BuildContext context) {
     final productNewState = ref.watch(productNewNotifier);
     final productNewStateNotifier = ref.read(productNewNotifier.notifier);
+    List<List<ProductModel>> data = productNewState.maybeWhen(
+        data: (product) => product, orElse: () => [[]]);
+    bool allLoaded = productNewState.maybeWhen(
+        data: (product) => data.isEmpty || data.first.length % 10 != 0,
+        orElse: () => false);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -69,6 +73,20 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
         body: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Builder(builder: (context) {
+            _scrollController = ScrollController()
+              ..addListener(() {
+                if (_scrollController.position.atEdge && !_isLoading) {
+                  bool isTop = _scrollController.position.pixels == 0;
+                  if (isTop) {
+                    log('At the top');
+                  } else {
+                    productNewStateNotifier.getProductNew(
+                        mode: "new",
+                        page: "${(data.first.length / 10) + 1}",
+                        limit: "10",loading: false);
+                  }
+                }
+              });
             return RefreshIndicator(
               onRefresh: () => productNewStateNotifier.getProductNew(
                   mode: "new", page: "1", limit: "10", loading: false),
@@ -138,8 +156,12 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
                       initial: () => const SizedBox(),
                       loading: () => loadingWidget,
                       error: (error) => Text(error ?? "Error"),
+                      // dataCompleted: (productNew) => Expanded,
                       data: (productNew) => Expanded(
                         child: GridView.builder(
+                          physics: const ClampingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          controller: _scrollController,
                           padding: const EdgeInsets.only(
                               top: 12, bottom: 24, left: 20, right: 20),
                           shrinkWrap: true,
@@ -149,19 +171,25 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
                                   childAspectRatio: 0.75,
                                   mainAxisSpacing: 8,
                                   crossAxisSpacing: 8),
-                          itemCount: productNew.first.length,
+                          itemCount: allLoaded
+                              ? data.first.length
+                              : data.first.length + 1,
                           itemBuilder: (context, index) {
-                            final item = productNew.first[index];
-                            return cardProduct(
-                              imageName: "$baseUrl${item.url}",
-                              price: convertToIdr(nominal: "12999000"),
-                              productName: item.name,
-                              onClick: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const ProductPage()),
-                              ),
-                            );
+                            if (index < data.first.length) {
+                              final item = data.first[index];
+                              return cardProduct(
+                                imageName: "$baseUrl${item.url}",
+                                price: convertToIdr(nominal: "12999000"),
+                                productName: item.name,
+                                onClick: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProductPage()),
+                                ),
+                              );
+                            }
+                            return loadingWidget;
                           },
                         ),
                       ),

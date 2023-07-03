@@ -2,10 +2,14 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:planet_gadget/application/product/new/search/search_product_new_event.dart';
+import 'package:planet_gadget/application/product/new/search/search_product_new_notifier.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/toast.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:planet_gadget/main.dart';
+import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import '../../../application/product/new/product_new_notiifer.dart';
 import '../../../domain/entity/product/product_model.dart';
 import '../../../library/color.dart';
@@ -58,12 +62,13 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<ProductModel> data = ref.watch(searchProvider).productList;
     final productNewState = ref.watch(productNewNotifier);
     final productNewStateNotifier = ref.read(productNewNotifier.notifier);
-    List<List<ProductModel>> data = productNewState.maybeWhen(
-        data: (product) => product, orElse: () => [[]]);
+    // List<List<ProductModel>> data = productNewState.maybeWhen(
+    //     data: (product) => product, orElse: () => [[]]);
     bool allLoaded = productNewState.maybeWhen(
-        data: (product) => data.isEmpty || data.first.length % 10 != 0,
+        data: (product) => data.isEmpty || data.length % 10 != 0,
         orElse: () => false);
     return SafeArea(
       top: false,
@@ -82,8 +87,9 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
                   } else {
                     productNewStateNotifier.getProductNew(
                         mode: "new",
-                        page: "${(data.first.length / 10) + 1}",
-                        limit: "10",loading: false);
+                        page: "${(data.length / 10) + 1}",
+                        limit: "10",
+                        loading: false);
                   }
                 }
               });
@@ -106,19 +112,15 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
                               controller: searchC,
                               onChanged: (val) => onChangedSearch(val),
                               borderColor: true,
-                              onClear: () {
-                                searchC.clear();
-                                searchValue = "";
-                                searchResult.clear();
-                                setState(() {});
-                              },
+                              onClear: onClear,
                             ),
                           ),
                           const SizedBox(width: 12),
                           Expanded(
                             flex: 1,
                             child: InkWell(
-                                onTap: () {},
+                                onTap: () => routes.navigateTo(context,
+                                    page: ShoppingCartPage()),
                                 child: Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
@@ -158,39 +160,40 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
                       error: (error) => Text(error ?? "Error"),
                       // dataCompleted: (productNew) => Expanded,
                       data: (productNew) => Expanded(
-                        child: GridView.builder(
+                        child: ListView(
                           physics: const ClampingScrollPhysics(
                               parent: AlwaysScrollableScrollPhysics()),
                           controller: _scrollController,
-                          padding: const EdgeInsets.only(
-                              top: 12, bottom: 24, left: 20, right: 20),
-                          shrinkWrap: true,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 0.75,
-                                  mainAxisSpacing: 8,
-                                  crossAxisSpacing: 8),
-                          itemCount: allLoaded
-                              ? data.first.length
-                              : data.first.length + 1,
-                          itemBuilder: (context, index) {
-                            if (index < data.first.length) {
-                              final item = data.first[index];
-                              return cardProduct(
-                                imageName: "$baseUrl${item.url}",
-                                price: convertToIdr(nominal: "12999000"),
-                                productName: item.name,
-                                onClick: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ProductPage()),
-                                ),
-                              );
-                            }
-                            return loadingWidget;
-                          },
+                          children: <Widget>[
+                            GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.only(
+                                  top: 12, bottom: 24, left: 20, right: 20),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 0.75,
+                                      mainAxisSpacing: 8,
+                                      crossAxisSpacing: 8),
+                              itemCount: data.length,
+                              itemBuilder: (context, index) {
+                                final item = data[index];
+                                return cardProduct(
+                                  imageName: "$baseUrl${item.url}",
+                                  price: convertToIdr(nominal: "12999000"),
+                                  productName: item.name,
+                                  onClick: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductPage()),
+                                  ),
+                                );
+                              },
+                            ),
+                            if (!allLoaded) loadingWidget,
+                          ],
                         ),
                       ),
                     ),
@@ -208,10 +211,31 @@ class _NewProductPageState extends ConsumerState<NewProductPage> {
     searchResult.clear();
     searchValue = val;
     if (val != "") {
+      ref.invalidate(searchProvider);
+      ref
+          .read(searchProvider.notifier)
+          .mapEventsToState(SearchProductNewedTextChanged(text: searchC.text));
       // searchResult = kp.getKategoriList
       //     .where((item) => item.nama.toLowerCase().contains(searchValue))
       //     .toList();
+    } else {
+      ref.invalidate(searchProvider);
     }
+    setState(() {});
+  }
+
+  onClear() {
+    log("ON CLEAR NEW PRODUCT PAGE");
+    searchC.text = "";
+    searchC.clear();
+    searchValue = "";
+    searchResult.clear();
+    ref.invalidate(searchProvider);
+    ref.read(searchProvider.notifier).mapEventsToState(UpdateListItems(
+        productModelList: (ref
+                .watch(productNewNotifier)
+                .whenOrNull(data: (productNew) => productNew.first)) ??
+            []));
     setState(() {});
   }
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -264,7 +266,7 @@ generalDecorationWoIconDropdown(String hintTxt, bool isEmpty,
 }
 
 searchDecoration(String hintTxt,
-    {required Function onClear, Color? borderColor, bool clearIcon = false}) {
+    {required Function() onClear, Color? borderColor, bool clearIcon = false}) {
   return InputDecoration(
       prefixIcon: const Padding(
         padding: EdgeInsets.only(left: 15, right: 10, top: 0),
@@ -277,7 +279,7 @@ searchDecoration(String hintTxt,
           : Padding(
               padding: const EdgeInsets.only(right: 14),
               child: InkWell(
-                onTap: () => onClear,
+                onTap: onClear,
                 child: SvgPicture.asset(
                   "${iconsPath}x-circle.svg",
                   width: 13,

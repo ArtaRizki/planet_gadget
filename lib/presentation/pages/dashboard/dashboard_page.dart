@@ -616,10 +616,14 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
               child: SizedBox(
                 width: 131,
                 // height: 145,
-                child: Image.network(
-                  imageName,
+                child: Image.asset(
+                  "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
                   fit: BoxFit.contain,
                 ),
+                // child: Image.network(
+                //   imageName,
+                //   fit: BoxFit.contain,
+                // ),
               ),
             ),
             const SizedBox(height: 8),

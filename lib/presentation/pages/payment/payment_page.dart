@@ -200,12 +200,7 @@ class _PaymentPageState extends State<PaymentPage> {
     Divider(thickness: 1, color: gray4),
     Row(
       children: <Widget>[
-        Container(
-            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-            decoration:
-                BoxDecoration(color: primaryYellow, shape: BoxShape.circle),
-            child: Text("1", style: inter14MediumBlack())),
-        const SizedBox(width: 8),
+        Text("1", style: inter14Gray3()),
         Flexible(
           child: RichText(
             text: TextSpan(style: inter14Gray3(), children: [

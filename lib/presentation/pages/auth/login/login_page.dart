@@ -1,5 +1,6 @@
 import 'dart:developer';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:planet_gadget/library/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,6 +21,7 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
+  FirebaseService service = FirebaseService();
   TextEditingController emailC = TextEditingController();
   TextEditingController passwordC = TextEditingController();
   @override
@@ -68,7 +70,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             error: loginFieldState.email.errorMessage,
                             onchanged: (val) {
                               loginFieldStateNotifier.checkField(
-                                  val: loginFieldState.email.value,
+                                  val: val,
                                   fieldEmpty: loginFieldState.email.isEmpty,
                                   fieldErrorMsg:
                                       loginFieldState.email.errorMessage,
@@ -85,7 +87,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             error: loginFieldState.password.errorMessage,
                             onchanged: (val) {
                               loginFieldStateNotifier.checkField(
-                                  val: loginFieldState.password.value,
+                                  val: val,
                                   fieldEmpty: loginFieldState.password.isEmpty,
                                   fieldErrorMsg:
                                       loginFieldState.password.errorMessage,
@@ -103,10 +105,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       error: (error) => Text(error ?? 'Error'),
                       loading: () => loadingWidget,
                       initial: () => InkWell(
-                        onTap: () {
+                        onTap: () async {
                           log("EMAILNYA : ${ref.read(loginFieldNotifier).email.value}");
                           log("PASSWORDNYA : ${ref.read(loginFieldNotifier).email.value}");
-                          loginStateNotifier.login();
+                          // loginStateNotifier.login();
+                          User? user = await service.signInwithGoogle();
+                          log("USER EMAIL : ${user!.email}");
+                          if (user != null) {}
                         },
                         child: Container(
                           margin: const EdgeInsets.symmetric(horizontal: 20),

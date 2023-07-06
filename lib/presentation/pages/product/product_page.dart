@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
+import 'package:planet_gadget/main.dart';
 import 'package:planet_gadget/presentation/pages/checkout/checkout_page.dart';
 import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:planet_gadget/presentation/pages/store_pickup/store_pickup_page.dart';
@@ -22,11 +23,12 @@ class ProductPage extends ConsumerStatefulWidget {
 }
 
 class _ProductPageState extends ConsumerState<ProductPage> {
+  String shipping1Value = "JNE";
   DraggableScrollableController dragC = DraggableScrollableController();
 
   @override
   void initState() {
-    ref.read(productNotifier.notifier).getProduct();
+    // ref.read(productNotifier.notifier).getProduct();
     super.initState();
   }
 
@@ -64,7 +66,8 @@ class _ProductPageState extends ConsumerState<ProductPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: InkWell(
-                onTap: () => Navigator.pop(context),
+                onTap: () =>
+                    routes.navigateTo(context, page: ShoppingCartPage()),
                 child: SvgPicture.asset(
                   '${iconsPath}shopping-cart.svg',
                   width: 24,
@@ -170,25 +173,46 @@ class _ProductPageState extends ConsumerState<ProductPage> {
     );
   }
 
-  Widget shippingBox(
-      {required double borderRadius,
-      double? height,
-      double? width,
-      required String imagePath}) {
+  Widget shippingBox({
+    required double borderRadius,
+    double? height,
+    double? width,
+    required String imagePath,
+    required String? groupValue,
+    required String? value,
+  }) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       height: height,
       width: width,
       decoration: BoxDecoration(
-        color: primaryBlue,
+        color: secondaryBlue,
         borderRadius: BorderRadius.circular(borderRadius),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("JNE Regular", style: inter14Bold()),
-          const SizedBox(height: 4),
-          Image.asset("$shippingPath$imagePath"),
-          const SizedBox(height: 4),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Radio(
+              fillColor: MaterialStateProperty.all(primaryBlue),
+              groupValue: groupValue,
+              value: value,
+              onChanged: (val) => setState(() => value = val.toString()),
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            flex: 9,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("JNE Regular", style: inter14Bold()),
+                const SizedBox(height: 4),
+                Image.asset("$shippingPath$imagePath"),
+                const SizedBox(height: 4),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -541,7 +565,9 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                             return shippingBox(
                                 borderRadius: 12,
                                 width: 178,
-                                imagePath: "jne.png");
+                                imagePath: "jne.png",
+                                groupValue: shipping1Value,
+                                value: shipping1Value);
                           },
                           separatorBuilder: (context, index) =>
                               const SizedBox(width: 12),
@@ -709,7 +735,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
         onPressed: () async => onClick ?? {},
         child: Text(
           name,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+          style: inter16BoldWhite(),
         ),
       ),
     );

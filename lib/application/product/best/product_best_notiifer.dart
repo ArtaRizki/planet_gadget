@@ -28,16 +28,16 @@ class ProductBestNotifier extends StateNotifier<ProductBestState> {
     String limit = "10",
   }) async {
     state = const ProductBestState.loading();
-    // try {
-    final productBest = await _iProductRepository.getProduct(
-        mode: mode, page: page, limit: limit);
-    if (productBest != []) {
-      state = ProductBestState.data(productBest: productBest);
-    } else {
-      state = const ProductBestState.error('Gagal');
+    try {
+      final productBest = await _iProductRepository.getProduct(
+          mode: mode, page: page, limit: limit);
+      if (productBest != []) {
+        state = ProductBestState.data(productBest: productBest);
+      } else {
+        state = const ProductBestState.error('Gagal : Kosong');
+      }
+    } catch (e) {
+      state = ProductBestState.error(e.toString());
     }
-    // } catch (e) {
-    // }
-    // state = const ProductBestState.initial();
   }
 }

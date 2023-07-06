@@ -22,17 +22,17 @@ class ProductRepository implements IProductRepository {
   }) async {
     String url = "/getproduct";
     url = changeUrl(url, mode, page, limit);
-    // try {
-    final response = await dio.requestGet(url: url, param: {});
-    if (response!.statusCode == 200) {
-      // log("RESPONSE : ${response!.data}");
-      return productModelFromJson(jsonEncode(response.data));
-    } else {
-      throw Exception("Gagal");
+    try {
+      final response = await dio.requestGet(url: url, param: {});
+      if (response!.statusCode == 200) {
+        // log("RESPONSE : ${response!.data}");
+        return productModelFromJson(jsonEncode(response.data));
+      } else {
+        throw Exception("Gagal : ${response.statusMessage}");
+      }
+    } catch (e) {
+      throw Exception("Gagal : $e");
     }
-    // } catch (e) {
-    //   throw Exception("Gagal");
-    // }
   }
 
   changeUrl(String url, String mode, String page, String limit) {

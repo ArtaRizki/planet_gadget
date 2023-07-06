@@ -9,10 +9,12 @@ import 'package:sizer/sizer.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
+import '../../../main.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
 import '../account/widgets/field.dart';
 import '../purchase/purchase_page.dart';
+import '../shopping_cart/shopping_cart_page.dart';
 
 class StorePickupPage extends StatefulWidget {
   const StorePickupPage({super.key});
@@ -80,7 +82,8 @@ class _StorePickupPageState extends State<StorePickupPage> {
                           Expanded(
                             flex: 1,
                             child: InkWell(
-                                onTap: () {},
+                                onTap: () => routes.navigateTo(context,
+                                    page: ShoppingCartPage()),
                                 child: Container(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 12),
@@ -809,6 +812,11 @@ class _StorePickupPageState extends State<StorePickupPage> {
           ),
           const SizedBox(height: 12),
           InkWell(
+            onTap: () async {
+              await showToast(
+                  "Items will be prepared and you can pickup", context);
+              Navigator.pop(context);
+            },
             // onTap: () => Navigator.push(context,
             //     MaterialPageRoute(builder: (context) => const PurchasePage())),
             child: Container(

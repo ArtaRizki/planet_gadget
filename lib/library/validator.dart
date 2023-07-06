@@ -12,7 +12,11 @@ checkGeneralField({String? val, required String errorMsg}) {
 }
 
 checkEmailField({String? val, required String errorMsg}) {
+  log("VAL : $val");
   val = val.toString().trim();
+  if (val == "" || val.isEmpty || val == "null") {
+    return "Email belum diisi";
+  }
   if (val.isNotEmpty && !s_validator.isEmail(val)) {
     return "Email tidak valid";
   }

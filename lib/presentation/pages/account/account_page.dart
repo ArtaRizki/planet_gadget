@@ -717,8 +717,9 @@ class _AccountPageState extends State<AccountPage> {
                                     completeAddress: state.address.value));
                                 setState;
                                 showToast("Data saved successfully", context);
-                                Navigator.pop(context);
-                                Navigator.pop(context);
+                                Navigator.of(context)
+                                  ..pop()
+                                  ..pop();
                               }
                             }),
                       ],
@@ -1372,9 +1373,9 @@ class _AccountPageState extends State<AccountPage> {
                       name1: "Yes, I want to close the edit form",
                       name2: "No, I want to go back to editing",
                       onClick1: () {
-                        showToast("Data changes have been successfully saved",
-                            context);
-                        Navigator.pop(context);
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop();
                       },
                       onClick2: () {
                         showToast("Data changes have been successfully saved",
@@ -1457,9 +1458,9 @@ class _AccountPageState extends State<AccountPage> {
                       name1: "Yes, I canceled adding data",
                       name2: "No, I continue to add data",
                       onClick1: () {
-                        showToast("Data changes have been successfully added",
-                            context);
-                        Navigator.pop(context);
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop();
                       },
                       onClick2: () {
                         showToast("Data changes have been successfully added",
@@ -1545,9 +1546,10 @@ class _AccountPageState extends State<AccountPage> {
                         addressList.removeAt(index);
                         showToast("Data deleted successfully", context);
                         setState;
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                        Navigator.pop(context);
+                        Navigator.of(context)
+                          ..pop()
+                          ..pop()
+                          ..pop();
                       },
                       onClick2: () {
                         Navigator.pop(context);

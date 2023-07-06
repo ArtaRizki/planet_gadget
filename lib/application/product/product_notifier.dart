@@ -28,36 +28,16 @@ class ProductNotifier extends StateNotifier<ProductState> {
   }) async {
     // _productFieldState = _productFieldState.copyWith();
     state = const ProductState.loading();
-    // try {
-    final product = await _iProductRepository.getProduct(
-        mode: mode, page: page, limit: limit);
-    if (product != []) {
-      state = ProductState.data(product: product);
-    } else {
-      state = const ProductState.error('Gagal');
+    try {
+      final product = await _iProductRepository.getProduct(
+          mode: mode, page: page, limit: limit);
+      if (product != []) {
+        state = ProductState.data(product: product);
+      } else {
+        state = const ProductState.error('Gagal : Kosong');
+      }
+    } catch (e) {
+      state = ProductState.error(e.toString());
     }
-    // } catch (e) {
-    // }
-    // state = const ProductState.initial();
-  }
-
-  Future<void> getProductNew({
-    String mode = "",
-    String page = "1",
-    String limit = "10",
-  }) async {
-    // _productFieldState = _productFieldState.copyWith();
-    state = const ProductState.loading();
-    // try {
-    final product = await _iProductRepository.getProduct(
-        mode: mode, page: page, limit: limit);
-    if (product != []) {
-      state = ProductState.data(product: product);
-    } else {
-      state = const ProductState.error('Gagal');
-    }
-    // } catch (e) {
-    // }
-    // state = const ProductState.initial();
   }
 }

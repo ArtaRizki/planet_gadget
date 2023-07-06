@@ -34,6 +34,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.1.1
   expandable: ^5.0.1
+  firebase_auth: ^4.6.3
   firebase_core: ^2.14.0
   firebase_messaging: ^14.6.3
   flutter:
@@ -46,6 +47,7 @@ dependencies:
   freezed_annotation: ^2.2.0
   get: ^4.6.5
   google_fonts: ^4.0.4
+  google_sign_in: ^6.1.4
   hooks_riverpod: ^2.3.6
   image_picker: ^0.8.7+4
   intl: ^0.18.1

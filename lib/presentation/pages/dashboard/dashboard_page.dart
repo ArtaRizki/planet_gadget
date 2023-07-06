@@ -7,6 +7,7 @@ import 'package:planet_gadget/library/loading.dart';
 import 'package:planet_gadget/library/textstyle.dart';
 import 'package:planet_gadget/presentation/pages/account/widgets/field.dart';
 import 'package:planet_gadget/presentation/pages/article/article_page.dart';
+import 'package:planet_gadget/presentation/pages/member/member_page.dart';
 import 'package:planet_gadget/presentation/pages/notification/notification_page.dart';
 import 'package:planet_gadget/presentation/pages/shopping_cart/shopping_cart_page.dart';
 import 'package:sizer/sizer.dart';
@@ -21,6 +22,7 @@ import '../../../utils/constants/path.dart';
 import '../../../utils/constants/url.dart';
 import '../best_selling_product/best_selling_product_page.dart';
 import '../brand/all_brand_page.dart';
+import '../brand/brand_page.dart';
 import '../choice_for_you/choice_for_you_page.dart';
 import '../new_product/new_product_page.dart';
 import '../product/product_page.dart';
@@ -176,20 +178,24 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                           Container(color: Colors.black, width: 1, height: 20),
                           Expanded(
                             flex: 2,
-                            child: Row(
-                              children: <Widget>[
-                                const SizedBox(width: 20),
-                                SvgPicture.asset(
-                                  "${iconsPath}member.svg",
-                                  width: 20,
-                                  height: 20,
-                                ),
-                                const SizedBox(width: 10),
-                                Text(
-                                  "Gold Member",
-                                  style: inter12MediumBlack(),
-                                ),
-                              ],
+                            child: InkWell(
+                              onTap: () => routes.navigateTo(context,
+                                  page: MemberPage()),
+                              child: Row(
+                                children: <Widget>[
+                                  const SizedBox(width: 20),
+                                  SvgPicture.asset(
+                                    "${iconsPath}member.svg",
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  Text(
+                                    "Gold Member",
+                                    style: inter12MediumBlack(),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -337,7 +343,8 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
                               children: [
                                 Text("Preferred brands", style: inter16Bold()),
                                 InkWell(
-                                    onTap: () {},
+                                    onTap: () => routes.navigateTo(context,
+                                        page: BrandPage()),
                                     child: Text("See More",
                                         style: inter12MediumBlack())),
                               ],

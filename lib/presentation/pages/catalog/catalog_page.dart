@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:planet_gadget/library/convert_currency.dart';
 import 'package:planet_gadget/library/toast.dart';
+import 'package:planet_gadget/main.dart';
+import 'package:planet_gadget/presentation/pages/product/product_page.dart';
 
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
@@ -123,55 +125,58 @@ class _CatalogPageState extends State<CatalogPage> {
                                 mainAxisSpacing: 8,
                                 crossAxisSpacing: 8),
                         itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: white,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 4,
-                                    color: black25)
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 8,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 131,
-                                      height: 146,
-                                      child: Image.asset(
-                                        "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
-                                        fit: BoxFit.contain,
+                          return InkWell(
+                            onTap: () => routes.navigateTo(context, page: ProductPage()),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: white,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: const Offset(0, 0),
+                                      blurRadius: 4,
+                                      color: black25)
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 8,
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 131,
+                                        height: 146,
+                                        child: Image.asset(
+                                          "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                // const SizedBox(height: 8),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Text(
-                                          "Apple Iphone 12 128Gb" +
-                                              "aaaaaaaaaaaaaaaa",
-                                          style: inter12MediumBlack()),
-                                    )),
-                                // const SizedBox(height: 8),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Text(
-                                          convertToIdr(nominal: "Rp12.999.000"),
-                                          style: inter14Bold()),
-                                    )),
-                              ],
+                                  // const SizedBox(height: 8),
+                                  Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Text(
+                                            "Apple Iphone 12 128Gb" +
+                                                "aaaaaaaaaaaaaaaa",
+                                            style: inter12MediumBlack()),
+                                      )),
+                                  // const SizedBox(height: 8),
+                                  Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Text(
+                                            convertToIdr(nominal: "Rp12.999.000"),
+                                            style: inter14Bold()),
+                                      )),
+                                ],
+                              ),
                             ),
                           );
                         },

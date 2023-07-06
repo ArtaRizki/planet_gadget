@@ -163,13 +163,13 @@ class _ArticlePageState extends State<ArticlePage> {
 
   Widget productTabbarView({required Widget productTabbarItem}) {
     return InkWell(
-      onTap: () => Navigator.push(
-          context,
-          PageRouteBuilder(
-              pageBuilder: ((context, animation, secondaryAnimation) =>
-                  const InformationStorePage()),
-              transitionDuration: const Duration(seconds: 0),
-              reverseTransitionDuration: Duration.zero)),
+      // onTap: () => Navigator.push(
+      //     context,
+      //     PageRouteBuilder(
+      //         pageBuilder: ((context, animation, secondaryAnimation) =>
+      //             const InformationStorePage()),
+      //         transitionDuration: const Duration(seconds: 0),
+      //         reverseTransitionDuration: Duration.zero)),
       // onTap: routes.navigateTo(context, page: const InformationStorePage()),
       child: Container(
         margin: const EdgeInsets.all(20),
@@ -316,8 +316,8 @@ class _ArticlePageState extends State<ArticlePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ArticlePage())),
+          // onTap: () => Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => const ArticlePage())),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(
@@ -597,8 +597,8 @@ class _ArticlePageState extends State<ArticlePage> {
               Text("Completed Time 01-06-2023", style: inter12MediumBlack2()),
         ),
         InkWell(
-          onTap: () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const ArticlePage())),
+          // onTap: () => Navigator.push(context,
+          //     MaterialPageRoute(builder: (context) => const ArticlePage())),
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 16),
             decoration: BoxDecoration(

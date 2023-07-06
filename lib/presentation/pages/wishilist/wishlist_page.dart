@@ -6,9 +6,11 @@ import 'package:planet_gadget/library/toast.dart';
 import '../../../library/color.dart';
 import '../../../library/decoration.dart';
 import '../../../library/textstyle.dart';
+import '../../../main.dart';
 import '../../../utils/constants/path.dart';
 import '../../core/appbar_widget.dart';
 import '../account/widgets/field.dart';
+import '../product/product_page.dart';
 
 class WishlistPage extends StatefulWidget {
   const WishlistPage({super.key});
@@ -122,96 +124,101 @@ class _WishlistPageState extends State<WishlistPage> {
                                 mainAxisSpacing: 8,
                                 crossAxisSpacing: 8),
                         itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: white,
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    offset: const Offset(0, 0),
-                                    blurRadius: 4,
-                                    color: black25)
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Expanded(
-                                  flex: 10,
-                                  child: Center(
-                                    child: SizedBox(
-                                      width: 131,
-                                      height: 146,
-                                      child: Image.asset(
-                                        "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
-                                        fit: BoxFit.contain,
+                          return InkWell(
+                            onTap: () =>
+                                routes.navigateTo(context, page: ProductPage()),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: white,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: const Offset(0, 0),
+                                      blurRadius: 4,
+                                      color: black25)
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                    flex: 10,
+                                    child: Center(
+                                      child: SizedBox(
+                                        width: 131,
+                                        height: 146,
+                                        child: Image.asset(
+                                          "${productsPath}iphone_12_mini_blue_1_1_5_2 1.png",
+                                          fit: BoxFit.contain,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                // const SizedBox(height: 8),
-                                Expanded(
+                                  // const SizedBox(height: 8),
+                                  Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Text(
+                                            "Apple Iphone 12 128Gb" +
+                                                "aaaaaaaaaaaaaaaa",
+                                            style: inter12MediumBlack()),
+                                      )),
+                                  // const SizedBox(height: 8),
+                                  Expanded(
+                                      flex: 2,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        child: Text(
+                                            convertToIdr(
+                                                nominal: "Rp12.999.000"),
+                                            style: inter14Bold()),
+                                      )),
+                                  Expanded(
                                     flex: 3,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 12),
-                                      child: Text(
-                                          "Apple Iphone 12 128Gb" +
-                                              "aaaaaaaaaaaaaaaa",
-                                          style: inter12MediumBlack()),
-                                    )),
-                                // const SizedBox(height: 8),
-                                Expanded(
-                                    flex: 2,
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 12),
-                                      child: Text(
-                                          convertToIdr(nominal: "Rp12.999.000"),
-                                          style: inter14Bold()),
-                                    )),
-                                Expanded(
-                                  flex: 3,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12),
-                                    child: Row(
-                                      children: <Widget>[
-                                        Expanded(
-                                          flex: 2,
-                                          child: Container(
-                                            padding: const EdgeInsets.all(4),
-                                            decoration: BoxDecoration(
-                                                color: white,
-                                                border: Border.all(
-                                                    color: primaryBlue),
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                            child: Icon(
-                                              Icons.favorite,
-                                              size: 16,
-                                              color: primaryBlue,
+                                      child: Row(
+                                        children: <Widget>[
+                                          Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                  color: white,
+                                                  border: Border.all(
+                                                      color: primaryBlue),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                              child: Icon(
+                                                Icons.favorite,
+                                                size: 16,
+                                                color: primaryBlue,
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Expanded(
-                                          flex: 8,
-                                          child: Container(
-                                            padding: const EdgeInsets.all(8),
-                                            decoration: BoxDecoration(
-                                                color: secondaryBlue,
-                                                borderRadius:
-                                                    BorderRadius.circular(8)),
-                                            child: Text("Add to cart",
-                                                style: inter12MediumBlack()),
+                                          const SizedBox(width: 8),
+                                          Expanded(
+                                            flex: 8,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                  color: secondaryBlue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8)),
+                                              child: Text("Add to cart",
+                                                  style: inter12MediumBlack()),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
